@@ -15,26 +15,29 @@ import UpdateIcon from "@mui/icons-material/Update";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { Link } from "@mui/material";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
+import GradingIcon from "@mui/icons-material/Grading";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 
 const MenuitemStudent = [
   {
     title: "ตรวจสอบการเรียน",
-    icon: HomeIcon,
+    icon: GradingIcon,
     href: "/student",
   },
   {
     title: "ตรวจสอบวิชาที่เรียน",
-    icon: UpdateIcon,
+    icon: FactCheckIcon,
     href: "/student/checkcouse",
   },
   {
     title: "ตรวจสอบแผนรายวิชา",
-    icon: ReceiptLongIcon,
+    icon: FormatListNumberedIcon,
     href: "/student/checkplan",
   },
   {
     title: "หลักสูตรรายวิชาเรียน",
-    icon: AssignmentTurnedInOutlined,
+    icon: ReceiptLongIcon,
     href: "/student/couse",
   },
   // {

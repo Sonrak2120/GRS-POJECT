@@ -14,6 +14,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import UpdateIcon from "@mui/icons-material/Update";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
+import SystemUpdateAltIcon from "@mui/icons-material/SystemUpdateAlt";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 const MenuitemSAdmin = [
   {
@@ -23,17 +26,17 @@ const MenuitemSAdmin = [
   },
   {
     title: "ข้อมูลอาจารย์/เจ้าหน้าที่",
-    icon: HomeIcon,
+    icon: SwitchAccountIcon,
     href: "/admin/list",
   },
   {
     title: "ดาวน์โหลดฟอร์มExel",
-    icon: AssignmentTurnedInOutlined,
+    icon: SystemUpdateAltIcon,
     href: "/admin/downloadfile",
   },
   {
     title: "หลักสูตรการศึกษา",
-    icon: AssignmentTurnedInOutlined,
+    icon: AssignmentIcon,
     href: "/admin/addcouse",
   },
   {
@@ -50,13 +53,13 @@ const MenuitemSAdmin = [
 
   {
     title: "รายชื่อนิสิต",
-    icon: UpdateIcon,
+    icon: BadgeIcon,
     href: "/admin/addstudent",
   },
 
   {
     title: "Update ผลการเรียน HTML",
-    icon: AssignmentTurnedInOutlined,
+    icon: UpdateIcon,
     href: "/admin/updatehtml",
   },
 ];
