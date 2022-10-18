@@ -31,7 +31,7 @@ const MenuitemOfficer = [
     href: "/officer/list",
   },
   {
-    title: "ดาวน์โหลดฟอร์มExel",
+    title: "ดาวน์โหลดฟอร์มExcel",
     icon: SystemUpdateAltIcon,
     href: "/officer/downloadfile",
   },

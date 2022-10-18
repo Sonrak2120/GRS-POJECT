@@ -122,13 +122,13 @@ export default function AddGen({ setLoading }) {
               <Inputnew
                 sx={{ width: "450px" }}
                 id="genID"
-                label="รหัสรายวิชา"
+                label="รหัสเล่มศึกษาทั่วไป"
                 onChange={(e) => setgenID(e.target.value)}
               />
               <Inputnew
                 sx={{ width: "450px" }}
                 id="genname"
-                label="ชื่อรายวิชา"
+                label="ชื่อเล่มศึกษาทั่วไป"
                 onChange={(e) => setgenname(e.target.value)}
               />
               {/* <Box sx={{ width: "450px" }}>
