@@ -159,34 +159,44 @@ export default function Forgetpassword() {
   }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      let headersList = {
-        Accept: "*/*",
-        "Content-Type": "application/json",
-      };
+    if (password !== password2) {
+      alert("รหัสผ่านไม่ตรงกัน");
+    } else if (password === password2 && password.length < 8) {
+      alert("ความยาวรหัสผ่านต้องมากกว่าหรือเท่ากับ 8 ตัว");
+    } else {
+      try {
+        let headersList = {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+        };
 
-      let bodyContent = JSON.stringify({
-        userid: `${userid}`,
-        name: name,
-        surname: surname,
-        email: email,
-        password: password,
-        role: role,
-      });
+        let bodyContent = JSON.stringify({
+          userid: `${userid}`,
+          name: name,
+          surname: surname,
+          email: email,
+          password: password,
+          role: role,
+        });
 
-      let reqOptions = {
-        url: "http://localhost:5000/forget-password-get-new-password",
-        method: "PUT",
-        headers: headersList,
-        data: bodyContent,
-      };
+        let reqOptions = {
+          url: "http://localhost:5000/forget-password-get-new-password",
+          method: "PUT",
+          headers: headersList,
+          data: bodyContent,
+        };
 
-      let response = await axios.request(reqOptions);
-      alert("ยืนยันสำเร็จ");
-      window.location.assign("/");
-    } catch (err) {
-      alert("มีข้อผิดพลาด");
-      console.log(err);
+        let response = await axios.request(reqOptions);
+        if (response.data.message === "success") {
+          alert("บันทึกรหัสผ่านใหม่สำเร็จ");
+          window.location.assign("/");
+        } else {
+          alert("มีข้อผิดพลาด");
+        }
+      } catch (err) {
+        alert("มีข้อผิดพลาด");
+        console.log(err);
+      }
     }
   };
 
@@ -223,7 +233,15 @@ export default function Forgetpassword() {
             กรุณาใส่ E-Mail เพื่อเปลี่ยนรหัสผ่าน
           </Typography> */}
           <TextField
-            sx={{ width: "450px" }}
+            sx={{
+              width: "450px",
+              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
+              },
+              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                "border-color": "white",
+              },
+            }}
             required
             id="password"
             placeholder="รหัสผ่านใหม่"
@@ -231,7 +249,15 @@ export default function Forgetpassword() {
             onChange={(e) => setpassword(e.target.value)}
           />
           <TextField
-            sx={{ width: "450px" }}
+            sx={{
+              width: "450px",
+              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
+              },
+              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                "border-color": "white",
+              },
+            }}
             required
             id="password2"
             placeholder="ยืนยันรหัสผ่านใหม่"

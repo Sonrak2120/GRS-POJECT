@@ -101,7 +101,7 @@ export default function StudentFullAddPage({ setLoading }) {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>เสร็จสิ้น</Button>
+          <Button onClick={handleClose}>ยกเลิก</Button>
         </DialogActions>
       </Dialog>
     </div>

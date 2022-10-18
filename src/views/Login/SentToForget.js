@@ -15,6 +15,7 @@ import logo from "../../assets/images/logo.png";
 import Container from "@mui/material/Container";
 import Footer from "../../layouts/FullLayout/Footer/Footer";
 import Typography from "@mui/material/Typography";
+import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
 const BoxCard = styled(Box)(({ them }) => ({
   backgroundColor: "#343434",
@@ -25,8 +26,10 @@ export default function SentToForget() {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const [email, setemail] = useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async (event) => {
+    setLoading(true);
     const headerlist = {
       Accept: "*/*",
     };
@@ -38,9 +41,18 @@ export default function SentToForget() {
         },
         {}
       );
-      alert("สำเร็จ");
-      window.location.assign("/");
+      if (resp.data.message === "success") {
+        setLoading(false);
+        alert("กรุณาตรวจสอบอีเมล");
+        window.location.assign("/");
+      } else if (resp.data.message === "not found") {
+        setLoading(false);
+        alert("ไม่พบบัญชีหรือยังไม่ยืนยันตัวตน");
+      } else {
+        alert("มีข้อผิดพลาด");
+      }
     } catch (err) {
+      setLoading(false);
       alert("มีข้อผิดพลาด");
       console.log(err);
     }
@@ -85,6 +97,7 @@ export default function SentToForget() {
   // );
   return (
     <BoxCard>
+      <Progess load={loading}></Progess>
       <Container maxWidth="lg">
         <Stack spacing={1} justifyContent="center" alignItems={"center"}>
           <Grid container> </Grid>

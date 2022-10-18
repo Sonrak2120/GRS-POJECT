@@ -102,7 +102,15 @@ export default function LoginPage({ SetRole }) {
             โปรดเข้าสู่ระบบ
           </Typography>
           <Inputnew
-            sx={{ width: "450px" }}
+            sx={{
+              width: "450px",
+              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
+              },
+              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                "border-color": "white",
+              },
+            }}
             required
             id="email"
             placeholder="E-mail"
@@ -110,7 +118,15 @@ export default function LoginPage({ SetRole }) {
             onChange={(e) => setEmail(e.target.value)}
           />
           <Inputnew
-            sx={{ width: "450px" }}
+            sx={{
+              width: "450px",
+              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
+              },
+              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                "border-color": "white",
+              },
+            }}
             required
             placeholder="Password"
             id="password"
@@ -137,7 +153,7 @@ export default function LoginPage({ SetRole }) {
               }}
               to="/forget/toemail"
             >
-              ลืมรหัสผ่าน
+              ลืม/เปลี่ยนรหัสผ่าน
             </Link>
 
             <Link style={{ color: "#D9D9D9", marginTop: "30px" }} to="/Actived">
