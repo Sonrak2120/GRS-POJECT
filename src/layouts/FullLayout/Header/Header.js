@@ -211,12 +211,12 @@ const Header = (props) => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose4}>
+        {/* <MenuItem onClick={handleClose4}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           onClick={onClickLogout}
           sx={{
