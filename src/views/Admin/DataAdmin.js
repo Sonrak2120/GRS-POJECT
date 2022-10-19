@@ -30,7 +30,7 @@ const MenuitemSAdmin = [
     href: "/admin/list",
   },
   {
-    title: "ดาวน์โหลดฟอร์มEcxel",
+    title: "ดาวน์โหลดฟอร์มExcel",
     icon: SystemUpdateAltIcon,
     href: "/admin/downloadfile",
   },
