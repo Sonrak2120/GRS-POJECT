@@ -39,7 +39,7 @@ export default function BasicTable({ setLoading }) {
 
   return (
     <div>
-      <h5>บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา</h5>
+      <h3 style={{ marginBottom: "20px" }}>บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา</h3>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

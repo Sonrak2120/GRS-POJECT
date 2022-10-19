@@ -114,8 +114,8 @@ export default function CollapsibleTable() {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell>{row.group[0]}</TableCell>
-          <TableCell align="center">
+          <TableCell style={{ fontWeight: 700 }}>{row.group[0]}</TableCell>
+          <TableCell align="center" style={{ fontWeight: 700 }}>
             {row.group[1]} {"หน่วยกิต"}
           </TableCell>
         </TableRow>
@@ -125,7 +125,12 @@ export default function CollapsibleTable() {
               <Stack spacing={2} sx={{ margin: 1 }}>
                 {term1?.length > 0 && (
                   <>
-                    <Typography variant="h6" gutterBottom component="div">
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      component="div"
+                      style={{ fontWeight: 700 }}
+                    >
                       {`ภาคต้น`}
                     </Typography>
                     <Table size="small" aria-label="purchases">
@@ -170,7 +175,12 @@ export default function CollapsibleTable() {
                 )}
                 {term2?.length > 0 && (
                   <>
-                    <Typography variant="h6" gutterBottom component="div">
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      component="div"
+                      style={{ fontWeight: 700 }}
+                    >
                       {`ภาคปลาย`}
                     </Typography>
                     <Table size="small" aria-label="purchases">
@@ -238,7 +248,7 @@ export default function CollapsibleTable() {
               </Typo_custom>
             </Grid>
           </Grid>
-          <Grid
+          <Grid_custom
             item
             container
             // xs={11}
@@ -257,7 +267,7 @@ export default function CollapsibleTable() {
             >
               <Sentbutton setLoading={setLoading} />
             </Grid_custom>
-          </Grid>
+          </Grid_custom>
         </Grid>
         {rows.map((row, index) => (
           <Table_custom
@@ -280,7 +290,7 @@ export default function CollapsibleTable() {
                   component="th"
                   scope="row"
                   align="center"
-                  sx={{ width: "20%", fontWeight: "600", fontSize: "16px" }}
+                  sx={{ width: "20%", fontWeight: "700", fontSize: "16px" }}
                 >
                   {row.section[1]} {"หน่วยกิต"}
                 </TableCell>

@@ -38,7 +38,7 @@ export default function AccCouse() {
   return (
     <div>
       <Progess load={loading} />
-      <h5>หลักสูตรการศึกษา</h5>
+      <h3 style={{ marginBottom: "20px" }}>หลักสูตรการศึกษา</h3>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

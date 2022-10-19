@@ -200,7 +200,7 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <Typography
           sx={{ flex: "1 1 100%" }}
-          variant="h6"
+          variant="h3"
           id="tableTitle"
           component="div"
           color="black"

@@ -37,7 +37,7 @@ export default function AccDepartment() {
   return (
     <div>
       <Progess load={loading} />
-      <h5>สาขาวิชา</h5>
+      <h3 style={{ marginBottom: "20px" }}>สาขาวิชา</h3>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

@@ -41,7 +41,7 @@ export default function BasicTable({ setLoading }) {
 
   return (
     <div>
-      <h5>บัญชีผู้ใช้ของเจ้าหน้าที่</h5>
+      <h3 style={{ marginBottom: "20px" }}>บัญชีผู้ใช้ของเจ้าหน้าที่</h3>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

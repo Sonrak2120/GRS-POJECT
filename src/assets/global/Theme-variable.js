@@ -22,7 +22,7 @@ const baseTheme = createTheme({
       light: "#e6f4ff",
     },
     primary3: {
-      main: "#D9D9D9",
+      main: "#ffff",
     },
     secondary: {
       main: "#1e4db7",

@@ -166,7 +166,7 @@ export default function FreeSolo() {
       <Stack
         spacing={2}
         style={{ width: 860, minHeight: "100vh" }}
-        marginTop={10}
+        marginTop={5}
       >
         {/* <div>{`value: '${value}'`}</div> */}
         <Grid_custom
@@ -203,6 +203,16 @@ export default function FreeSolo() {
             </Box_custom>
           </Grid>
         </Grid_custom>
+        <Typography
+          fontWeight={50}
+          fontSize={30}
+          alignItems="center"
+          justifyContent="center"
+          display="flex"
+          style={{ marginBottom: "20px" }}
+        >
+          ตรวจสอบแผนรายวิชา
+        </Typography>
         <Autocomplete
           value={value}
           onChange={(event, newValue) => {

@@ -11,7 +11,7 @@ function Home() {
   return (
     <div
       style={{
-        marginTop: "80px",
+        marginTop: "50px",
         marginBottom: "80px",
         justifyContent: "center",
         alignItems: "center",

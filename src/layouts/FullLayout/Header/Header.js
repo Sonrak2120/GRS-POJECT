@@ -27,6 +27,7 @@ import {
   ListItemIcon,
   Stack,
   useMediaQuery,
+  Paper,
 } from "@material-ui/core";
 
 const onClickLogout = async () => {
@@ -184,6 +185,8 @@ const Header = (props) => {
             width: "250px",
             right: 0,
             top: "70px !important",
+            backgroundColor: "#e2e0e0",
+            borderBlockColor: "black",
           },
         }}
       >
@@ -244,16 +247,18 @@ const Header = (props) => {
   return (
     <AppBar sx={props.sx} elevation={0}>
       {headerContent}
-      <Box
+      <Paper
+        elevation={9}
         sx={{
-          backgroundColor: "pink",
+          backgroundColor: "#85888e",
           alignItems: "center",
           justifyContent: "center",
           display: "flex",
+          borderRadius: "0",
         }}
       >
         <NameAccount />
-      </Box>
+      </Paper>
     </AppBar>
   );
 };

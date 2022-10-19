@@ -73,7 +73,7 @@ function NameAccount() {
             return (
               <p
                 style={{
-                  color: "black",
+                  color: "white",
                   fontSize: "20px",
                   margin: "10px",
                   marginLeft: "5px",

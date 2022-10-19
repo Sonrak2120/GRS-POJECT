@@ -258,6 +258,8 @@ export default function Verify() {
                   },
                 "& .css-10botns-MuiInputBase-input-MuiFilledInput-input.Mui-disabled":
                   { "-webkit-text-fill-color": "white" },
+                "& .css-geon7s-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled":
+                  { "-webkit-text-fill-color": "#ffffff82" },
               }}
               onChange={(e) => setName(e.target.value)}
             />
@@ -278,6 +280,8 @@ export default function Verify() {
                   },
                 "& .css-10botns-MuiInputBase-input-MuiFilledInput-input.Mui-disabled":
                   { "-webkit-text-fill-color": "white" },
+                "& .css-geon7s-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled":
+                  { "-webkit-text-fill-color": "#ffffff82" },
               }}
               onChange={(e) => setSurname(e.target.value)}
             />
