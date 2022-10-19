@@ -102,7 +102,46 @@ export default function AccGen() {
                   {row.gen_name}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
-                  {row.upload_data_status}
+                  {/* {row.upload_data_status}
+                  <br />({row.filename}) */}
+                  <div style={{ display: "flex" }}>
+                    {(() => {
+                      if (row.upload_data_status === "ยังไม่อัปโหลด") {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "red",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>ยังไม่อัปโหลด</p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "green",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>
+                              อัปโหลดสำเร็จ
+                              <br />({row.filename})
+                            </p>
+                          </div>
+                        );
+                      }
+                    })()}
+                  </div>
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {row.date}

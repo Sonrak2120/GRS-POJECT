@@ -375,8 +375,85 @@ export default function EnhancedTable() {
                       <TableCell align="left">{row.name}</TableCell>
                       <TableCell align="left">{row.surname}</TableCell>
                       <TableCell align="left">{row.email}</TableCell>
-                      <TableCell align="center">{row.mess}</TableCell>
-                      <TableCell align="center">{row.html_status}</TableCell>
+                      <TableCell align="center">
+                        <div style={{ display: "flex" }}>
+                          {(() => {
+                            if (row.mess === "ยังไม่ยืนยัน") {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>ยังไม่ยืนยัน</p>
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "green",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>ยืนยันแล้ว</p>
+                                </div>
+                              );
+                            }
+                          })()}
+                        </div>
+                      </TableCell>
+                      <TableCell align="center">
+                        {/* {row.html_status}
+                        <br />({row.html_name}) */}
+                        <div style={{ display: "flex" }}>
+                          {(() => {
+                            if (row.html_status === "ยังไม่อัปโหลด") {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>ยังไม่อัปโหลด</p>
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "green",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>
+                                    อัปโหลดสำเร็จ
+                                    <br />({row.html_name})
+                                  </p>
+                                </div>
+                              );
+                            }
+                          })()}
+                        </div>
+                      </TableCell>
                       <TableCell align="center">{row.date_html}</TableCell>
                       <TableCell
                         align="center"

@@ -114,10 +114,88 @@ export default function AccCouse() {
                   {row.depart_id}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
-                  {row.pdf_status}
+                  {/* {row.pdf_status}
+                  <br />({row.pdf_name}) */}
+                  <div style={{ display: "flex" }}>
+                    {(() => {
+                      if (row.pdf_status === "ยังไม่อัปโหลด") {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "red",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>ยังไม่อัปโหลด</p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "green",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>
+                              อัปโหลดสำเร็จ
+                              <br />({row.pdf_name})
+                            </p>
+                          </div>
+                        );
+                      }
+                    })()}
+                  </div>
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
-                  {row.upload_data_status}
+                  {/* {row.upload_data_status}
+                  <br />({row.excel_name}) */}
+                  <div style={{ display: "flex" }}>
+                    {(() => {
+                      if (row.upload_data_status === "ยังไม่อัปโหลด") {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "red",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>ยังไม่อัปโหลด</p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "green",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>
+                              อัปโหลดสำเร็จ
+                              <br />({row.excel_name})
+                            </p>
+                          </div>
+                        );
+                      }
+                    })()}
+                  </div>
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {row.date}

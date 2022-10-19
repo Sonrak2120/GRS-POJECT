@@ -43,6 +43,7 @@ export default function Active() {
         },
         {}
       );
+      console.log("Email-------", email);
 
       if (resp.data.message == "success") {
         setLoading(false);

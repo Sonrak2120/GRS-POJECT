@@ -48,11 +48,11 @@ const Grid_custom = styled("Box")(({ theme }) => ({
     alignItems: "center",
   },
   [theme.breakpoints.up("xl")]: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    right: 50,
-    top: 180,
+    // justifyContent: "center",
+    // alignItems: "center",
+    // position: "absolute",
+    // right: 350,
+    // top: 200,
   },
 }));
 
@@ -62,7 +62,7 @@ const Table_custom = styled("Table")(({ theme }) => ({
   },
   [theme.breakpoints.up("xl")]: {
     width: "80%",
-    marginLeft: "30px",
+    margin: "auto",
   },
 }));
 
@@ -244,15 +244,16 @@ export default function CollapsibleTable() {
             // xs={11}
             sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "center",
+              width: "80%",
             }}
-            direction="column"
+            // direction="column"
           >
             <Grid_custom
-              justifyContent="center"
-              alignItems="center"
-              // sx={{ position: "absolute" }}
+            // justifyContent="center"
+            // alignItems="center"
+            // sx={{ position: "absolute" }}
             >
               <Sentbutton setLoading={setLoading} />
             </Grid_custom>

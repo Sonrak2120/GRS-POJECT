@@ -149,10 +149,11 @@ export default function Sentbutton({ setLoading }) {
                 color: "green",
                 alignItems: "center",
                 justifyContent: "center",
+                display: "flex",
               }}
             >
               <Typography style={{ margin: 10 }}>
-                ผ่านเเล้ว สามารถรับไฟล์PDFได้
+                ผ่านเเล้ว สามารถรับไฟล์ PDF ได้
               </Typography>
               <Box
                 style={{

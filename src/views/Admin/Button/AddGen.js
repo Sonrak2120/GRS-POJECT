@@ -70,6 +70,7 @@ export default function AddGen({ setLoading }) {
           setLoading(false);
           alert("ผิดพลาด");
         }
+        console.log("result[message]", result["message"]);
       });
     let data2 = await response.text();
     console.log(data2);

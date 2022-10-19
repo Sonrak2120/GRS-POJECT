@@ -87,14 +87,16 @@ export default function AddCouse({ setLoading }) {
       .then((res) => res.json())
       .then((result) => {
         if (result["message"] === "success") {
-          setLoading(true);
+          setLoading(false);
           alert("บันทึกเสร็จสิ้น");
           window.location.reload("Refresh");
         } else {
-          setLoading(true);
+          setLoading(false);
           alert("ผิดพลาด");
         }
+        console.log("result[message]", result["message"]);
       });
+
     let data2 = await response.text();
     console.log(data2);
   };

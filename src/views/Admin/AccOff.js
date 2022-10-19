@@ -97,7 +97,42 @@ export default function BasicTable({ setLoading }) {
                   {row.depart_id}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
-                  {row.status}
+                  {/* {row.status} */}
+                  <div style={{ display: "flex" }}>
+                    {(() => {
+                      if (row.status === "ยังไม่ยืนยัน") {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "red",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>ยังไม่ยืนยัน</p>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "green",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              textAlign: "center",
+                              margin: "auto",
+                            }}
+                          >
+                            <p>ยืนยันแล้ว</p>
+                          </div>
+                        );
+                      }
+                    })()}
+                  </div>
                 </TableCell>
                 <TableCell align="center">
                   <div style={{ display: "flex" }}>
