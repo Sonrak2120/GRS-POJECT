@@ -10,11 +10,13 @@ import EditButton from "./Button/EditButtonAdmin";
 import Deletebutton from "./Button/Deletebutton";
 import AddPage from "./AddPage";
 import axios from "axios";
+import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
 function createData(name, lastname, id) {
   return { name, lastname, id };
 }
-export default function BasicTable({ setLoading }) {
+export default function AccT() {
+  const [loading, setLoading] = React.useState(false);
   const token = sessionStorage.getItem("token");
   const [rows, setRows] = React.useState([]);
   useEffect(() => {
@@ -39,16 +41,21 @@ export default function BasicTable({ setLoading }) {
 
   return (
     <div>
+      <Progess load={loading} />
       <h3 style={{ marginBottom: "20px" }}>บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา</h3>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
+              <TableCell
+                sx={{ fontWeight: "bold", fontSize: "16px" }}
+                style={{ width: "20%" }}
+              >
                 ชื่อ
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
+                style={{ width: "20%" }}
                 align="left"
               >
                 นามสกุล
@@ -56,18 +63,21 @@ export default function BasicTable({ setLoading }) {
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 รหัสอาจารย์
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 สถานะ
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 Action
               </TableCell>

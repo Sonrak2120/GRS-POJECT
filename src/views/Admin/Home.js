@@ -10,26 +10,16 @@ function Home() {
   const [loading, setLoading] = React.useState(false);
   return (
     <div
-      style={{
-        marginTop: "50px",
-        marginBottom: "80px",
-        justifyContent: "center",
-        alignItems: "center",
-        display: "flex",
-      }}
+    // style={{
+    //   marginTop: "50px",
+    //   marginBottom: "80px",
+    //   justifyContent: "center",
+    //   alignItems: "center",
+    //   display: "flex",
+    // }}
     >
       <Progess load={loading} />
-      <h5></h5>
-      <Stack direction="row" spacing={5}>
-        <Box>
-          <AccT setLoading={setLoading} />
-        </Box>
-        <AccOff setLoading={setLoading} />
-      </Stack>
-      {/* <Stack direction="row" spacing={50} justifyContent="center" marginTop={5}>
-        <AddPage />
-        <OfficerAddPage />
-      </Stack> */}
+      <AccOff setLoading={setLoading} />
     </div>
   );
 }

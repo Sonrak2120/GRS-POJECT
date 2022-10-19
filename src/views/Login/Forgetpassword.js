@@ -264,6 +264,9 @@ export default function Forgetpassword() {
             autoComplete="password"
             onChange={(e) => setpassword2(e.target.value)}
           />
+          <Typography sx={{ fontSize: "15px", color: "rgba(0,0,0,0.5)" }}>
+            โปรดตั้งรหัสผ่านอย่างน้อย 8 ตัว
+          </Typography>
           <Button
             type="submit"
             variant="contained"

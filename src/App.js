@@ -31,6 +31,7 @@ import Download from "./views/Admin/Download";
 import UploadNew from "./uplaod/UploadNew";
 import UploadHtmlNew from "./uplaod/UploadHtmlNew";
 import AccGen from "./views/Admin/AccGen";
+import AccOff from "./views/Admin/AccOff";
 
 //////////////////////////////////////////Student
 import HomeStudent from "./views/Student/HomeStudent";
@@ -147,12 +148,13 @@ const App = () => {
       children: [
         { path: "/admin", element: <AccDepartment /> },
         { path: "addstudent", element: <AccStu /> },
-        { path: "list", element: <Home /> },
+        { path: "list", element: <AccOff /> },
         { path: "addcouse", element: <AccCouse /> },
         { path: "gensubject", element: <AccGen /> },
         { path: "updatecouse", element: <UploadNew /> },
         { path: "updatehtml", element: <UploadHtmlNew /> },
         { path: "downloadfile", element: <Download /> },
+        { path: "listteacher", element: <AccT /> },
         {
           path: "*",
           element: <Navigate to="/404" replace />,

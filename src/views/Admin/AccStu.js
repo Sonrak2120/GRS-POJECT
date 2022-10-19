@@ -60,9 +60,15 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
+    id: "id_teacher",
+    numeric: true,
+    disablePadding: true,
+    label: "รหัสอาจารย์ที่ปรึกษา",
+  },
+  {
     id: "user_id",
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: "รหัสนิสิต",
   },
   {
@@ -369,11 +375,25 @@ export default function EnhancedTable() {
                         id={labelId}
                         scope="row"
                         padding="none"
+                        align="center"
+                      >
+                        {row.teacher_id}
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        align="center"
                       >
                         {row.user_id}
                       </TableCell>
-                      <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.surname}</TableCell>
+                      <TableCell align="left" style={{ fontWeight: "bolder" }}>
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="left" style={{ fontWeight: "bolder" }}>
+                        {row.surname}
+                      </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="center">
                         <div style={{ display: "flex" }}>

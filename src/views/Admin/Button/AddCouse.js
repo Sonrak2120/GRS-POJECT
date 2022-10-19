@@ -75,7 +75,7 @@ export default function AddCouse({ setLoading }) {
     };
     let bodyContent = new FormData();
     bodyContent.append("course_name", cousename);
-    bodyContent.append("depart_id", "Q03");
+    bodyContent.append("depart_id", departID);
     bodyContent.append("course_id", couseID);
     bodyContent.append("file_pdf", filepdf);
     bodyContent.append("file_course", filecourse);

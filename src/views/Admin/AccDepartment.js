@@ -10,6 +10,9 @@ import DeleteDepartButton from "./Button/DeleteDepartButton";
 import axios from "axios";
 import AddDepartment from "./Button/AddDepartment";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import EditButtonDepart from "./Button/EditButtonDepart";
+import AddFullDepart from "./Button/AddFullDepart";
+import { Stack } from "@mui/material";
 
 export default function AccDepartment() {
   const [rows, setRows] = React.useState([]);
@@ -87,16 +90,35 @@ export default function AccDepartment() {
                 </TableCell>
 
                 <TableCell align="center" sx={{ width: "200px" }}>
-                  <DeleteDepartButton row={inx} rows={rows} setRows={setRows} />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <EditButtonDepart row={inx} rows={rows} setRows={setRows} />
+                    <DeleteDepartButton
+                      row={inx}
+                      rows={rows}
+                      setRows={setRows}
+                    />
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <div style={{ marginTop: "20px" }}>
+      <Stack
+        className="layout"
+        direction="row"
+        spacing={5}
+        style={{ marginTop: "20px" }}
+      >
         <AddDepartment setLoading={setLoading} />
-      </div>
+        <AddFullDepart setLoading={setLoading} />
+      </Stack>
     </div>
   );
 }

@@ -11,6 +11,7 @@ import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
 import axios from "axios";
 import AddCouse from "./Button/AddCouse";
+import EditButtonCouse from "./Button/EditButtonCouse";
 
 export default function AccCouse() {
   const [loading, setLoading] = React.useState(false);
@@ -199,8 +200,21 @@ export default function AccCouse() {
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {row.date}
+                  <br />
+                  {"เวลา "}
+                  {row.time}
+                  {" น."}
                 </TableCell>
-                <TableCell align="center" sx={{ width: "200px" }}>
+                <TableCell
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  align="center"
+                  sx={{ width: "200px" }}
+                >
+                  <EditButtonCouse row={inx} rows={rows} setRows={setRows} />
                   <DeleteCouseButton row={inx} rows={rows} setRows={setRows} />
                 </TableCell>
               </TableRow>

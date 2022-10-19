@@ -25,9 +25,14 @@ const MenuitemSAdmin = [
     href: "/admin",
   },
   {
-    title: "ข้อมูลอาจารย์/เจ้าหน้าที่",
+    title: "ข้อมูลเจ้าหน้าที่",
     icon: SwitchAccountIcon,
     href: "/admin/list",
+  },
+  {
+    title: "ข้อมูลอาจารย์",
+    icon: SwitchAccountIcon,
+    href: "/admin/listteacher",
   },
   {
     title: "ดาวน์โหลดฟอร์มExcel",

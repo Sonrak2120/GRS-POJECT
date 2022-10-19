@@ -11,6 +11,7 @@ import axios from "axios";
 import AddCouse from "./Button/AddCouse";
 import AddGen from "./Button/AddGen";
 import DeleteGen from "./Button/DeleteGen";
+import EditButtonGen from "./Button/EditButtonGen";
 
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
@@ -49,30 +50,35 @@ export default function AccGen() {
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 รหัสเล่มศึกษาทั่วไป
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 ชื่อเล่มศึกษาทั่วไป
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 สถานะการอัปโหลดไฟล์
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 วันที่
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 Action
               </TableCell>
@@ -146,7 +152,15 @@ export default function AccGen() {
                 <TableCell sx={{ width: "200px" }} align="center">
                   {row.date}
                 </TableCell>
-                <TableCell align="center" sx={{ width: "200px" }}>
+                <TableCell
+                  align="center"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <EditButtonGen row={inx} rows={rows} setRows={setRows} />
                   <DeleteGen row={inx} rows={rows} setRows={setRows} />
                 </TableCell>
               </TableRow>

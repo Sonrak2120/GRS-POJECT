@@ -10,6 +10,7 @@ import Deletebutton from "./Button/Deletebutton";
 import EditbuttonOfficer from "./Button/EditbuttonOfficer";
 import OfficerAddPage from "./Button/OfficerAddPage";
 import AddPage from "./AddPage";
+import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
 import axios from "axios";
 
@@ -17,7 +18,8 @@ function createData(name, lastname, id) {
   return { name, lastname, id };
 }
 
-export default function BasicTable({ setLoading }) {
+export default function AccOff() {
+  const [loading, setLoading] = React.useState(false);
   const [rows, setRows] = React.useState([]);
   const [offid, setOffid] = useState("");
   useEffect(() => {
@@ -41,35 +43,43 @@ export default function BasicTable({ setLoading }) {
 
   return (
     <div>
+      <Progess load={loading} />
       <h3 style={{ marginBottom: "20px" }}>บัญชีผู้ใช้ของเจ้าหน้าที่</h3>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
+              <TableCell
+                sx={{ fontWeight: "bold", fontSize: "16px" }}
+                style={{ width: "20%" }}
+              >
                 ชื่อ
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="left"
+                style={{ width: "20%" }}
               >
                 นามสกุล
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 รหัสสาขา
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 สถานะ
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
+                style={{ width: "20%" }}
               >
                 Action
               </TableCell>
@@ -135,7 +145,13 @@ export default function BasicTable({ setLoading }) {
                   </div>
                 </TableCell>
                 <TableCell align="center">
-                  <div style={{ display: "flex" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <EditbuttonOfficer
                       row={inx}
                       rows={rows}
