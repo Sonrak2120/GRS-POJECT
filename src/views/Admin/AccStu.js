@@ -29,6 +29,7 @@ import StudentFullAddPage from "./StudentFullAddPage";
 import { Stack } from "@mui/system";
 import "../../App";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import { Button } from "@mui/material";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -87,7 +88,7 @@ const headCells = [
     id: "id_teacher",
     numeric: true,
     disablePadding: true,
-    label: "รหัสอาจารย์ที่ปรึกษา",
+    label: "อาจารย์ที่ปรึกษา",
   },
   {
     id: "mess",
@@ -177,6 +178,32 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+const onDownload3 = () => {
+  fetch("http://localhost:5000/download-add-student-example-form", {
+    method: "GET",
+    headers: {
+      "Content-Type": "./example/student_example.xlsx",
+    },
+  })
+    .then((response) => response.blob())
+    .then((blob) => {
+      // Create blob link to download
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `student_form.xlsx`);
+
+      // Append to html link element page
+      document.body.appendChild(link);
+
+      // Start download
+      link.click();
+
+      // Clean up and remove the link
+      link.parentNode.removeChild(link);
+    });
+};
+
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
@@ -185,49 +212,25 @@ const EnhancedTableToolbar = (props) => {
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
       }}
     >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          color="black"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} รายชื่อ
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h3"
-          id="tableTitle"
-          component="div"
-          color="black"
-        >
-          รายชื่อนิสิต
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      <Typography
+        sx={{ flex: "1 1 100%" }}
+        variant="h3"
+        id="tableTitle"
+        component="div"
+        color="black"
+      >
+        รายชื่อนิสิต
+      </Typography>
+      <Button
+        onClick={onDownload3}
+        sx={{ width: "20%", height: "20%" }}
+        variant="contained"
+        color="primary"
+      >
+        ดาวน์โหลด ตัวอย่างเพื่อเพิ่มรายชื่อนิสิต
+      </Button>
     </Toolbar>
   );
 };
@@ -393,7 +396,7 @@ export default function EnhancedTable() {
                         padding="none"
                         align="center"
                       >
-                        {row.teacher_id}
+                        {row.teacher_name} {row.teacher_surname}
                       </TableCell>
                       <TableCell align="center">
                         <div style={{ display: "flex" }}>

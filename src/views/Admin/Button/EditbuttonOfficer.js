@@ -33,7 +33,7 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
 
       let response = await axios.request(reqOptions);
       setdept(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     };
     api_();
   }, []);
@@ -42,7 +42,7 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
   const [open, setOpen] = React.useState(false);
   const [name, setname] = useState("");
   const [surname, setsurname] = useState("");
-  const [Email, setemail] = useState("");
+  const [email, setemail] = useState("");
   const [departID, setdepartID] = useState("");
   const [id, setID] = useState("");
   const [password, setpassword] = useState("");
@@ -55,7 +55,7 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
       officer_id: id,
       name: name,
       surname: surname,
-      email: Email,
+      email: email,
       depart_id: departID,
     };
     fetch("http://localhost:5000/edit-data-officer", {
@@ -86,7 +86,6 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
     setemail(rows[row].email);
     setdepartID(rows[row].depart_id);
     setID(rows[row].user_id);
-    console.log("eoejm");
 
     setOpen(true);
   };
@@ -116,35 +115,8 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 2 }}
-              sx={{ mt: 5 }}
+              sx={{ mt: 2 }}
             >
-              {/* <Inputnew
-                sx={{ width: "450px" }}
-                id="email"
-                label="E-mail"
-                autoComplete="email"
-                onChange={(e) => setemail(e.target.value)}
-              /> */}
-              <Box sx={{ width: "450px" }}>
-                <FormControl fullWidth>
-                  <InputLabel>รหัสสาขา</InputLabel>
-                  {console.log("dept=", dept, "depart=", departID)}
-                  <Select
-                    value={departID}
-                    label="รหัสสาขา"
-                    onChange={(e) => {
-                      setdepartID(e.target.value);
-                    }}
-                    defaultValue={dept}
-                  >
-                    {dept.map((name) => (
-                      <MenuItem key={name.dept_id} value={name.dept_id}>
-                        {name.dept_id} {name.dept_name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
               {/* <Inputnew
                 sx={{ width: "450px" }}
                 label="รหัสสาขา"
@@ -180,6 +152,35 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
               id="surname"
               onChange={(e) => setsurname(e.target.value)}
             />
+
+            <Inputnew
+              sx={{ width: "450px" }}
+              label="email"
+              defaultValue={email}
+              id="email"
+              onChange={(e) => setemail(e.target.value)}
+            />
+
+            <Box sx={{ width: "450px" }}>
+              <FormControl fullWidth>
+                <InputLabel>รหัสสาขา</InputLabel>
+                {/* {console.log("dept=", dept, "depart=", departID)} */}
+                <Select
+                  value={departID}
+                  label="รหัสสาขา"
+                  onChange={(e) => {
+                    setdepartID(e.target.value);
+                  }}
+                  defaultValue={dept}
+                >
+                  {dept.map((name) => (
+                    <MenuItem key={name.dept_id} value={name.dept_id}>
+                      {name.dept_id} {name.dept_name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
             {/* <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 2 }}

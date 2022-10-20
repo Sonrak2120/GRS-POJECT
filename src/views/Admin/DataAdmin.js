@@ -34,11 +34,11 @@ const MenuitemSAdmin = [
     icon: SwitchAccountIcon,
     href: "/admin/listteacher",
   },
-  {
-    title: "ดาวน์โหลดฟอร์มExcel",
-    icon: SystemUpdateAltIcon,
-    href: "/admin/downloadfile",
-  },
+  // {
+  //   title: "ดาวน์โหลดฟอร์มExcel",
+  //   icon: SystemUpdateAltIcon,
+  //   href: "/admin/downloadfile",
+  // },
   {
     title: "หลักสูตรการศึกษา",
     icon: AssignmentIcon,

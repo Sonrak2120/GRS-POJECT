@@ -137,7 +137,7 @@ export default function AddCouse({ setLoading }) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"เพิ่มหลักสูตรในสาขาวิชา วิทยาการคอมพิวเตอร์"}
+          {"เพิ่มหลักสูตรในสาขาวิชา"}
         </DialogTitle>
         <DialogContent>
           <Stack spacing={2} justifyContent="center" alignItems={"center"}>
@@ -171,6 +171,8 @@ export default function AddCouse({ setLoading }) {
                     {rows.map((name) => (
                       <MenuItem key={name} value={name}>
                         {name.dept_id}
+                        {"-"}
+                        {name.dept_name}
                       </MenuItem>
                     ))}
                   </Select>

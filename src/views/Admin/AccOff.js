@@ -67,7 +67,14 @@ export default function AccOff() {
                 align="center"
                 style={{ width: "20%" }}
               >
-                รหัสสาขา
+                E-mail
+              </TableCell>
+              <TableCell
+                sx={{ fontWeight: "bold", fontSize: "16px" }}
+                align="center"
+                style={{ width: "20%" }}
+              >
+                สาขา
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
@@ -104,7 +111,12 @@ export default function AccOff() {
                   {row.surname}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
+                  {row.email}
+                </TableCell>
+                <TableCell sx={{ width: "200px" }} align="left">
                   {row.depart_id}
+                  {"-"}
+                  {row.depart_name}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {/* {row.status} */}

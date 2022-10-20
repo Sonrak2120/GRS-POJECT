@@ -20,6 +20,8 @@ export default function EditButtonCouse({ row, rows, setRows }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const [departID, setdepartID] = useState("");
+  const [teacherName, setteacherName] = useState("");
+  const [teacherSur, setteacherSur] = useState("");
 
   const [newid, setnewID] = useState("");
 
@@ -60,6 +62,8 @@ export default function EditButtonCouse({ row, rows, setRows }) {
       depart_id: departID,
       file_pdf: filepdf,
       file_course: filecourse,
+      teacher_name: teacherName,
+      teacher_surname: teacherSur,
     };
     fetch("http://localhost:5000/edit-upload-course-pdf", {
       method: "PUT",
@@ -87,6 +91,8 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     setcouseID(rows[row].course_id);
     setcousename(rows[row].course_name);
     setfilepdf(rows[row].file_pdf);
+    setteacherName(rows[row].teacher_name);
+    setteacherSur(rows[row].teacher_surname);
     setOpen(true);
   };
 

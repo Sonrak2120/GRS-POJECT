@@ -30,11 +30,11 @@ const MenuitemOfficer = [
     icon: SwitchAccountIcon,
     href: "/officer/list",
   },
-  {
-    title: "ดาวน์โหลดฟอร์มExcel",
-    icon: SystemUpdateAltIcon,
-    href: "/officer/downloadfile",
-  },
+  // {
+  //   title: "ดาวน์โหลดฟอร์มExcel",
+  //   icon: SystemUpdateAltIcon,
+  //   href: "/officer/downloadfile",
+  // },
   {
     title: "หลักสูตรการศึกษา",
     icon: AssignmentIcon,

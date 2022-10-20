@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 
 import axios from "axios";
 import AddCouse from "./Button/AddCouse";
@@ -39,10 +40,47 @@ export default function AccGen() {
     api_();
   }, []);
 
+  const onDownload4 = () => {
+    fetch("http://localhost:5000/download-add-gen-example-form", {
+      method: "GET",
+      headers: {
+        "Content-Type": "./example/subject_gen64.xlsx",
+      },
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `subject_gen64.xlsx`);
+
+        // Append to html link element page
+        document.body.appendChild(link);
+
+        // Start download
+        link.click();
+
+        // Clean up and remove the link
+        link.parentNode.removeChild(link);
+      });
+  };
+
   return (
     <div>
       <Progess load={loading} />
-      <h3 style={{ marginBottom: "20px" }}>รายวิชาศึกษาทั่วไป</h3>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>รายวิชาศึกษาทั่วไป</h3>
+        <Button onClick={onDownload4} variant="contained" color="primary">
+          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มคู่มือการศึกษาทั่วไป
+        </Button>
+      </div>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

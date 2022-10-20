@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteCouseButton from "./Button/DeleteCouseButton";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import { Button } from "@mui/material";
 
 import axios from "axios";
 import AddCouse from "./Button/AddCouse";
@@ -36,10 +37,48 @@ export default function AccCouse() {
     api_();
   }, []);
 
+  const onDownload2 = () => {
+    fetch("http://localhost:5000/download-add-subject-example-form", {
+      method: "GET",
+      headers: {
+        "Content-Type": "./example/subject_example.xlsx",
+      },
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `subject_form.xlsx`);
+
+        // Append to html link element page
+        document.body.appendChild(link);
+
+        // Start download
+        link.click();
+
+        // Clean up and remove the link
+        link.parentNode.removeChild(link);
+      });
+  };
+
   return (
     <div>
       <Progess load={loading} />
-      <h3 style={{ marginBottom: "20px" }}>หลักสูตรการศึกษา</h3>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>หลักสูตรการศึกษา</h3>
+        <Button onClick={onDownload2} variant="contained" color="primary">
+          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มหลักสูตร
+        </Button>
+      </div>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>
@@ -60,7 +99,7 @@ export default function AccCouse() {
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
               >
-                รหัสสาขา
+                สาขา
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
@@ -108,11 +147,13 @@ export default function AccCouse() {
                 >
                   {row.course_id}
                 </TableCell>
-                <TableCell sx={{ width: "400px" }} align="left">
+                <TableCell sx={{ width: "400px" }} align="center">
                   {row.course_name}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {row.depart_id}
+                  {"-"}
+                  {row.depart_name}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {/* {row.pdf_status}

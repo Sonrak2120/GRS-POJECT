@@ -12,7 +12,7 @@ import AddDepartment from "./Button/AddDepartment";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import EditButtonDepart from "./Button/EditButtonDepart";
 import AddFullDepart from "./Button/AddFullDepart";
-import { Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 
 export default function AccDepartment() {
   const [rows, setRows] = React.useState([]);
@@ -37,10 +37,48 @@ export default function AccDepartment() {
     api_();
   }, []);
 
+  const onDownload5 = () => {
+    fetch("http://localhost:5000/download-add-depart-example-form", {
+      method: "GET",
+      headers: {
+        "Content-Type": "./example/department.xlsx",
+      },
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `department.xlsx`);
+
+        // Append to html link element page
+        document.body.appendChild(link);
+
+        // Start download
+        link.click();
+
+        // Clean up and remove the link
+        link.parentNode.removeChild(link);
+      });
+  };
+
   return (
     <div>
       <Progess load={loading} />
-      <h3 style={{ marginBottom: "20px" }}>สาขาวิชา</h3>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>สาขาวิชา</h3>
+        <Button onClick={onDownload5} variant="contained" color="primary">
+          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มสาขาวิชา
+        </Button>
+      </div>
+
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

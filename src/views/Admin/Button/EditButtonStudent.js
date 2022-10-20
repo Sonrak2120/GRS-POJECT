@@ -26,6 +26,7 @@ export default function AlertDialog({ row, rows, setRows }) {
   const [newid, setnewID] = useState("");
   const [courseid, setcourse] = useState("");
   const [teacherid, setteacherid] = useState("");
+  const [email, setemail] = useState("");
 
   const [teachert2, setteachert2] = React.useState([]);
 
@@ -79,6 +80,7 @@ export default function AlertDialog({ row, rows, setRows }) {
       depart_id: departID,
       course_id: courseid,
       teacher_id: teacherid,
+      email: email,
     };
     fetch("http://localhost:5000/edit-data-student", {
       method: "PUT",
@@ -107,6 +109,7 @@ export default function AlertDialog({ row, rows, setRows }) {
     setID(rows[row].user_id);
     setcourse(rows[row].course_id);
     setteacherid(rows[row].teacher_id);
+    setemail(rows[row].email);
     setOpen(true);
     setnewID(rows[row].user_id);
   };
@@ -168,6 +171,13 @@ export default function AlertDialog({ row, rows, setRows }) {
                 onChange={(e) => setsurname(e.target.value)}
               />
             </Stack>
+            <Inputnew
+              sx={{ width: "450px" }}
+              label="E-mail"
+              defaultValue={email}
+              id="email"
+              onChange={(e) => setemail(e.target.value)}
+            />
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 2 }}

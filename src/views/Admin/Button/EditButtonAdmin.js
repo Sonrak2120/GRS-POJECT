@@ -20,6 +20,7 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const [name, setname] = useState("");
+  const [email, setemail] = useState("");
   const [surname, setsurname] = useState("");
   const [departID, setdepartID] = useState("");
   const [id, setID] = useState("");
@@ -56,6 +57,7 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
       name: name,
       surname: surname,
       depart_id: departID,
+      email: email,
     };
     fetch("http://localhost:5000/edit-data-teacher", {
       method: "PUT",
@@ -85,6 +87,7 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
     setdepartID(rows[row].depart_id);
     setID(rows[row].user_id);
     setnewID(rows[row].user_id);
+    setemail(rows[row].email);
     setOpen(true);
   };
 
@@ -117,27 +120,6 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
                   spacing={{ xs: 1, sm: 2, md: 2 }}
                   sx={{ mt: "20px" }}
                 >
-                  <Box sx={{ width: "450px" }}>
-                    <FormControl fullWidth>
-                      <InputLabel>รหัสสาขา</InputLabel>
-                      {console.log("dept=", dept, "depart=", departID)}
-                      <Select
-                        value={departID}
-                        label="รหัสสาขา"
-                        onChange={(e) => {
-                          setdepartID(e.target.value);
-                        }}
-                        defaultValue={dept}
-                      >
-                        {dept.map((name) => (
-                          <MenuItem key={name.dept_id} value={name.dept_id}>
-                            {name.dept_id} {name.dept_name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Box>
-
                   {/* <Inputnew
                 sx={{ width: "450px" }}
                 label="รหัสสาขา"
@@ -170,18 +152,41 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
                     onChange={(e) => setsurname(e.target.value)}
                   />
                 </Stack>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
-                >
-                  <Inputnew
-                    sx={{ width: "450px" }}
-                    id="teacherID"
-                    defaultValue={id}
-                    label="รหัสอาจารย์"
-                    onChange={(e) => setnewID(e.target.value)}
-                  />
-                </Stack>
+
+                <Inputnew
+                  sx={{ width: "450px" }}
+                  id="teacherID"
+                  defaultValue={id}
+                  label="รหัสอาจารย์"
+                  onChange={(e) => setnewID(e.target.value)}
+                />
+                <Inputnew
+                  sx={{ width: "450px" }}
+                  id="email"
+                  defaultValue={email}
+                  label="E-mail"
+                  onChange={(e) => setemail(e.target.value)}
+                />
+                <Box sx={{ width: "450px" }}>
+                  <FormControl fullWidth>
+                    <InputLabel>รหัสสาขา</InputLabel>
+                    {console.log("dept=", dept, "depart=", departID)}
+                    <Select
+                      value={departID}
+                      label="รหัสสาขา"
+                      onChange={(e) => {
+                        setdepartID(e.target.value);
+                      }}
+                      defaultValue={dept}
+                    >
+                      {dept.map((name) => (
+                        <MenuItem key={name.dept_id} value={name.dept_id}>
+                          {name.dept_id} {name.dept_name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
               </Stack>
             </DialogContent>
             <DialogActions>

@@ -11,6 +11,7 @@ import Deletebutton from "./Button/Deletebutton";
 import AddPage from "./AddPage";
 import axios from "axios";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import { Button } from "@mui/material";
 
 function createData(name, lastname, id) {
   return { name, lastname, id };
@@ -49,6 +50,13 @@ export default function AccT() {
             <TableRow>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
+                align="center"
+                style={{ width: "10%" }}
+              >
+                รหัสอาจารย์
+              </TableCell>
+              <TableCell
+                sx={{ fontWeight: "bold", fontSize: "16px" }}
                 style={{ width: "20%" }}
               >
                 ชื่อ
@@ -62,11 +70,19 @@ export default function AccT() {
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
-                align="center"
                 style={{ width: "20%" }}
+                align="left"
               >
-                รหัสอาจารย์
+                E-mail
               </TableCell>
+              <TableCell
+                sx={{ fontWeight: "bold", fontSize: "16px" }}
+                style={{ width: "20%" }}
+                align="center"
+              >
+                สาขา
+              </TableCell>
+
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "16px" }}
                 align="center"
@@ -95,15 +111,24 @@ export default function AccT() {
                   },
                 }}
               >
+                <TableCell sx={{ width: "200px" }} align="center">
+                  {row.user_id}
+                </TableCell>
                 <TableCell component="th" scope="row" sx={{ width: "200px" }}>
                   {row.name}
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="left">
                   {row.surname}
                 </TableCell>
-                <TableCell sx={{ width: "200px" }} align="center">
-                  {row.user_id}
+                <TableCell sx={{ width: "200px" }} align="left">
+                  {row.email}
                 </TableCell>
+                <TableCell sx={{ width: "200px" }} align="left">
+                  {row.depart_id}
+                  {"-"}
+                  {row.depart_name}
+                </TableCell>
+
                 <TableCell sx={{ width: "200px" }} align="center">
                   {/* {row.status} */}
                   <div style={{ display: "flex" }}>
