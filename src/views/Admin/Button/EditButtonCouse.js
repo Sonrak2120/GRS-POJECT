@@ -83,7 +83,7 @@ export default function EditButtonCouse({ row, rows, setRows }) {
 
   const handleClickOpen = () => {
     setdepartID(rows[row].depart_id);
-    setnewID(rows[row].user_id);
+    setnewID(rows[row].course_id);
     setcouseID(rows[row].course_id);
     setcousename(rows[row].course_name);
     setfilepdf(rows[row].file_pdf);
@@ -110,7 +110,7 @@ export default function EditButtonCouse({ row, rows, setRows }) {
             // sx={{  minWidth:"100vh",minHeight: "100vh",backgroundColor: 'primary.dark',}}
           >
             <DialogTitle id="alert-dialog-title">
-              {"แก้ไขข้อมูลอาจารย์"}
+              {"แก้ไขข้อมูลหลักสูตรการศึกษา"}
             </DialogTitle>
             <DialogContent>
               <Stack spacing={2} justifyContent="center" alignItems={"center"}>

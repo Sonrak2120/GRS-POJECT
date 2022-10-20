@@ -46,7 +46,7 @@ export default function EditButtonDepart({ row, rows, setRows }) {
           window.location.reload("Refresh");
         } else {
           alert("ล้มเหลว");
-          console.log(result["error"]);
+          console.log(result["message"]);
         }
       });
   };
@@ -54,7 +54,7 @@ export default function EditButtonDepart({ row, rows, setRows }) {
   const handleClickOpen = () => {
     setdepartID(rows[row].depart_id);
     setdepartment(rows[row].department);
-    setnewID(rows[row].user_id);
+    setnewID(rows[row].depart_id);
     setOpen(true);
   };
 
@@ -76,7 +76,7 @@ export default function EditButtonDepart({ row, rows, setRows }) {
         // sx={{  minWidth:"100vh",minHeight: "100vh",backgroundColor: 'primary.dark',}}
       >
         <DialogTitle id="alert-dialog-title">
-          {"แก้ไขข้อมูลอาจารย์"}
+          {"แก้ไขข้อมูลสาขาวิชา"}
         </DialogTitle>
         <DialogContent>
           <Stack spacing={2} justifyContent="center" alignItems={"center"}>

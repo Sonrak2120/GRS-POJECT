@@ -60,12 +60,6 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "id_teacher",
-    numeric: true,
-    disablePadding: true,
-    label: "รหัสอาจารย์ที่ปรึกษา",
-  },
-  {
     id: "user_id",
     numeric: false,
     disablePadding: false,
@@ -88,6 +82,12 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "E-Mail",
+  },
+  {
+    id: "id_teacher",
+    numeric: true,
+    disablePadding: true,
+    label: "รหัสอาจารย์ที่ปรึกษา",
   },
   {
     id: "mess",
@@ -377,15 +377,6 @@ export default function EnhancedTable() {
                         padding="none"
                         align="center"
                       >
-                        {row.teacher_id}
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        align="center"
-                      >
                         {row.user_id}
                       </TableCell>
                       <TableCell align="left" style={{ fontWeight: "bolder" }}>
@@ -394,7 +385,16 @@ export default function EnhancedTable() {
                       <TableCell align="left" style={{ fontWeight: "bolder" }}>
                         {row.surname}
                       </TableCell>
-                      <TableCell align="left">{row.email}</TableCell>
+                      <TableCell align="center">{row.email}</TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                        align="center"
+                      >
+                        {row.teacher_id}
+                      </TableCell>
                       <TableCell align="center">
                         <div style={{ display: "flex" }}>
                           {(() => {
@@ -474,7 +474,13 @@ export default function EnhancedTable() {
                           })()}
                         </div>
                       </TableCell>
-                      <TableCell align="center">{row.date_html}</TableCell>
+                      <TableCell align="center">
+                        {row.date_html}
+                        <br />
+                        {"เวลา "}
+                        {row.time}
+                        {" น."}
+                      </TableCell>
                       <TableCell
                         align="center"
                         style={{ display: "flex", justifyContent: "center" }}

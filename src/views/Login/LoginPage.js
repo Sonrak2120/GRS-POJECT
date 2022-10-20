@@ -104,8 +104,8 @@ export default function LoginPage({ SetRole }) {
           <Inputnew
             sx={{
               width: "450px",
-              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
-                color: "white",
+              "& .css-16klrgp-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "rgba(255,255,255,0.8)",
               },
               "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
                 "border-color": "white",
@@ -120,8 +120,8 @@ export default function LoginPage({ SetRole }) {
           <Inputnew
             sx={{
               width: "450px",
-              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
-                color: "white",
+              "& .css-16klrgp-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "rgba(255,255,255,0.8)",
               },
               "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
                 "border-color": "white",

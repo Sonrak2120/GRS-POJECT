@@ -54,7 +54,7 @@ export default function EditButtonGen({ row, rows, setRows }) {
   const handleClickOpen = () => {
     setgenID(rows[row].gen_id);
     setdgenname(rows[row].gen_name);
-    setnewID(rows[row].user_id);
+    setnewID(rows[row].gen_id);
     setOpen(true);
   };
 
@@ -76,7 +76,7 @@ export default function EditButtonGen({ row, rows, setRows }) {
         // sx={{  minWidth:"100vh",minHeight: "100vh",backgroundColor: 'primary.dark',}}
       >
         <DialogTitle id="alert-dialog-title">
-          {"แก้ไขข้อมูลอาจารย์"}
+          {"แก้ไขข้อมูลรายวิชา"}
         </DialogTitle>
         <DialogContent>
           <Stack spacing={2} justifyContent="center" alignItems={"center"}>

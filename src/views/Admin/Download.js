@@ -116,6 +116,32 @@ const onDownload4 = () => {
     });
 };
 
+const onDownload5 = () => {
+  fetch("http://localhost:5000/download-add-depart-example-form", {
+    method: "GET",
+    headers: {
+      "Content-Type": "./example/department.xlsx",
+    },
+  })
+    .then((response) => response.blob())
+    .then((blob) => {
+      // Create blob link to download
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `department.xlsx`);
+
+      // Append to html link element page
+      document.body.appendChild(link);
+
+      // Start download
+      link.click();
+
+      // Clean up and remove the link
+      link.parentNode.removeChild(link);
+    });
+};
+
 const Download = () => {
   return (
     <div style={{ backgroundColor: "white" }}>
@@ -209,6 +235,26 @@ const Download = () => {
           >
             <Button onClick={onDownload4} variant="contained" color="primary">
               ดาวน์โหลด ตัวอย่างเพื่อเพิ่มคู่มือการศึกษาทั่วไป
+            </Button>
+          </Box>
+          <Typography
+            sx={{
+              m: "20px",
+            }}
+            fontSize={"14pt"}
+          >
+            <strong>ตัวอย่าง</strong> เอกสารสำหรับเจ้าหน้าที่
+            เพื่อเป็นแบบอย่างในการกรอกแบบฟอร์มเพื่อเพิ่มสาขาวิชา
+          </Typography>
+          <Box
+            sx={{
+              alignItem: "center",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button onClick={onDownload5} variant="contained" color="primary">
+              ดาวน์โหลด ตัวอย่างเพื่อเพิ่มสาขาวิชา
             </Button>
           </Box>
         </Grid>

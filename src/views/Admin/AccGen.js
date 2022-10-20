@@ -151,6 +151,10 @@ export default function AccGen() {
                 </TableCell>
                 <TableCell sx={{ width: "200px" }} align="center">
                   {row.date}
+                  <br />
+                  {"เวลา "}
+                  {row.time}
+                  {" น."}
                 </TableCell>
                 <TableCell
                   align="center"

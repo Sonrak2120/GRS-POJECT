@@ -43,9 +43,10 @@ export default function StudentFullAddPage({ setLoading }) {
       setLoading(false);
       alert("กรุณาแจ้งผู้ใช้ให้ยืนยันตัวตนที่หน้าเข้าสู่ระบบ");
       window.location.reload("Refresh");
-    } catch {
+    } catch (error) {
       setLoading(false);
       alert("Error อัปโหลดไฟล์ไม่ถูกต้อง");
+      console.log(error);
     }
   };
 
