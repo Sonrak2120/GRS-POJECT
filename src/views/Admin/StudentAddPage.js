@@ -140,7 +140,29 @@ export default function StudentAddPage({ setLoading }) {
           {"เพิ่มบัญชีผู้ใช้ของนิสิต"}
         </DialogTitle>
         <DialogContent>
-          <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+          <Stack
+            spacing={2}
+            justifyContent="center"
+            alignItems={"center"}
+            marginTop={"10px"}
+          >
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 1, sm: 2, md: 2 }}
+            >
+              <Inputnew
+                sx={{ width: "450px" }}
+                id="name"
+                label="ชื่อ"
+                onChange={(e) => setname(e.target.value)}
+              />
+              <Inputnew
+                sx={{ width: "450px" }}
+                label="นามสกุล"
+                id="surname"
+                onChange={(e) => setsurname(e.target.value)}
+              />
+            </Stack>
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 2 }}
@@ -160,23 +182,7 @@ export default function StudentAddPage({ setLoading }) {
                 onChange={(e) => setstdID(e.target.value)}
               />
             </Stack>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="name"
-                label="ชื่อ"
-                onChange={(e) => setname(e.target.value)}
-              />
-              <Inputnew
-                sx={{ width: "450px" }}
-                label="นามสกุล"
-                id="surname"
-                onChange={(e) => setsurname(e.target.value)}
-              />
-            </Stack>
+
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 2 }}

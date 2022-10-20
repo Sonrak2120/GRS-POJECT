@@ -118,82 +118,50 @@ export default function AlertDialog({ setLoading }) {
         </DialogTitle>
         <DialogContent>
           <Stack spacing={2} justifyContent="center" alignItems={"center"}>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-              sx={{ mt: 5 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="email"
-                label="E-mail"
-                autoComplete="email"
-                onChange={(e) => setemail(e.target.value)}
-              />
-              {/* <Inputnew
-                sx={{ width: "450px" }}
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(e) => setpassword(e.target.value)}
-              /> */}
-            </Stack>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="name"
-                label="ชื่อ"
-                onChange={(e) => setname(e.target.value)}
-              />
-              <Inputnew
-                sx={{ width: "450px" }}
-                label="นามสกุล"
-                id="surname"
-                onChange={(e) => setsurname(e.target.value)}
-              />
-            </Stack>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="teacherID"
-                label="รหัสอาจารย์"
-                onChange={(e) => setteacherID(e.target.value)}
-              />
-              <Box sx={{ width: "450px" }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    รหัสสาขา
-                  </InputLabel>
-                  <Select
-                    // id="departID"
-                    label="รหัสสาขา"
-                    onChange={(e) => setdepartID(e.target.value.dept_id)}
-                  >
-                    {rows.map((name) => (
-                      <MenuItem key={name} value={name}>
-                        {name.dept_id}
-                        {"-"}
-                        {name.dept_name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
+            <Inputnew
+              sx={{ width: "450px" }}
+              id="name"
+              label="ชื่อ"
+              onChange={(e) => setname(e.target.value)}
+            />
+            <Inputnew
+              sx={{ width: "450px" }}
+              label="นามสกุล"
+              id="surname"
+              onChange={(e) => setsurname(e.target.value)}
+            />
+            <Inputnew
+              sx={{ width: "450px" }}
+              id="email"
+              label="E-mail"
+              autoComplete="email"
+              onChange={(e) => setemail(e.target.value)}
+            />
 
-              {/* <Inputnew
-                sx={{ width: "450px" }}
-                label="รหัสสาขา"
-                id="departID"
-                onChange={(e) => setdepartID(e.target.value)}
-              /> */}
-            </Stack>
+            <Inputnew
+              sx={{ width: "450px" }}
+              id="teacherID"
+              label="รหัสอาจารย์"
+              onChange={(e) => setteacherID(e.target.value)}
+            />
+            <Box sx={{ width: "450px" }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">รหัสสาขา</InputLabel>
+                <Select
+                  // id="departID"
+                  label="รหัสสาขา"
+                  onChange={(e) => setdepartID(e.target.value.dept_id)}
+                >
+                  {rows.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      {name.dept_id}
+                      {"-"}
+                      {name.dept_name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
           </Stack>
         </DialogContent>
         <DialogActions>
