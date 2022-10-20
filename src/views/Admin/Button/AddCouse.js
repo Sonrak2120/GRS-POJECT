@@ -79,6 +79,7 @@ export default function AddCouse({ setLoading }) {
     bodyContent.append("course_id", couseID);
     bodyContent.append("file_pdf", filepdf);
     bodyContent.append("file_course", filecourse);
+    console.log(bodyContent);
     let response = await fetch("http://127.0.0.1:5000/upload-course-pdf", {
       method: "POST",
       body: bodyContent,
@@ -93,6 +94,7 @@ export default function AddCouse({ setLoading }) {
         } else {
           setLoading(false);
           alert("ผิดพลาด");
+          window.location.reload("Refresh");
         }
         console.log("result[message]", result["message"]);
       });

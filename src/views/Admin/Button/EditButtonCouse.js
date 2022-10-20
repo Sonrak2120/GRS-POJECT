@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 export default function EditButtonCouse({ row, rows, setRows }) {
   const token = sessionStorage.getItem("token");
@@ -22,13 +23,34 @@ export default function EditButtonCouse({ row, rows, setRows }) {
   const [departID, setdepartID] = useState("");
   const [teacherName, setteacherName] = useState("");
   const [teacherSur, setteacherSur] = useState("");
+  const [pdfname, setpdfname] = useState("");
+  const [exlname, setexlname] = useState("");
 
   const [newid, setnewID] = useState("");
 
   const [couseID, setcouseID] = useState("");
   const [cousename, setcousename] = useState("");
+  const [id, setid] = useState("");
 
   const [dept, setdept] = React.useState([]);
+
+  const handleUploadImage = (e) => {
+    const filepdf = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setfilepdf(filepdf);
+    };
+    reader.readAsDataURL(filepdf);
+  };
+  const [filecourse, setfilecourse] = useState({});
+  const handleUploadxlxs = (e) => {
+    const filecourse = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setfilecourse(filecourse);
+    };
+    reader.readAsDataURL(filecourse);
+  };
 
   useEffect(() => {
     const api_ = async () => {
@@ -50,28 +72,25 @@ export default function EditButtonCouse({ row, rows, setRows }) {
   }, []);
 
   const [filepdf, setfilepdf] = useState({});
-  const [filecourse, setfilecourse] = useState({});
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     setOpen(false);
     event.preventDefault();
-    var data = {
-      new_id: newid,
-      course_id: couseID,
-      course_name: cousename,
-      depart_id: departID,
-      file_pdf: filepdf,
-      file_course: filecourse,
-      teacher_name: teacherName,
-      teacher_surname: teacherSur,
+    let headersList = {
+      Accept: "*/*",
     };
-    fetch("http://localhost:5000/edit-upload-course-pdf", {
+    let bodyContent = new FormData();
+    bodyContent.append("course_name", cousename);
+    bodyContent.append("depart_id", departID);
+    bodyContent.append("course_id", couseID);
+    bodyContent.append("file_pdf", filepdf);
+    bodyContent.append("file_course", filecourse);
+    bodyContent.append("id", id);
+    console.log(bodyContent);
+    let response = await fetch("http://localhost:5000/edit-upload-course-pdf", {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-      body: JSON.stringify(data),
+      headers: headersList,
+      body: bodyContent,
     })
       .then((res) => res.json())
       .then((result) => {
@@ -93,6 +112,9 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     setfilepdf(rows[row].file_pdf);
     setteacherName(rows[row].teacher_name);
     setteacherSur(rows[row].teacher_surname);
+    setpdfname(rows[row].pdf_name);
+    setexlname(rows[row].excel_name);
+    setid(rows[row].id);
     setOpen(true);
   };
 
@@ -119,15 +141,11 @@ export default function EditButtonCouse({ row, rows, setRows }) {
               {"แก้ไขข้อมูลหลักสูตรการศึกษา"}
             </DialogTitle>
             <DialogContent>
-              <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+              <Stack spacing={2}>
                 <Stack
-                  direction={{ xs: "column", sm: "row" }}
+                  //direction={{ xs: "column", sm: "row" }}
                   spacing={{ xs: 1, sm: 2, md: 2 }}
                   sx={{ mt: "20px" }}
-                ></Stack>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
                 >
                   <Inputnew
                     sx={{ width: "450px" }}
@@ -169,6 +187,34 @@ export default function EditButtonCouse({ row, rows, setRows }) {
                     </Select>
                   </FormControl>
                 </Box>
+                <p style={{ color: "red" }}>*ไฟล์ PDF ข้อมูลหลักสูตร</p>
+                <Typography
+                  style={{ color: "green", fontSize: "15px", marginTop: "2px" }}
+                >
+                  ( ไฟล์ล่าสุด : {pdfname} )
+                </Typography>
+                <input
+                  type={"file"}
+                  accept="application/pdf"
+                  ID="fileSelect"
+                  runat="server"
+                  onChange={handleUploadImage}
+                />{" "}
+                <br />
+                <p style={{ color: "red" }}>*ไฟล์ xlxs เพื่อเพิ่มหลักสูตร</p>
+                <Typography
+                  style={{ color: "green", fontSize: "15px", marginTop: "2px" }}
+                >
+                  ( ไฟล์ล่าสุด : {exlname} )
+                </Typography>
+                <input
+                  type={"file"}
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  ID="fileSelect"
+                  runat="server"
+                  onChange={handleUploadxlxs}
+                />
+                <br />
               </Stack>
             </DialogContent>
             <DialogActions>

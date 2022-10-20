@@ -94,11 +94,11 @@ export default function StudentFullAddPage({ setLoading }) {
               ID="fileSelect"
               runat="server"
               onChange={handleUploadImage}
-            />{" "}
+            />
             <br />
-            <button onClick={onClickUpload} className="btn btn-primary">
+            <Button variant="contained" color="success" onClick={onClickUpload}>
               อัปโหลดไฟล์
-            </button>
+            </Button>
           </div>
         </DialogContent>
         <DialogActions>

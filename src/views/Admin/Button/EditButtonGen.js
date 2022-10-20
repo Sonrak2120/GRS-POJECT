@@ -15,29 +15,42 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 export default function EditButtonGen({ row, rows, setRows }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const [genID, setgenID] = useState("");
   const [genname, setdgenname] = useState("");
-  const [newid, setnewID] = useState("");
+  const [exlname, setexlname] = useState("");
+  const [id, setid] = useState("");
 
-  const handleSubmit = (event) => {
+  const [filecourse, setfilecourse] = useState({});
+  const handleUploadxlxs = (e) => {
+    const filecourse = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setfilecourse(filecourse);
+    };
+    reader.readAsDataURL(filecourse);
+  };
+
+  const handleSubmit = async (event) => {
     setOpen(false);
     event.preventDefault();
-    var data = {
-      new_id: newid,
-      gen_id: genID,
-      gen_name: genname,
+    let headersList = {
+      Accept: "*/*",
     };
-    fetch("http://localhost:5000/edit-general", {
+    let bodyContent = new FormData();
+    bodyContent.append("gen_name", genname);
+    bodyContent.append("gen_id", genID);
+    bodyContent.append("file_course", filecourse);
+    bodyContent.append("id", id);
+    console.log(bodyContent);
+    let response = await fetch("http://localhost:5000/edit-general", {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ` + token,
-      },
-      body: JSON.stringify(data),
+      headers: headersList,
+      body: bodyContent,
     })
       .then((res) => res.json())
       .then((result) => {
@@ -54,7 +67,9 @@ export default function EditButtonGen({ row, rows, setRows }) {
   const handleClickOpen = () => {
     setgenID(rows[row].gen_id);
     setdgenname(rows[row].gen_name);
-    setnewID(rows[row].gen_id);
+    setid(rows[row].id);
+
+    setexlname(rows[row].filename);
     setOpen(true);
   };
 
@@ -79,7 +94,7 @@ export default function EditButtonGen({ row, rows, setRows }) {
           {"แก้ไขข้อมูลรายวิชา"}
         </DialogTitle>
         <DialogContent>
-          <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+          <Stack spacing={2}>
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 1, sm: 2, md: 2 }}
@@ -90,7 +105,7 @@ export default function EditButtonGen({ row, rows, setRows }) {
                 label="รหัสเล่มศึกษาทั่วไป"
                 defaultValue={genID}
                 id="genID"
-                onChange={(e) => setnewID(e.target.value)}
+                onChange={(e) => setgenID(e.target.value)}
               />
             </Stack>
             <Stack
@@ -105,6 +120,21 @@ export default function EditButtonGen({ row, rows, setRows }) {
                 onChange={(e) => setdgenname(e.target.value)}
               />
             </Stack>
+
+            <p style={{ color: "red" }}>*ไฟล์ xlxs เพื่อเพิ่มหลักสูตร</p>
+            <Typography
+              style={{ color: "green", fontSize: "15px", marginTop: "2px" }}
+            >
+              ( ไฟล์ล่าสุด : {exlname} )
+            </Typography>
+            <input
+              type={"file"}
+              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              ID="fileSelect"
+              runat="server"
+              onChange={handleUploadxlxs}
+            />
+            <br />
           </Stack>
         </DialogContent>
         <DialogActions>
