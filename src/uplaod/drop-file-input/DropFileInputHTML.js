@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Button from "@mui/material/Button";
 
 import "./drop-file-input.css";
 
@@ -47,6 +48,13 @@ const DropFileInputHTML = (props, { setLoading }) => {
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
     props.onFileChange(updatedList);
+  };
+
+  const handledownload = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(file.file);
+    a.download = file.file.name;
+    a.click();
   };
 
   const [file, setFile] = useState({});
@@ -132,7 +140,10 @@ const DropFileInputHTML = (props, { setLoading }) => {
                 alt="Error Input"
               />
               <div className="drop-file-preview__item__info">
-                <p>{item.file.name}</p>
+                <Button variant="text" onClick={handledownload}>
+                  {" "}
+                  {item.file.name}
+                </Button>
                 <p>{item.file.size}B</p>
               </div>
               {!item.flag && (
