@@ -13,10 +13,12 @@ import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import EditButtonDepart from "./Button/EditButtonDepart";
 import AddFullDepart from "./Button/AddFullDepart";
 import { Stack, Button } from "@mui/material";
+import DropFileDepart from "../../uplaod/drop-file-input/DropFileDepart";
 
 export default function AccDepartment() {
   const [rows, setRows] = React.useState([]);
   const [offid, setOffid] = useState("");
+  const [file, setfile] = useState(null);
   const [loading, setLoading] = React.useState(false);
   useEffect(() => {
     const api_ = async () => {
@@ -155,7 +157,7 @@ export default function AccDepartment() {
         style={{ marginTop: "20px" }}
       >
         <AddDepartment setLoading={setLoading} />
-        <AddFullDepart setLoading={setLoading} />
+        <DropFileDepart setLoading={setLoading} onFileChange={setfile} />
       </Stack>
     </div>
   );

@@ -30,6 +30,7 @@ import UploadHtml from "./views/Admin/UploadHtml";
 import Download from "./views/Admin/Download";
 import UploadNew from "./uplaod/UploadNew";
 import UploadHtmlNew from "./uplaod/UploadHtmlNew";
+import UploadDepartNew from "./uplaod/UploadDepartNew";
 import AccGen from "./views/Admin/AccGen";
 import AccOff from "./views/Admin/AccOff";
 
