@@ -244,6 +244,7 @@ export default function Forgetpassword() {
             }}
             required
             id="password"
+            type="password"
             placeholder="รหัสผ่านใหม่"
             autoComplete="password"
             onChange={(e) => setpassword(e.target.value)}
@@ -260,6 +261,7 @@ export default function Forgetpassword() {
             }}
             required
             id="password2"
+            type="password"
             placeholder="ยืนยันรหัสผ่านใหม่"
             autoComplete="password"
             onChange={(e) => setpassword2(e.target.value)}

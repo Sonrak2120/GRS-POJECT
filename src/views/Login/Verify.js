@@ -137,6 +137,8 @@ export default function Verify() {
   const [err, setErr] = useState(false);
   const [Department, setDepartment] = useState([]);
   const [email, setEmail] = useState([]);
+  const [password, setpassword] = useState("");
+  const [password2, setpassword2] = useState("");
 
   useEffect(() => {
     const resp = async () => {
@@ -165,6 +167,11 @@ export default function Verify() {
   }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (password !== password2) {
+      alert("รหัสผ่านไม่ตรงกัน");
+    } else if (password === password2 && password.length < 8) {
+      alert("ความยาวรหัสผ่านต้องมากกว่าหรือเท่ากับ 8 ตัว");
+    } else {
     try {
       let headersList = {
         Accept: "*/*",
@@ -177,6 +184,7 @@ export default function Verify() {
         surname: surname,
         role: role,
         email: email,
+        password: password,
       });
 
       let reqOptions = {
@@ -192,6 +200,7 @@ export default function Verify() {
     } catch (err) {
       alert("มีข้อผิดพลาด");
       console.log(err);
+    }
     }
   };
 
@@ -286,15 +295,55 @@ export default function Verify() {
               onChange={(e) => setSurname(e.target.value)}
             />
           </Grid2>
+          <TextField
+            sx={{
+              width: "450px",
+              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
+              },
+              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                "border-color": "white",
+              },
+            }}
+            required
+            id="password"
+            type="password"
+            placeholder="ตั้งรหัสผ่าน"
+            autoComplete="password"
+            onChange={(e) => setpassword(e.target.value)}
+          />
+          <TextField
+            sx={{
+              width: "450px",
+              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "white",
+              },
+              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                "border-color": "white",
+              },
+              marginTop: "20px",
+            }}
+            required
+            id="password2"
+            type="password"
+            placeholder="ยืนยันรหัสผ่าน"
+            autoComplete="password"
+            onChange={(e) => setpassword2(e.target.value)}
+          />
+          <Typography sx={{ fontSize: "15px", color: "rgba(0,0,0,0.5)" }}>
+            โปรดตั้งรหัสผ่านอย่างน้อย 8 ตัว
+          </Typography>
         </Grid2>
+        
         <Grid2
           display="flex"
           justifyContent="center"
           alignItems="center"
           mt={"20px"}
         >
+
           <Button variant="contained" color="primary" onClick={handleSubmit}>
-            ยืนยันตัวตน
+            ยืนยัน
           </Button>
         </Grid2>
       </Grid>
