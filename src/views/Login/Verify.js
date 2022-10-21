@@ -172,35 +172,35 @@ export default function Verify() {
     } else if (password === password2 && password.length < 8) {
       alert("ความยาวรหัสผ่านต้องมากกว่าหรือเท่ากับ 8 ตัว");
     } else {
-    try {
-      let headersList = {
-        Accept: "*/*",
-        "Content-Type": "application/json",
-      };
+      try {
+        let headersList = {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+        };
 
-      let bodyContent = JSON.stringify({
-        token: `${token}`,
-        name: name,
-        surname: surname,
-        role: role,
-        email: email,
-        password: password,
-      });
+        let bodyContent = JSON.stringify({
+          token: `${token}`,
+          name: name,
+          surname: surname,
+          role: role,
+          email: email,
+          password: password,
+        });
 
-      let reqOptions = {
-        url: "http://localhost:5000/verify",
-        method: "PUT",
-        headers: headersList,
-        data: bodyContent,
-      };
+        let reqOptions = {
+          url: "http://localhost:5000/verify",
+          method: "PUT",
+          headers: headersList,
+          data: bodyContent,
+        };
 
-      let response = await axios.request(reqOptions);
-      alert("ยืนยันสำเร็จ");
-      window.location.assign("/");
-    } catch (err) {
-      alert("มีข้อผิดพลาด");
-      console.log(err);
-    }
+        let response = await axios.request(reqOptions);
+        alert("ยืนยันสำเร็จ");
+        window.location.assign("/");
+      } catch (err) {
+        alert("มีข้อผิดพลาด");
+        console.log(err);
+      }
     }
   };
 
@@ -227,7 +227,7 @@ export default function Verify() {
         component="img"
         src={logo}
         sx={{ maxWidth: "200px" }}
-        mt="5rem!important"
+        mt="3rem!important"
         mb="2rem!important"
       />
       <Typography variant="h4" color={"white"}>
@@ -298,14 +298,20 @@ export default function Verify() {
           <TextField
             sx={{
               width: "450px",
-              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
-                color: "white",
-              },
-              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                "border-color": "white",
+              "& .css-ugbsi5-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled":
+                {
+                  color: "white",
+                },
+              "& .css-10botns-MuiInputBase-input-MuiFilledInput-input.Mui-disabled":
+                { "-webkit-text-fill-color": "white" },
+              "& .css-geon7s-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled":
+                { "-webkit-text-fill-color": "#ffffff82" },
+              "& .css-kdqih4-MuiInputBase-root-MuiFilledInput-root": {
+                color: "#ffff",
               },
             }}
             required
+            variant="filled"
             id="password"
             type="password"
             placeholder="ตั้งรหัสผ่าน"
@@ -315,15 +321,22 @@ export default function Verify() {
           <TextField
             sx={{
               width: "450px",
-              "& .css-183vkw9-MuiInputBase-root-MuiOutlinedInput-root": {
-                color: "white",
-              },
-              "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-                "border-color": "white",
+              "& .css-ugbsi5-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled":
+                {
+                  color: "white",
+                },
+              "& .css-10botns-MuiInputBase-input-MuiFilledInput-input.Mui-disabled":
+                { "-webkit-text-fill-color": "white" },
+              "& .css-geon7s-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled":
+                { "-webkit-text-fill-color": "#ffffff82" },
+
+              "& .css-kdqih4-MuiInputBase-root-MuiFilledInput-root": {
+                color: "#ffff",
               },
               marginTop: "20px",
             }}
             required
+            variant="filled"
             id="password2"
             type="password"
             placeholder="ยืนยันรหัสผ่าน"
@@ -334,14 +347,14 @@ export default function Verify() {
             โปรดตั้งรหัสผ่านอย่างน้อย 8 ตัว
           </Typography>
         </Grid2>
-        
+
         <Grid2
           display="flex"
           justifyContent="center"
           alignItems="center"
           mt={"20px"}
+          mb={"30px"}
         >
-
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             ยืนยัน
           </Button>
