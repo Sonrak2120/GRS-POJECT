@@ -46,7 +46,7 @@ export default function EditButtonGen({ row, rows, setRows }) {
     bodyContent.append("gen_id", genID);
     bodyContent.append("file_course", filecourse);
     bodyContent.append("id", id);
-    console.log(bodyContent);
+
     let response = await fetch("http://localhost:5000/edit-general", {
       method: "PUT",
       headers: headersList,
@@ -59,7 +59,6 @@ export default function EditButtonGen({ row, rows, setRows }) {
           window.location.reload("Refresh");
         } else {
           alert("ล้มเหลว");
-          console.log(result["error"]);
         }
       });
   };

@@ -86,7 +86,7 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     };
     reader.readAsDataURL(filepdf);
   };
-  console.log("filepdf", filepdf);
+  console.log("couseID", couseID);
 
   const handleSubmit = async (event) => {
     setOpen(false);
@@ -101,7 +101,8 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     bodyContent.append("file_pdf", filepdf);
     bodyContent.append("file_course", filecourse);
     bodyContent.append("id", id);
-    console.log(bodyContent);
+    console.log("bodyContent", bodyContent);
+
     let response = await fetch("http://localhost:5000/edit-upload-course-pdf", {
       method: "PUT",
       headers: headersList,
@@ -167,7 +168,7 @@ export default function EditButtonCouse({ row, rows, setRows }) {
                     id="couseID"
                     defaultValue={couseID}
                     label="รหัสหลักสูตร"
-                    onChange={(e) => setnewID(e.target.value)}
+                    onChange={(e) => setcouseID(e.target.value)}
                   />
                 </Stack>
                 <Stack
