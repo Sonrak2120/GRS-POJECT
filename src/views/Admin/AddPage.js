@@ -16,11 +16,19 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
 
+import { useForm, Controller } from "react-hook-form";
+
 export default function AlertDialog({ setLoading }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
 
   const [rows, setrows] = React.useState([]);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     const api_ = async () => {
@@ -45,10 +53,9 @@ export default function AlertDialog({ setLoading }) {
   //   setAge(event.target.value);
   // };
 
-  const handleSubmit = (event) => {
+  const handleSubmits = (event) => {
     // setLoading(true);
     setOpen(false);
-    event.preventDefault();
     var data = {
       teacher_id: teacherID,
       name: name,
@@ -92,7 +99,9 @@ export default function AlertDialog({ setLoading }) {
   const [teacherID, setteacherID] = useState("");
   // const [password, setpassword] = useState("");
 
-  console.log(departID);
+  const onSubmit = (data) => {
+    handleSubmits(data);
+  };
 
   return (
     <div
@@ -113,63 +122,112 @@ export default function AlertDialog({ setLoading }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"เพิ่มบัญชีผู้ใช้ของอาจารย์"}
-        </DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} justifyContent="center" alignItems={"center"}>
-            <Inputnew
-              sx={{ width: "450px" }}
-              id="name"
-              label="ชื่อ"
-              onChange={(e) => setname(e.target.value)}
-            />
-            <Inputnew
-              sx={{ width: "450px" }}
-              label="นามสกุล"
-              id="surname"
-              onChange={(e) => setsurname(e.target.value)}
-            />
-            <Inputnew
-              sx={{ width: "450px" }}
-              id="email"
-              label="E-mail"
-              autoComplete="email"
-              onChange={(e) => setemail(e.target.value)}
-            />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle id="alert-dialog-title">
+            {"เพิ่มบัญชีผู้ใช้ของอาจารย์"}
+          </DialogTitle>
+          <DialogContent>
+            <Stack
+              spacing={2}
+              justifyContent="center"
+              alignItems={"center"}
+              mt={"20px"}
+            >
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Inputnew
+                    sx={{ width: "450px" }}
+                    id="name"
+                    label="ชื่อ"
+                    onChange={(e) => setname(e.target.value)}
+                    required
+                  />
+                )}
+                name="name"
+                control={control}
+                defaultValue=""
+              />
 
-            <Inputnew
-              sx={{ width: "450px" }}
-              id="teacherID"
-              label="รหัสอาจารย์"
-              onChange={(e) => setteacherID(e.target.value)}
-            />
-            <Box sx={{ width: "450px" }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">รหัสสาขา</InputLabel>
-                <Select
-                  // id="departID"
-                  label="รหัสสาขา"
-                  onChange={(e) => setdepartID(e.target.value.dept_id)}
-                >
-                  {rows.map((name) => (
-                    <MenuItem key={name} value={name}>
-                      {name.dept_id}
-                      {"-"}
-                      {name.dept_name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>ยกเลิก</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            เพิ่ม
-          </Button>
-        </DialogActions>
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Inputnew
+                    sx={{ width: "450px" }}
+                    label="นามสกุล"
+                    id="surname"
+                    onChange={(e) => setsurname(e.target.value)}
+                    required
+                  />
+                )}
+                name="surname"
+                control={control}
+                defaultValue=""
+              />
+
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Inputnew
+                    sx={{ width: "450px" }}
+                    id="email"
+                    label="E-mail"
+                    autoComplete="email"
+                    onChange={(e) => setemail(e.target.value)}
+                    required
+                  />
+                )}
+                name="email"
+                control={control}
+                defaultValue=""
+              />
+
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Inputnew
+                    sx={{ width: "450px" }}
+                    id="teacherID"
+                    label="รหัสอาจารย์"
+                    onChange={(e) => setteacherID(e.target.value)}
+                    required
+                  />
+                )}
+                name="teacherID"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Box sx={{ width: "450px" }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        รหัสสาขา
+                      </InputLabel>
+                      <Select
+                        // id="departID"
+                        label="รหัสสาขา"
+                        onChange={(e) => setdepartID(e.target.value.dept_id)}
+                        required
+                      >
+                        {rows.map((name) => (
+                          <MenuItem key={name} value={name}>
+                            {name.dept_id}
+                            {"-"}
+                            {name.dept_name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                )}
+                name="departID"
+                control={control}
+                defaultValue=""
+              />
+            </Stack>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>ยกเลิก</Button>
+            <Button type="submit">เพิ่ม</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

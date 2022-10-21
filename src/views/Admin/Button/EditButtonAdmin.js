@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import { useForm, Controller } from "react-hook-form";
 
 export default function AlertDialog({ row, rows, setRows, setLoading }) {
   const token = sessionStorage.getItem("token");
@@ -27,6 +28,12 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
   const [newid, setnewID] = useState("");
 
   const [dept, setdept] = React.useState([]);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     const api_ = async () => {
@@ -47,10 +54,9 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
     api_();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmits = (event) => {
     setLoading(true);
     setOpen(false);
-    event.preventDefault();
     var data = {
       teacher_id: id,
       new_id: newid,
@@ -95,6 +101,10 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
     setOpen(false);
   };
 
+  const onSubmit = (data) => {
+    handleSubmits(data);
+  };
+
   return (
     <div style={{ width: "80px" }}>
       {dept !== [] && (
@@ -110,91 +120,128 @@ export default function AlertDialog({ row, rows, setRows, setLoading }) {
             aria-describedby="alert-dialog-description"
             // sx={{  minWidth:"100vh",minHeight: "100vh",backgroundColor: 'primary.dark',}}
           >
-            <DialogTitle id="alert-dialog-title">
-              {"แก้ไขข้อมูลอาจารย์"}
-            </DialogTitle>
-            <DialogContent>
-              <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <DialogTitle id="alert-dialog-title">
+                {"แก้ไขข้อมูลอาจารย์"}
+              </DialogTitle>
+              <DialogContent>
                 <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
-                  sx={{ mt: "20px" }}
+                  spacing={2}
+                  justifyContent="center"
+                  alignItems={"center"}
                 >
-                  {/* <Inputnew
-                sx={{ width: "450px" }}
-                label="รหัสสาขา"
-                defaultValue={departID}
-                id="departID"
-                onChange={(e) => setdepartID(e.target.value)}
-              /> */}
-                </Stack>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
-                >
-                  <Inputnew
-                    sx={{ width: "450px" }}
-                    id="name"
-                    defaultValue={name}
-                    label="ชื่อ"
-                    onChange={(e) => setname(e.target.value)}
+                  <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 1, sm: 2, md: 2 }}
+                    sx={{ mt: "20px" }}
                   />
-                </Stack>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
-                >
-                  <Inputnew
-                    sx={{ width: "450px" }}
-                    label="นามสกุล"
-                    defaultValue={surname}
-                    id="surname"
-                    onChange={(e) => setsurname(e.target.value)}
-                  />
-                </Stack>
 
-                <Inputnew
-                  sx={{ width: "450px" }}
-                  id="teacherID"
-                  defaultValue={id}
-                  label="รหัสอาจารย์"
-                  onChange={(e) => setnewID(e.target.value)}
-                />
-                <Inputnew
-                  sx={{ width: "450px" }}
-                  id="email"
-                  defaultValue={email}
-                  label="E-mail"
-                  onChange={(e) => setemail(e.target.value)}
-                />
-                <Box sx={{ width: "450px" }}>
-                  <FormControl fullWidth>
-                    <InputLabel>รหัสสาขา</InputLabel>
-                    {console.log("dept=", dept, "depart=", departID)}
-                    <Select
-                      value={departID}
-                      label="รหัสสาขา"
-                      onChange={(e) => {
-                        setdepartID(e.target.value);
-                      }}
-                      defaultValue={dept}
-                    >
-                      {dept.map((name) => (
-                        <MenuItem key={name.dept_id} value={name.dept_id}>
-                          {name.dept_id} {name.dept_name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </Stack>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>ยกเลิก</Button>
-              <Button onClick={handleSubmit} autoFocus>
-                บันทึก
-              </Button>
-            </DialogActions>
+                  <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 1, sm: 2, md: 2 }}
+                  >
+                    <Controller
+                      render={({ field: { onChange } }) => (
+                        <Inputnew
+                          sx={{ width: "450px" }}
+                          id="name"
+                          defaultValue={name}
+                          label="ชื่อ"
+                          onChange={(e) => setname(e.target.value)}
+                          required
+                        />
+                      )}
+                      name="name"
+                      control={control}
+                      defaultValue=""
+                    />
+                  </Stack>
+                  <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 1, sm: 2, md: 2 }}
+                  >
+                    <Controller
+                      render={({ field: { onChange } }) => (
+                        <Inputnew
+                          sx={{ width: "450px" }}
+                          label="นามสกุล"
+                          defaultValue={surname}
+                          id="surname"
+                          onChange={(e) => setsurname(e.target.value)}
+                          required
+                        />
+                      )}
+                      name="surname"
+                      control={control}
+                      defaultValue=""
+                    />
+                  </Stack>
+                  <Controller
+                    render={({ field: { onChange } }) => (
+                      <Inputnew
+                        sx={{ width: "450px" }}
+                        id="teacherID"
+                        defaultValue={id}
+                        label="รหัสอาจารย์"
+                        onChange={(e) => setnewID(e.target.value)}
+                        required
+                      />
+                    )}
+                    name="teacherID"
+                    control={control}
+                    defaultValue=""
+                  />
+
+                  <Controller
+                    render={({ field: { onChange } }) => (
+                      <Inputnew
+                        sx={{ width: "450px" }}
+                        id="email"
+                        defaultValue={email}
+                        label="E-mail"
+                        onChange={(e) => setemail(e.target.value)}
+                        required
+                      />
+                    )}
+                    name="email"
+                    control={control}
+                    defaultValue=""
+                  />
+                  <Controller
+                    render={({ field: { onChange } }) => (
+                      <Box sx={{ width: "450px" }}>
+                        <FormControl fullWidth>
+                          <InputLabel>รหัสสาขา</InputLabel>
+                          {console.log("dept=", dept, "depart=", departID)}
+                          <Select
+                            value={departID}
+                            label="รหัสสาขา"
+                            onChange={(e) => {
+                              setdepartID(e.target.value);
+                            }}
+                            required
+                            defaultValue={dept}
+                          >
+                            {dept.map((name) => (
+                              <MenuItem key={name.dept_id} value={name.dept_id}>
+                                {name.dept_id} {name.dept_name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Box>
+                    )}
+                    name="departID"
+                    control={control}
+                    defaultValue=""
+                  />
+                </Stack>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>ยกเลิก</Button>
+                <Button type="submit">บันทึก</Button>
+              </DialogActions>
+            </form>
           </Dialog>
         </>
       )}

@@ -161,7 +161,7 @@ export default function AddGen({ setLoading }, props) {
               </Box> */}
 
               <p style={{ color: "red" }}>
-                *ไฟล์ xlxs เพื่อเพิ่มรายวิชาศึกษาทั่วไป
+                *ไฟล์ xlsx เพื่อเพิ่มรายวิชาศึกษาทั่วไป
               </p>
               <Button minWidth="100%" variant="contained" component="label">
                 เลือกไฟล์

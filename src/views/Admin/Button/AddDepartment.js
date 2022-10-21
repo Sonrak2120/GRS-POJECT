@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import { useForm, Controller } from "react-hook-form"; //copy
+
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,19 +16,27 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { TextField } from "@mui/material";
 import axios from "axios";
 
 export default function AddDepartment({ setLoading }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
 
-  const handleSubmit = (event) => {
+  //copy
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
+  const handleSubmits = (value) => {
     setLoading(true);
     setOpen(false);
-    event.preventDefault();
+
     var data = {
-      depart_id: departID,
-      department: department,
+      depart_id: value?.departID,
+      department: value?.department,
     };
     fetch("http://localhost:5000/add-department", {
       method: "POST",
@@ -55,8 +66,12 @@ export default function AddDepartment({ setLoading }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const [department, setdepartmen] = useState("");
-  const [departID, setdepartID] = useState("");
+
+  //copy
+  const onSubmit = (data) => {
+    handleSubmits(data);
+  };
+
   return (
     <div
       style={{
@@ -76,35 +91,58 @@ export default function AddDepartment({ setLoading }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"เพิ่มสาขาวิชา"}</DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} justifyContent="center" alignItems={"center"}>
-            <Stack
-              //   direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-              sx={{ mt: 5 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="departID"
-                label="รหัสสาขา"
-                onChange={(e) => setdepartID(e.target.value)}
-              />
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="departmwnt"
-                label="สาขา"
-                onChange={(e) => setdepartmen(e.target.value)}
-              />
+        {/* copy */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle id="alert-dialog-title">{"เพิ่มสาขาวิชา"}</DialogTitle>
+          <DialogContent>
+            <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+              <Stack
+                //   direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 2 }}
+                sx={{ mt: 5 }}
+              >
+                {/* copy แป */}
+                <Controller
+                  render={({ field: { onChange } }) => (
+                    <TextField
+                      sx={{ width: "450px" }}
+                      id="departID"
+                      label="รหัสสาขา"
+                      onChange={(e) => {
+                        onChange(e);
+                      }}
+                      required
+                    />
+                  )}
+                  name="departID"
+                  control={control}
+                  defaultValue=""
+                />
+
+                <Controller
+                  render={({ field: { onChange } }) => (
+                    <Inputnew
+                      sx={{ width: "450px" }}
+                      id="department"
+                      label="สาขา"
+                      onChange={(e) => {
+                        onChange(e);
+                      }}
+                      required
+                    />
+                  )}
+                  name="department"
+                  control={control}
+                  defaultValue=""
+                />
+              </Stack>
             </Stack>
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>ยกเลิก</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            เพิ่ม
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>ยกเลิก</Button>
+            <Button type="submit">เพิ่ม</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

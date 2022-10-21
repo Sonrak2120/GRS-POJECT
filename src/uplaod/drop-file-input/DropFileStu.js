@@ -14,7 +14,7 @@ import "./drop-file-input.css";
 import { ImageConfig } from "../config/ImageConfig";
 import uploadImg from "../../assets/uploadfile/cloud-upload-regular-240.png";
 
-const DropFileDepart = (props) => {
+const DropFileStu = (props) => {
   const [open, setOpen] = React.useState(false);
   const wrapperRef = useRef(null);
 
@@ -73,7 +73,7 @@ const DropFileDepart = (props) => {
       setOpen(false);
       const UploadStudent = await axios({
         method: "post",
-        url: "http://127.0.0.1:5000/add-file-department",
+        url: "http://127.0.0.1:5000/create-student-info",
         data: formData,
         headers: {
           Authorization: `Bearer ` + token,
@@ -197,8 +197,8 @@ const DropFileDepart = (props) => {
   );
 };
 
-DropFileDepart.propTypes = {
+DropFileStu.propTypes = {
   onFileChange: PropTypes.func,
 };
 
-export default DropFileDepart;
+export default DropFileStu;

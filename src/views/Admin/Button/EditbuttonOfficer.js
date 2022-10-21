@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -18,6 +19,12 @@ import axios from "axios";
 
 export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
   const [dept, setdept] = React.useState([]);
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   useEffect(() => {
     const api_ = async () => {
@@ -47,10 +54,9 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
   const [id, setID] = useState("");
   const [password, setpassword] = useState("");
   // console.log(rows[row].name)
-  const handleSubmit = (event) => {
+  const handleSubmits = (event) => {
     setLoading(true);
     setOpen(false);
-    event.preventDefault();
     var data = {
       officer_id: id,
       name: name,
@@ -94,6 +100,10 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
     setOpen(false);
   };
 
+  const onSubmit = (data) => {
+    handleSubmits(data);
+  };
+
   return (
     <div style={{ width: "80px" }}>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -107,99 +117,98 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
         aria-describedby="alert-dialog-description"
         // sx={{  minWidth:"100vh",minHeight: "100vh",backgroundColor: 'primary.dark',}}
       >
-        <DialogTitle id="alert-dialog-title">
-          {"แก้ไขข้อมูลเจ้าหน้าที่"}
-        </DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} justifyContent="center" alignItems={"center"}>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-              sx={{ mt: 2 }}
-            >
-              {/* <Inputnew
-                sx={{ width: "450px" }}
-                label="รหัสสาขา"
-                id="departID"
-                defaultValue={departID}
-                onChange={(e) => setdepartID(e.target.value)}
-              /> */}
-              {/* <Inputnew
-                sx={{ width: "450px" }}
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(e) => setpassword(e.target.value)}
-              /> */}
-            </Stack>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="name"
-                defaultValue={name}
-                label="ชื่อ"
-                onChange={(e) => setname(e.target.value)}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle id="alert-dialog-title">
+            {"แก้ไขข้อมูลเจ้าหน้าที่"}
+          </DialogTitle>
+          <DialogContent>
+            <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 2 }}
+              >
+                <Controller
+                  render={({ field: { onChange } }) => (
+                    <Inputnew
+                      sx={{ width: "450px" }}
+                      id="name"
+                      defaultValue={name}
+                      label="ชื่อ"
+                      onChange={(e) => setname(e.target.value)}
+                      required
+                    />
+                  )}
+                  name="name"
+                  control={control}
+                  defaultValue=""
+                />
+              </Stack>
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Inputnew
+                    sx={{ width: "450px" }}
+                    label="นามสกุล"
+                    defaultValue={surname}
+                    id="surname"
+                    onChange={(e) => setsurname(e.target.value)}
+                    required
+                  />
+                )}
+                name="surname"
+                control={control}
+                defaultValue=""
+              />
+
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Inputnew
+                    sx={{ width: "450px" }}
+                    label="email"
+                    defaultValue={email}
+                    id="email"
+                    onChange={(e) => setemail(e.target.value)}
+                    required
+                  />
+                )}
+                name="email"
+                control={control}
+                defaultValue=""
+              />
+              <Controller
+                render={({ field: { onChange } }) => (
+                  <Box sx={{ width: "450px" }}>
+                    <FormControl fullWidth>
+                      <InputLabel>รหัสสาขา</InputLabel>
+                      {/* {console.log("dept=", dept, "depart=", departID)} */}
+                      <Select
+                        value={departID}
+                        label="รหัสสาขา"
+                        onChange={(e) => {
+                          setdepartID(e.target.value);
+                        }}
+                        required
+                        defaultValue={dept}
+                      >
+                        {dept.map((name) => (
+                          <MenuItem key={name.dept_id} value={name.dept_id}>
+                            {name.dept_id} {name.dept_name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                )}
+                name="departID"
+                control={control}
+                defaultValue=""
               />
             </Stack>
-            <Inputnew
-              sx={{ width: "450px" }}
-              label="นามสกุล"
-              defaultValue={surname}
-              id="surname"
-              onChange={(e) => setsurname(e.target.value)}
-            />
-
-            <Inputnew
-              sx={{ width: "450px" }}
-              label="email"
-              defaultValue={email}
-              id="email"
-              onChange={(e) => setemail(e.target.value)}
-            />
-
-            <Box sx={{ width: "450px" }}>
-              <FormControl fullWidth>
-                <InputLabel>รหัสสาขา</InputLabel>
-                {/* {console.log("dept=", dept, "depart=", departID)} */}
-                <Select
-                  value={departID}
-                  label="รหัสสาขา"
-                  onChange={(e) => {
-                    setdepartID(e.target.value);
-                  }}
-                  defaultValue={dept}
-                >
-                  {dept.map((name) => (
-                    <MenuItem key={name.dept_id} value={name.dept_id}>
-                      {name.dept_id} {name.dept_name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-            {/* <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                label="รหัสสาขา"
-                id="departID"
-                onChange={(e) => setdepartID(e.target.value)}
-              />
-            </Stack> */}
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>ยกเลิก</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            บันทึก
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>ยกเลิก</Button>
+            <Button type="submit">บันทึก</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

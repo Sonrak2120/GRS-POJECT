@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -30,6 +30,7 @@ import { Stack } from "@mui/system";
 import "../../App";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import { Button } from "@mui/material";
+import DropFileStu from "../../uplaod/drop-file-input/DropFileStu";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -246,6 +247,7 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [file, setfile] = useState(null);
 
   const [loading, setLoading] = React.useState(false);
 
@@ -535,7 +537,8 @@ export default function EnhancedTable() {
       /> */}
       <Stack className="layout" direction="row" spacing={5}>
         <StudentAddPage setLoading={setLoading} />
-        <StudentFullAddPage setLoading={setLoading} />
+        <DropFileStu setLoading={setLoading} onFileChange={setfile} />
+        {/* <StudentFullAddPage setLoading={setLoading} /> */}
       </Stack>
     </Box>
   );
