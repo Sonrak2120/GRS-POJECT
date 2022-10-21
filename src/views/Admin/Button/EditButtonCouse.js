@@ -34,14 +34,6 @@ export default function EditButtonCouse({ row, rows, setRows }) {
 
   const [dept, setdept] = React.useState([]);
 
-  const handleUploadImage = (e) => {
-    const filepdf = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setfilepdf(filepdf);
-    };
-    reader.readAsDataURL(filepdf);
-  };
   const [filecourse, setfilecourse] = useState({});
   const handleUploadxlxs = (e) => {
     const filecourse = e.target.files[0];
@@ -50,6 +42,20 @@ export default function EditButtonCouse({ row, rows, setRows }) {
       setfilecourse(filecourse);
     };
     reader.readAsDataURL(filecourse);
+  };
+
+  const handledownload = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(filecourse);
+    a.download = filecourse.name;
+    a.click();
+  };
+
+  const handledownloadpdf = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(filepdf);
+    a.download = filepdf.name;
+    a.click();
   };
 
   useEffect(() => {
@@ -70,8 +76,16 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     };
     api_();
   }, []);
-
   const [filepdf, setfilepdf] = useState({});
+  const handleUploadImage = (e) => {
+    const filepdf = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setfilepdf(filepdf);
+    };
+    reader.readAsDataURL(filepdf);
+  };
+  console.log("filepdf", filepdf);
 
   const handleSubmit = async (event) => {
     setOpen(false);
@@ -193,13 +207,35 @@ export default function EditButtonCouse({ row, rows, setRows }) {
                 >
                   ( ไฟล์ล่าสุด : {pdfname} )
                 </Typography>
-                <input
+                {/* <input
                   type={"file"}
                   accept="application/pdf"
                   ID="fileSelect"
                   runat="server"
                   onChange={handleUploadImage}
-                />{" "}
+                />{" "} */}
+                <Button minWidth="100%" variant="contained" component="label">
+                  เลือกไฟล์
+                  <input
+                    hidden
+                    accept="application/pdf"
+                    multiple
+                    type="file"
+                    onChange={handleUploadImage}
+                  />
+                </Button>
+                <Typography
+                  align="left"
+                  sx={{
+                    display: "inline-block",
+                    m: "auto",
+                    ml: 1,
+                  }}
+                >
+                  ชื่อไฟล์ที่เลือก:{" "}
+                  <Button onClick={handledownloadpdf}>{filepdf.name}</Button>
+                  {console.log("filepdf.name", filepdf.name)}
+                </Typography>
                 <br />
                 <p style={{ color: "red" }}>*ไฟล์ xlxs เพื่อเพิ่มหลักสูตร</p>
                 <Typography

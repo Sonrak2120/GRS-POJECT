@@ -14,28 +14,37 @@ import Inputnew from "../../../components/Inputnew";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import Progess from "../../../layouts/FullLayout/Sidebar/Progess";
+import { Typography } from "@mui/material";
 
-export default function AddGen({ setLoading }) {
+export default function AddGen({ setLoading }, props) {
   const [open, setOpen] = React.useState(false);
   const [rows, setRows] = React.useState([]);
 
-  const [filepdf, setfilepdf] = useState({});
-  const handleUploadImage = (e) => {
-    const filepdf = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setfilepdf(filepdf);
-    };
-    reader.readAsDataURL(filepdf);
-  };
+  // const [filepdf, setfilepdf] = useState({});
+  // const handleUploadImage = (e) => {
+  //   const filepdf = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     setfilepdf(filepdf);
+  //   };
+  //   reader.readAsDataURL(filepdf);
+  // };
   const [filecourse, setfilecourse] = useState({});
   const handleUploadxlxs = (e) => {
-    const filecourse = e.target.files[0];
+    const fileupload = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setfilecourse(filecourse);
+      setfilecourse(fileupload);
     };
-    reader.readAsDataURL(filecourse);
+    reader.readAsDataURL(fileupload);
+  };
+  console.log("ffilecourse", filecourse);
+
+  const handledownload = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(filecourse);
+    a.download = filecourse.name;
+    a.click();
   };
 
   const handleSubmit = async (event) => {
@@ -154,13 +163,34 @@ export default function AddGen({ setLoading }) {
               <p style={{ color: "red" }}>
                 *ไฟล์ xlxs เพื่อเพิ่มรายวิชาศึกษาทั่วไป
               </p>
-              <input
+              <Button minWidth="100%" variant="contained" component="label">
+                เลือกไฟล์
+                <input
+                  hidden
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  multiple
+                  type="file"
+                  onChange={handleUploadxlxs}
+                />
+              </Button>
+              <Typography
+                align="left"
+                sx={{
+                  display: "inline-block",
+                  m: "auto",
+                  ml: 1,
+                }}
+              >
+                ชื่อไฟล์ที่เลือก:{" "}
+                <Button onClick={handledownload}>{filecourse.name}</Button>
+              </Typography>
+              {/* <input
                 type={"file"}
                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 ID="fileSelect"
                 runat="server"
                 onChange={handleUploadxlxs}
-              />
+              /> */}
               <br />
             </Stack>
           </Stack>

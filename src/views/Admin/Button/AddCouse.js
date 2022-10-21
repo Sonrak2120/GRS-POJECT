@@ -14,6 +14,7 @@ import Inputnew from "../../../components/Inputnew";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import Progess from "../../../layouts/FullLayout/Sidebar/Progess";
+import { Typography } from "@mui/material";
 
 export default function AddCouse({ setLoading }) {
   const [open, setOpen] = React.useState(false);
@@ -48,6 +49,7 @@ export default function AddCouse({ setLoading }) {
     };
     reader.readAsDataURL(filepdf);
   };
+  console.log(filepdf);
   const [filecourse, setfilecourse] = useState({});
   const handleUploadxlxs = (e) => {
     const filecourse = e.target.files[0];
@@ -56,6 +58,20 @@ export default function AddCouse({ setLoading }) {
       setfilecourse(filecourse);
     };
     reader.readAsDataURL(filecourse);
+  };
+
+  const handledownload = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(filecourse);
+    a.download = filecourse.name;
+    a.click();
+  };
+
+  const handledownloadpdf = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(filepdf);
+    a.download = filepdf.name;
+    a.click();
   };
 
   const handleSubmit = async (event) => {
@@ -181,22 +197,52 @@ export default function AddCouse({ setLoading }) {
                 </FormControl>
               </Box>
               <p style={{ color: "red" }}>*ไฟล์ PDF ข้อมูลหลักสูตร</p>
-              <input
-                type={"file"}
-                accept="application/pdf"
-                ID="fileSelect"
-                runat="server"
-                onChange={handleUploadImage}
-              />{" "}
+
+              <Button minWidth="100%" variant="contained" component="label">
+                เลือกไฟล์
+                <input
+                  hidden
+                  accept="application/pdf"
+                  multiple
+                  type="file"
+                  onChange={handleUploadImage}
+                />
+              </Button>
+              <Typography
+                align="left"
+                sx={{
+                  display: "inline-block",
+                  m: "auto",
+                  ml: 1,
+                }}
+              >
+                ชื่อไฟล์ที่เลือก:{" "}
+                <Button onClick={handledownloadpdf}>{filepdf.name}</Button>
+              </Typography>
               <br />
-              <p style={{ color: "red" }}>*ไฟล์ xlxs เพื่อเพิ่มหลักสูตร</p>
-              <input
-                type={"file"}
-                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                ID="fileSelect"
-                runat="server"
-                onChange={handleUploadxlxs}
-              />
+              <p style={{ color: "red" }}>*ไฟล์ xlsx เพื่อเพิ่มหลักสูตร</p>
+
+              <Button minWidth="100%" variant="contained" component="label">
+                เลือกไฟล์
+                <input
+                  hidden
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  multiple
+                  type="file"
+                  onChange={handleUploadxlxs}
+                />
+              </Button>
+              <Typography
+                align="left"
+                sx={{
+                  display: "inline-block",
+                  m: "auto",
+                  ml: 1,
+                }}
+              >
+                ชื่อไฟล์ที่เลือก:{" "}
+                <Button onClick={handledownload}>{filecourse.name}</Button>
+              </Typography>
               <br />
             </Stack>
           </Stack>
