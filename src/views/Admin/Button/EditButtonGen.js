@@ -64,6 +64,13 @@ export default function EditButtonGen({ row, rows, setRows }) {
       });
   };
 
+  const handledownload = () => {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(filecourse);
+    a.download = filecourse.name;
+    a.click();
+  };
+
   const handleClickOpen = () => {
     setgenID(rows[row].gen_id);
     setdgenname(rows[row].gen_name);
@@ -127,13 +134,36 @@ export default function EditButtonGen({ row, rows, setRows }) {
             >
               ( ไฟล์ล่าสุด : {exlname} )
             </Typography>
-            <input
+            {/* <input
               type={"file"}
               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
               ID="fileSelect"
               runat="server"
               onChange={handleUploadxlxs}
-            />
+            /> */}
+            <Button minWidth="100%" variant="contained" component="label">
+              เลือกไฟล์
+              <input
+                hidden
+                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                multiple
+                type="file"
+                onChange={handleUploadxlxs}
+              />
+            </Button>
+            {filecourse && (
+              <Typography
+                align="left"
+                sx={{
+                  display: "inline-block",
+                  m: "auto",
+                  ml: 1,
+                }}
+              >
+                ชื่อไฟล์ที่เลือก:{" "}
+                <Button onClick={handledownload}>{filecourse.name}</Button>
+              </Typography>
+            )}
             <br />
           </Stack>
         </DialogContent>
