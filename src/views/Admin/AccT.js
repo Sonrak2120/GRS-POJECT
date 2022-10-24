@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,13 +11,15 @@ import Deletebutton from "./Button/Deletebutton";
 import AddPage from "./AddPage";
 import axios from "axios";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
+import DropFileTeacher from "../../uplaod/drop-file-input/DropFileTeacher";
 
 function createData(name, lastname, id) {
   return { name, lastname, id };
 }
 export default function AccT() {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(null);
+  const [file, setfile] = useState(null);
   const token = sessionStorage.getItem("token");
   const [rows, setRows] = React.useState([]);
   useEffect(() => {
@@ -189,9 +191,15 @@ export default function AccT() {
           </TableBody>
         </Table>
       </TableContainer>
-      <div style={{ marginTop: "20px" }}>
+      <Stack
+        className="layout"
+        direction="row"
+        spacing={5}
+        style={{ marginTop: "20px" }}
+      >
         <AddPage setLoading={setLoading} />
-      </div>
+        <DropFileTeacher setLoading={setLoading} onFileChange={setfile} />
+      </Stack>
     </div>
   );
 }

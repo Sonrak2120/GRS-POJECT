@@ -6,20 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import DeleteDepartButton from "./Button/DeleteDepartButton";
-import axios from "axios";
-import AddDepartment from "./Button/AddDepartment";
-import Progess from "../../layouts/FullLayout/Sidebar/Progess";
-import EditButtonDepart from "./Button/EditButtonDepart";
-import AddFullDepart from "./Button/AddFullDepart";
-import { Stack, Button } from "@mui/material";
-import DropFileDepart from "../../uplaod/drop-file-input/DropFileDepart";
 
-export default function AccDepartment() {
+import axios from "axios";
+
+import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+
+export default function AccDepartmentOfficer() {
   const [rows, setRows] = React.useState([]);
   const [offid, setOffid] = useState("");
   const [file, setfile] = useState(null);
-  const [loading, setLoading] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   useEffect(() => {
     const api_ = async () => {
       let headersList = {
@@ -66,7 +62,12 @@ export default function AccDepartment() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        width: "80%",
+        margin: "auto",
+      }}
+    >
       <Progess load={loading} />
       <div
         style={{
@@ -75,10 +76,7 @@ export default function AccDepartment() {
           marginBottom: "20px",
         }}
       >
-        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>สาขาวิชา</h3>
-        <Button onClick={onDownload5} variant="contained" color="primary">
-          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มสาขาวิชา
-        </Button>
+        <h2 style={{ margin: "auto" }}>สาขาวิชา</h2>
       </div>
 
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
@@ -96,12 +94,6 @@ export default function AccDepartment() {
                 align="center"
               >
                 สาขา
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: "bold", fontSize: "16px" }}
-                align="center"
-              >
-                Action
               </TableCell>
             </TableRow>
           </TableHead>
@@ -128,37 +120,11 @@ export default function AccDepartment() {
                 <TableCell sx={{ width: "400px" }} align="center">
                   {row.department}
                 </TableCell>
-
-                <TableCell align="center" sx={{ width: "200px" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <EditButtonDepart row={inx} rows={rows} setRows={setRows} />
-                    <DeleteDepartButton
-                      row={inx}
-                      rows={rows}
-                      setRows={setRows}
-                    />
-                  </div>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack
-        className="layout"
-        direction="row"
-        spacing={5}
-        style={{ marginTop: "20px" }}
-      >
-        <AddDepartment setLoading={setLoading} />
-        <DropFileDepart setLoading={setLoading} onFileChange={setfile} />
-      </Stack>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -20,6 +21,12 @@ export default function AddGen({ setLoading }, props) {
   const [open, setOpen] = React.useState(false);
   const [rows, setRows] = React.useState([]);
 
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
   // const [filepdf, setfilepdf] = useState({});
   // const handleUploadImage = (e) => {
   //   const filepdf = e.target.files[0];
@@ -29,7 +36,7 @@ export default function AddGen({ setLoading }, props) {
   //   };
   //   reader.readAsDataURL(filepdf);
   // };
-  const [filecourse, setfilecourse] = useState({});
+  const [filecourse, setfilecourse] = useState("");
   const handleUploadxlxs = (e) => {
     const fileupload = e.target.files[0];
     const reader = new FileReader();
@@ -47,10 +54,9 @@ export default function AddGen({ setLoading }, props) {
     a.click();
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmits = async (event) => {
     setLoading(true);
     setOpen(false);
-    event.preventDefault();
 
     let headersList = {
       Accept: "*/*",
@@ -96,6 +102,9 @@ export default function AddGen({ setLoading }, props) {
   const [genID, setgenID] = useState("");
   const [genname, setgenname] = useState("");
 
+  const onSubmit = (data) => {
+    handleSubmits(data);
+  };
   return (
     <div
       style={{
@@ -119,88 +128,132 @@ export default function AddGen({ setLoading }, props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"เพิ่มรายวิชาการศึกษาทั่วไปในสาขาวิชา วิทยาการคอมพิวเตอร์"}
-        </DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} justifyContent="center" alignItems={"center"}>
-            <Stack
-              //   direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1, sm: 2, md: 2 }}
-              sx={{ mt: 5 }}
-            >
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="genID"
-                label="รหัสเล่มศึกษาทั่วไป"
-                onChange={(e) => setgenID(e.target.value)}
-              />
-              <Inputnew
-                sx={{ width: "450px" }}
-                id="genname"
-                label="ชื่อเล่มศึกษาทั่วไป"
-                onChange={(e) => setgenname(e.target.value)}
-              />
-              {/* <Box sx={{ width: "450px" }}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    รหัสสาขา
-                  </InputLabel>
-                  <Select
-                    // id="departID"
-                    label="รหัสสาขา"
-                    onChange={(e) => setdepartID(e.target.value.dept_id)}
-                  >
-                    {rows.map((name) => (
-                      <MenuItem key={name} value={name}>
-                        {name.dept_id}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box> */}
-
-              <p style={{ color: "red" }}>
-                *ไฟล์ xlsx เพื่อเพิ่มรายวิชาศึกษาทั่วไป
-              </p>
-              <Button minWidth="100%" variant="contained" component="label">
-                เลือกไฟล์
-                <input
-                  hidden
-                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                  multiple
-                  type="file"
-                  onChange={handleUploadxlxs}
-                />
-              </Button>
-              <Typography
-                align="left"
-                sx={{
-                  display: "inline-block",
-                  m: "auto",
-                  ml: 1,
-                }}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle id="alert-dialog-title">
+            {"เพิ่มรายวิชาการศึกษาทั่วไป"}
+          </DialogTitle>
+          <DialogContent>
+            <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+              <Stack
+                //   direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 2, md: 2 }}
+                sx={{ mt: 5 }}
               >
-                ชื่อไฟล์ที่เลือก:{" "}
-                <Button onClick={handledownload}>{filecourse.name}</Button>
-              </Typography>
-              {/* <input
-                type={"file"}
-                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                ID="fileSelect"
-                runat="server"
-                onChange={handleUploadxlxs}
-              /> */}
-              <br />
+                <Controller
+                  render={({ field: { onChange } }) => (
+                    <Inputnew
+                      sx={{ width: "450px" }}
+                      id="genID"
+                      label="รหัสเล่มศึกษาทั่วไป"
+                      onChange={(e) => setgenID(e.target.value)}
+                      required
+                    />
+                  )}
+                  name="genID"
+                  control={control}
+                  defaultValue=""
+                />
+                <Controller
+                  render={({ field: { onChange } }) => (
+                    <Inputnew
+                      sx={{ width: "450px" }}
+                      id="genname"
+                      label="ชื่อเล่มศึกษาทั่วไป"
+                      onChange={(e) => setgenname(e.target.value)}
+                      required
+                    />
+                  )}
+                  name="genname"
+                  control={control}
+                  defaultValue=""
+                />
+
+                <Controller
+                  render={({ field: { onChange } }) => (
+                    <Box className="box2">
+                      <p style={{ color: "red" }}>
+                        *ไฟล์ xlsx เพื่อเพิ่มรายวิชาศึกษาทั่วไป
+                      </p>
+                      <Button
+                        style={{ minWidth: "100%", marginTop: "16px" }}
+                        variant="contained"
+                        component="label"
+                      >
+                        เลือกไฟล์
+                        <input
+                          hidden
+                          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                          multiple
+                          type="file"
+                          onChange={handleUploadxlxs}
+                          required
+                        />
+                      </Button>
+                      <div style={{ display: "flex" }}>
+                        {(() => {
+                          if (filecourse == "") {
+                            return (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  color: "red",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  textAlign: "center",
+                                  margin: "auto",
+                                  marginTop: "16px",
+                                }}
+                              >
+                                <p>ยังไม่เลือกไฟล์</p>
+                              </div>
+                            );
+                          } else {
+                            return (
+                              <div
+                                style={{
+                                  // display: "flex",
+                                  color: "green",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  textAlign: "center",
+                                  margin: "auto",
+                                  marginTop: "16px",
+                                }}
+                              >
+                                <Button
+                                  onClick={handledownload}
+                                  variant="outlined"
+                                >
+                                  {"ตรวจสอบไฟล์ : "}
+                                  {filecourse.name}
+                                </Button>
+                                <Typography style={{ marginTop: "16px" }}>
+                                  {" "}
+                                  {"เวลาแก้ไขไฟล์ล่าสุด : "}
+                                  {filecourse.lastModifiedDate
+                                    .toString()
+                                    .substring(0, 25)}
+                                </Typography>
+                              </div>
+                            );
+                          }
+                        })()}
+                      </div>
+                    </Box>
+                  )}
+                  name="departID"
+                  control={control}
+                  defaultValue=""
+                />
+                <br />
+              </Stack>
             </Stack>
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>ยกเลิก</Button>
-          <Button onClick={handleSubmit} autoFocus>
-            เพิ่ม
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>ยกเลิก</Button>
+            <Button type="submit">เพิ่ม</Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

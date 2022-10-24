@@ -33,6 +33,7 @@ import UploadHtmlNew from "./uplaod/UploadHtmlNew";
 import UploadDepartNew from "./uplaod/UploadDepartNew";
 import AccGen from "./views/Admin/AccGen";
 import AccOff from "./views/Admin/AccOff";
+import AccDepartmentOfficer from "./views/Officer/AccDepartmentOfficer";
 
 //////////////////////////////////////////Student
 import HomeStudent from "./views/Student/HomeStudent";
@@ -45,6 +46,7 @@ import DataStu from "./views/Teacher/DataStu";
 import ActiveStu from "./views/Teacher/ActiveStu";
 import FullLayoutOfficer from "./layouts/FullLayout/Sidebar/FullLayoutOfficer";
 import AccT from "./views/Admin/AccT";
+import TabdataStu from "./views/Teacher/TabdataStu";
 
 const App = () => {
   const [role, SetRole] = useState(
@@ -126,7 +128,7 @@ const App = () => {
       path: "/officer",
       element: <FullLayoutOfficer />,
       children: [
-        { path: "/officer", element: <AccDepartment /> },
+        { path: "/officer", element: <AccDepartmentOfficer /> },
         { path: "addstudent", element: <AccStu /> },
         { path: "list", element: <AccT /> },
         { path: "addcouse", element: <AccCouse /> },

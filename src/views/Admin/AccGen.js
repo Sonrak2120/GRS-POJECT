@@ -202,7 +202,12 @@ export default function AccGen() {
                     alignItems: "center",
                   }}
                 >
-                  <EditButtonGen row={inx} rows={rows} setRows={setRows} />
+                  <EditButtonGen
+                    row={inx}
+                    rows={rows}
+                    setRows={setRows}
+                    setLoading={setLoading}
+                  />
                   <DeleteGen row={inx} rows={rows} setRows={setRows} />
                 </TableCell>
               </TableRow>

@@ -72,6 +72,7 @@ export default function CollapsibleTable({
   setRows,
   setOpen,
   onNav,
+  std_id,
 }) {
   const [rowsT, setRowsT] = React.useState([]);
   const [groups, setgrop] = React.useState([]);
@@ -79,6 +80,8 @@ export default function CollapsibleTable({
   const [num, setNum] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [data_rows, setdatarows] = useState([]);
+
+  console.log("rows", rows);
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     const api_ = async () => {
@@ -91,7 +94,7 @@ export default function CollapsibleTable({
       };
 
       let bodyContent = JSON.stringify({
-        std_id: rows[row][0],
+        std_id: std_id,
       });
 
       let reqOptions = {

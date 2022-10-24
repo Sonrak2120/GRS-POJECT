@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-import ActiveStu from "./views/Teacher/TestTeacher";
+import DataStu from "./DataStu";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -118,7 +118,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   })
 );
 
-export default function CustomizedTabs() {
+export default function TabdataStu() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -127,11 +127,11 @@ export default function CustomizedTabs() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ bgcolor: "#fff" }}>
+      <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Tab 1" />
           <AntTab label="Tab 2" />
-          <AntTab label="Tab 3" />
+          <AntTab label="สาขาวิทยาการคอมพิวเตอร์" />
         </AntTabs>
         <TabPanel value={value} index={0}>
           Item Two
@@ -140,7 +140,7 @@ export default function CustomizedTabs() {
           Item 2
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <ActiveStu />
+          <DataStu />
         </TabPanel>
         <Box sx={{ p: 3 }} />
       </Box>

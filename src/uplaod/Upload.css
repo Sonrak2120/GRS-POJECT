@@ -37,6 +37,13 @@
     box-shadow: var(--box-shadow);
 }
 
+.box2 {
+    background-color: #e3e3e3;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: var(--box-shadow);
+}
+
 .header {
     margin-bottom: 30px;
     text-align: center;

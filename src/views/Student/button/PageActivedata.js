@@ -16,12 +16,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { Grid, styled } from "@mui/material";
-import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import Progess from "../../../layouts/FullLayout/Sidebar/Progess";
 import Checkbox from "@mui/material/Checkbox";
-import Sentbutton from "../Student/button/Sentbutton";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import InfoIcon from "@mui/icons-material/Info";
+import Sentbutton from "./Sentbutton";
 
 const Typo_custom = styled("Typography")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
@@ -72,33 +69,22 @@ const Table_custom = styled("Table")(({ theme }) => ({
   },
 }));
 
-export default function CollapsibleTable({
+export default function PageActivedata({
   row2,
   rows2,
-  row,
   setRows2,
   setOpen,
   check,
   setCheck,
-  setDataDate,
-  setDataTime,
-  setCheckDate,
-  setCheckTime,
-  setSentDate,
-  setSentTime,
   subcode,
   setSubcode,
-  stdId,
-  index,
-  history,
+  setStId,
 }) {
   const [rows, setRows] = React.useState([]);
   const [groups, setgrop] = React.useState([]);
   const [name, setName] = React.useState([]);
   const [num, setNum] = React.useState([]);
-  const [comment, setComment] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  console.log("comment", comment);
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
@@ -106,23 +92,14 @@ export default function CollapsibleTable({
       let headersList = {
         Authorization: `Bearer ${token}`,
         Accept: "*/*",
-        "Content-Type": "application/json",
       };
 
-      let bodyContent = JSON.stringify({
-        std_id: history.std_id,
-        data_date: history.data_date,
-        data_time: history.data_time,
-        sent_date: history.sent_date,
-        sent_time: history.sent_time,
-        check_date: history.check_date,
-        check_time: history.check_time,
-      });
-
-      console.log("bodyContent", bodyContent);
+      let bodyContent = {
+        std_id: rows2[0]?.std_in_depart?.[row2]?.head?.std_id,
+      };
 
       let reqOptions = {
-        url: "http://localhost:5000/get-history",
+        url: "http://localhost:5000/get-sub-progress-info-for-teacher",
         method: "PATCH",
         headers: headersList,
         data: bodyContent,
@@ -130,36 +107,36 @@ export default function CollapsibleTable({
 
       let response = await axios.request(reqOptions);
       const data = response.data.data;
-
       setName(response.data.course_name);
       setNum(response.data.allcredit);
       setRows(response.data.data);
       setSubcode(response.data.sub_code);
-      setComment(response.data.comment);
       setgrop(data);
       const temp = [];
+      response.data.sub_code.map((item) => temp.push(0));
       setCheck(temp);
+      setStId(rows2[0]?.std_in_depart?.[row2]?.head?.std_id);
     };
     api_();
   }, []);
-  // const count = check.length;
+  const count = check.length;
 
   function Row(props) {
     const { row, setCheck } = props;
     const [open, setOpen] = React.useState(true);
 
-    // const findIndex = (value) => {
-    //   const valueIndex = subcode.findIndex((element) => {
-    //     return element === value;
-    //   });
-    //   return valueIndex;
-    // };
+    const findIndex = (value) => {
+      const valueIndex = subcode.findIndex((element) => {
+        return element === value;
+      });
+      return valueIndex;
+    };
 
-    // const onChange = (value, index) => {
-    //   let temp = [...check];
-    //   temp[index] = value ? 1 : 0;
-    //   setCheck(temp);
-    // };
+    const onChange = (value, index) => {
+      let temp = [...check];
+      temp[index] = value ? 1 : 0;
+      setCheck(temp);
+    };
 
     // const sortRow = row.subject_group.sort((a, b) => a.term - b.term);
     return (
@@ -200,7 +177,8 @@ export default function CollapsibleTable({
                       <TableCell sx={{ width: "25%" }}>ชื่อวิชา</TableCell>
                       <TableCell align="center">หน่วยกิต</TableCell>
                       <TableCell align="center">เกรด</TableCell>
-                      <TableCell align="center">ชั้นปี</TableCell>
+                      <TableCell align="center">ภาค</TableCell>
+                      <TableCell align="center">ปี</TableCell>
                       <TableCell align="center"></TableCell>
                     </TableRow>
                   </TableHead>
@@ -215,30 +193,23 @@ export default function CollapsibleTable({
                           <TableCell> {item[1]} </TableCell>
                           <TableCell align="center">{item[2]}</TableCell>
                           <TableCell align="center">{item[3][0][0]}</TableCell>
+                          <TableCell align="center">
+                            {item[3][0][1] === "1" ? "ต้น" : "ปลาย"}
+                          </TableCell>
                           <TableCell align="center">{item[3][0][2]}</TableCell>
                           <TableCell align="center">
-                            {/* {item[5]} */}
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {(() => {
-                                if (item[4] == "1") {
-                                  return (
-                                    <div>
-                                      <CheckBoxIcon />
-                                    </div>
-                                  );
-                                } else if (item[4] == "0") {
-                                  return <CheckBoxOutlineBlankIcon />;
-                                } else {
-                                  return <InfoIcon />;
-                                }
-                              })()}
-                            </div>
+                            <Checkbox
+                              label=""
+                              checked={
+                                check[findIndex(item[0])] === 0 ? false : true
+                              }
+                              onChange={(value) =>
+                                onChange(
+                                  value.target.checked,
+                                  findIndex(item[0])
+                                )
+                              }
+                            />
                           </TableCell>
                         </TableRow>
                         {item[3].length > 1 && (
@@ -258,6 +229,9 @@ export default function CollapsibleTable({
                                     </TableCell>
                                     <TableCell align="center">
                                       {item1[0]}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                      {item1[1] === "1" ? "ต้น" : "ปลาย"}
                                     </TableCell>
                                     <TableCell align="center">
                                       {item1[2]}
@@ -283,7 +257,7 @@ export default function CollapsibleTable({
     );
   }
 
-  if (groups.length > 0 && 3 > 0) {
+  if (groups.length > 0 && check.length > 0) {
     return (
       <TableContainer component={Paper}>
         <Progess load={loading}></Progess>
@@ -336,9 +310,6 @@ export default function CollapsibleTable({
             </TableBody>
           </Table_custom>
         ))}
-        <Box sx={{ padding: "24px" }}>
-          <Typography>หมายเหตุ: {comment}</Typography>
-        </Box>
       </TableContainer>
     );
   }

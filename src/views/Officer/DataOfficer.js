@@ -26,7 +26,7 @@ const MenuitemOfficer = [
     href: "/officer",
   },
   {
-    title: "ข้อมูลอาจารย์",
+    title: "ข้อมูลอาจารย์ที่ปรึกษา",
     icon: SwitchAccountIcon,
     href: "/officer/list",
   },
@@ -53,7 +53,7 @@ const MenuitemOfficer = [
   },
 
   {
-    title: "Update ผลการเรียน HTML",
+    title: "Upload ผลการเรียน",
     icon: UpdateIcon,
     href: "/officer/updatehtml",
   },

@@ -24,7 +24,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const BootstrapDialogTitle = (props) => {
-  const { children, onClose, ...other } = props;
+  const { children, onClose, data, ...other } = props;
 
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -59,6 +59,7 @@ export default function HistoryButton({
   row,
   stdId,
   index,
+  data,
 }) {
   const [open, setOpen] = React.useState(false);
   const token = sessionStorage.getItem("token");
@@ -72,16 +73,12 @@ export default function HistoryButton({
   const [sentdate, setSentDate] = React.useState("");
   const [senttime, setSentTime] = React.useState("");
 
-  console.log(senttime);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  console.log(row);
 
   return (
     <div>
@@ -113,6 +110,7 @@ export default function HistoryButton({
             setSubcode={setSubcode}
             stdId={stdId}
             index={index}
+            history={data}
           />
         </DialogContent>
         <DialogActions>

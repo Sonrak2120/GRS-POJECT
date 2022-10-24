@@ -30,7 +30,7 @@ const MenuitemSAdmin = [
     href: "/admin/list",
   },
   {
-    title: "ข้อมูลอาจารย์",
+    title: "ข้อมูลอาจารย์ที่ปรึกษา",
     icon: SwitchAccountIcon,
     href: "/admin/listteacher",
   },
@@ -63,7 +63,7 @@ const MenuitemSAdmin = [
   },
 
   {
-    title: "Update ผลการเรียน HTML",
+    title: "Upload ผลการเรียน",
     icon: UpdateIcon,
     href: "/admin/updatehtml",
   },

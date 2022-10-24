@@ -1,12 +1,19 @@
 import * as React from "react";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function DubleCheckButton({ stdId, sentToStudent }) {
+export default function DubleCheckButton({
+  stdId,
+  sentToStudent,
+  comment,
+  setComment,
+}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -28,12 +35,29 @@ export default function DubleCheckButton({ stdId, sentToStudent }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"ส่งผลการตรวจสอบ"}</DialogTitle>
+        <DialogTitle
+          sx={{ fontSize: "21px", fontWeight: "bold" }}
+          id="alert-dialog-title"
+        >
+          ส่งผลการตรวจสอบ
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             ยืนยันที่จะส่งผล "การตรวจสอบการจบการศึกษา" <br /> ให้กับ
             หมายเลขนิสิต {stdId} หรือไม่
+            <br />
           </DialogContentText>
+          <Typography variant="h6" sx={{ fontSize: "1rem" }}>
+            comment
+          </Typography>
+          <TextareaAutosize
+            aria-label="empty textarea"
+            placeholder="Empty"
+            style={{ width: "100%" }}
+            minRows={3}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color={"danger"}>

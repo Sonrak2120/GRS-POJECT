@@ -62,7 +62,25 @@ export default function AccCouse() {
         link.parentNode.removeChild(link);
       });
   };
+  const handledownload = async () => {
+    let headersList = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+    };
 
+    let bodyContent = JSON.stringify({
+      course_id: "Q03-60",
+    });
+
+    let response = await fetch("localhost:5000/download-course-pdf", {
+      method: "GET",
+      body: bodyContent,
+      headers: headersList,
+    });
+
+    let data = await response.text();
+    console.log(data);
+  };
   return (
     <div>
       <Progess load={loading} />
@@ -187,10 +205,13 @@ export default function AccCouse() {
                               margin: "auto",
                             }}
                           >
-                            <p>
-                              อัปโหลดสำเร็จ
-                              <br />({row.pdf_name})
-                            </p>
+                            <Button variant="text" onClick={handledownload}>
+                              <p>
+                                อัปโหลดสำเร็จ
+                                <br />
+                                {row.pdf_name}
+                              </p>
+                            </Button>
                           </div>
                         );
                       }
@@ -255,7 +276,12 @@ export default function AccCouse() {
                   align="center"
                   sx={{ width: "200px" }}
                 >
-                  <EditButtonCouse row={inx} rows={rows} setRows={setRows} />
+                  <EditButtonCouse
+                    row={inx}
+                    rows={rows}
+                    setRows={setRows}
+                    setLoading={setLoading}
+                  />
                   <DeleteCouseButton row={inx} rows={rows} setRows={setRows} />
                 </TableCell>
               </TableRow>

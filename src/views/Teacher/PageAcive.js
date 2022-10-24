@@ -95,7 +95,7 @@ export default function CollapsibleTable({
       };
 
       let bodyContent = {
-        std_id: rows2[row2].head.std_id,
+        std_id: rows2[0]?.std_in_depart?.[row2]?.head?.std_id,
       };
 
       let reqOptions = {
@@ -115,13 +115,11 @@ export default function CollapsibleTable({
       const temp = [];
       response.data.sub_code.map((item) => temp.push(0));
       setCheck(temp);
-      setStId(rows2[row2].head.std_id);
+      setStId(rows2[0]?.std_in_depart?.[row2]?.head?.std_id);
     };
     api_();
   }, []);
   const count = check.length;
-
-  console.log("count", count);
 
   function Row(props) {
     const { row, setCheck } = props;
@@ -220,7 +218,6 @@ export default function CollapsibleTable({
                               if (index1 !== 0) {
                                 return (
                                   <TableRow key={index1.toString()}>
-                                    {console.log("item1", item1)}
                                     <TableCell />
                                     <TableCell
                                       component="th"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -16,8 +17,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
 import { Typography } from "@mui/material";
+import "../../../uplaod/Upload.css";
 
-export default function EditButtonCouse({ row, rows, setRows }) {
+export default function EditButtonCouse({ row, rows, setRows, setLoading }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const [departID, setdepartID] = useState("");
@@ -25,6 +27,12 @@ export default function EditButtonCouse({ row, rows, setRows }) {
   const [teacherSur, setteacherSur] = useState("");
   const [pdfname, setpdfname] = useState("");
   const [exlname, setexlname] = useState("");
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   const [newid, setnewID] = useState("");
 
@@ -34,7 +42,8 @@ export default function EditButtonCouse({ row, rows, setRows }) {
 
   const [dept, setdept] = React.useState([]);
 
-  const [filecourse, setfilecourse] = useState({});
+  const [filecourse, setfilecourse] = useState("");
+
   const handleUploadxlxs = (e) => {
     const filecourse = e.target.files[0];
     const reader = new FileReader();
@@ -76,7 +85,7 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     };
     api_();
   }, []);
-  const [filepdf, setfilepdf] = useState({});
+  const [filepdf = 0, setfilepdf] = useState("");
 
   const handleUploadImage = (e) => {
     const filepdf = e.target.files[0];
@@ -87,10 +96,12 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     reader.readAsDataURL(filepdf);
   };
   console.log("couseID", couseID);
+  console.log("filecourse", filecourse);
+  console.log("filepdf", filepdf);
 
-  const handleSubmit = async (event) => {
+  const handleSubmits = async (event) => {
+    setLoading(true);
     setOpen(false);
-    event.preventDefault();
     let headersList = {
       Accept: "*/*",
     };
@@ -111,9 +122,11 @@ export default function EditButtonCouse({ row, rows, setRows }) {
       .then((res) => res.json())
       .then((result) => {
         if (result["message"] === "success") {
+          setLoading(false);
           alert("บันทึกเสร็จสิ้น");
           window.location.reload("Refresh");
         } else {
+          setLoading(false);
           alert("ล้มเหลว");
           console.log(result["error"]);
         }
@@ -138,6 +151,10 @@ export default function EditButtonCouse({ row, rows, setRows }) {
     setOpen(false);
   };
 
+  const onSubmit = (data) => {
+    handleSubmits(data);
+  };
+
   return (
     <div style={{ width: "80px" }}>
       {dept !== [] && (
@@ -153,139 +170,269 @@ export default function EditButtonCouse({ row, rows, setRows }) {
             aria-describedby="alert-dialog-description"
             // sx={{  minWidth:"100vh",minHeight: "100vh",backgroundColor: 'primary.dark',}}
           >
-            <DialogTitle id="alert-dialog-title">
-              {"แก้ไขข้อมูลหลักสูตรการศึกษา"}
-            </DialogTitle>
-            <DialogContent>
-              <Stack spacing={2}>
-                <Stack
-                  //direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
-                  sx={{ mt: "20px" }}
-                >
-                  <Inputnew
-                    sx={{ width: "450px" }}
-                    id="couseID"
-                    defaultValue={couseID}
-                    label="รหัสหลักสูตร"
-                    onChange={(e) => setcouseID(e.target.value)}
+            {" "}
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <DialogTitle id="alert-dialog-title">
+                {"แก้ไขข้อมูลหลักสูตรการศึกษา"}
+              </DialogTitle>
+              <DialogContent>
+                <Stack spacing={2}>
+                  <Stack
+                    //direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 1, sm: 2, md: 2 }}
+                    sx={{ mt: "20px" }}
+                  >
+                    <Controller
+                      render={({ field: { onChange } }) => (
+                        <Inputnew
+                          sx={{ width: "450px" }}
+                          id="couseID"
+                          defaultValue={couseID}
+                          label="รหัสหลักสูตร"
+                          onChange={(e) => setcouseID(e.target.value)}
+                          required
+                        />
+                      )}
+                      name="couseID"
+                      control={control}
+                      defaultValue=""
+                    />
+                  </Stack>
+                  <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 1, sm: 2, md: 2 }}
+                  >
+                    <Controller
+                      render={({ field: { onChange } }) => (
+                        <Inputnew
+                          sx={{ width: "450px" }}
+                          label="cousename"
+                          defaultValue={cousename}
+                          id="หลักสูตร"
+                          onChange={(e) => setcousename(e.target.value)}
+                          required
+                        />
+                      )}
+                      name="cousename"
+                      control={control}
+                      defaultValue=""
+                    />
+                  </Stack>
+                  <Controller
+                    render={({ field: { onChange } }) => (
+                      <Box sx={{ width: "450px" }}>
+                        <FormControl fullWidth>
+                          <InputLabel>รหัสสาขา</InputLabel>
+                          {console.log("dept=", dept, "depart=", departID)}
+                          <Select
+                            value={departID}
+                            label="รหัสสาขา"
+                            onChange={(e) => {
+                              setdepartID(e.target.value);
+                            }}
+                            defaultValue={dept}
+                            required
+                          >
+                            {dept.map((name) => (
+                              <MenuItem key={name.dept_id} value={name.dept_id}>
+                                {name.dept_id} {name.dept_name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Box>
+                    )}
+                    name="departID"
+                    control={control}
+                    defaultValue=""
                   />
-                </Stack>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={{ xs: 1, sm: 2, md: 2 }}
-                >
-                  <Inputnew
-                    sx={{ width: "450px" }}
-                    label="cousename"
-                    defaultValue={cousename}
-                    id="หลักสูตร"
-                    onChange={(e) => setcousename(e.target.value)}
-                  />
-                </Stack>
-                <Box sx={{ width: "450px" }}>
-                  <FormControl fullWidth>
-                    <InputLabel>รหัสสาขา</InputLabel>
-                    {console.log("dept=", dept, "depart=", departID)}
-                    <Select
-                      value={departID}
-                      label="รหัสสาขา"
-                      onChange={(e) => {
-                        setdepartID(e.target.value);
-                      }}
-                      defaultValue={dept}
+
+                  <Box className="box2">
+                    <p style={{ color: "red" }}>*ไฟล์ PDF ข้อมูลหลักสูตร</p>
+
+                    <Button
+                      style={{ minWidth: "100%", marginTop: "16px" }}
+                      variant="contained"
+                      component="label"
                     >
-                      {dept.map((name) => (
-                        <MenuItem key={name.dept_id} value={name.dept_id}>
-                          {name.dept_id} {name.dept_name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Box>
-                <p style={{ color: "red" }}>*ไฟล์ PDF ข้อมูลหลักสูตร</p>
-                <Typography
-                  style={{ color: "green", fontSize: "15px", marginTop: "2px" }}
-                >
-                  ( ไฟล์ล่าสุด : {pdfname} )
-                </Typography>
-                {/* <input
-                  type={"file"}
-                  accept="application/pdf"
-                  ID="fileSelect"
-                  runat="server"
-                  onChange={handleUploadImage}
-                />{" "} */}
-                <Button minWidth="100%" variant="contained" component="label">
-                  เลือกไฟล์
-                  <input
-                    hidden
-                    accept="application/pdf"
-                    multiple
-                    type="file"
-                    onChange={handleUploadImage}
-                  />
+                      เลือกไฟล์
+                      <input
+                        hidden
+                        accept="application/pdf"
+                        multiple
+                        type="file"
+                        onChange={handleUploadImage}
+                      />
+                    </Button>
+                    <div style={{ display: "flex" }}>
+                      {(() => {
+                        if (filepdf === 0) {
+                          return (
+                            <div
+                              style={{
+                                display: "flex",
+                                color: "red",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                                marginTop: "8px",
+                              }}
+                            >
+                              <Typography
+                                style={{
+                                  color: "green",
+                                  fontSize: "15px",
+                                  marginTop: "2px",
+                                }}
+                              >
+                                ( ไฟล์ล่าสุด : {pdfname} )
+                              </Typography>
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div
+                              style={{
+                                // display: "flex",
+                                color: "green",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                                marginTop: "8px",
+                              }}
+                            >
+                              {filepdf && (
+                                <div
+                                  style={{
+                                    // display: "flex",
+                                    color: "green",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                    marginTop: "8px",
+                                  }}
+                                >
+                                  <Button
+                                    onClick={handledownloadpdf}
+                                    variant="outlined"
+                                  >
+                                    {"ตรวจสอบไฟล์ : "}
+                                    {filepdf.name}
+                                  </Button>
+                                  <Typography style={{ marginTop: "16px" }}>
+                                    {" "}
+                                    {"เวลาแก้ไขไฟล์ล่าสุด : "}
+                                    {filepdf.lastModifiedDate
+                                      .toString()
+                                      .substring(0, 25)}
+                                  </Typography>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
+                      })()}
+                    </div>
+                  </Box>
+
+                  <Box className="box2">
+                    <p style={{ color: "red" }}>
+                      *ไฟล์ xlxs เพื่อเพิ่มหลักสูตร
+                    </p>
+
+                    <Button
+                      style={{ minWidth: "100%", marginTop: "16px" }}
+                      variant="contained"
+                      component="label"
+                    >
+                      เลือกไฟล์
+                      <input
+                        hidden
+                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        multiple
+                        type="file"
+                        onChange={handleUploadxlxs}
+                      />
+                    </Button>
+                    <div style={{ display: "flex" }}>
+                      {(() => {
+                        if (filecourse === "") {
+                          return (
+                            <div
+                              style={{
+                                display: "flex",
+                                color: "red",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                                marginTop: "8px",
+                              }}
+                            >
+                              <Typography
+                                style={{
+                                  color: "green",
+                                  fontSize: "15px",
+                                  marginTop: "2px",
+                                }}
+                              >
+                                ( ไฟล์ล่าสุด : {exlname} )
+                              </Typography>
+                            </div>
+                          );
+                        } else {
+                          return (
+                            <div
+                              style={{
+                                // display: "flex",
+                                color: "green",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                                marginTop: "8px",
+                              }}
+                            >
+                              {filecourse && (
+                                <Typography
+                                  sx={{
+                                    marginTop: "8px",
+                                  }}
+                                >
+                                  <Button
+                                    onClick={handledownload}
+                                    variant="outlined"
+                                  >
+                                    {"ตรวจสอบไฟล์ : "}
+                                    {filecourse.name}
+                                  </Button>
+                                  <Typography style={{ marginTop: "16px" }}>
+                                    {" "}
+                                    {"เวลาแก้ไขไฟล์ล่าสุด : "}
+                                    {filecourse.lastModifiedDate
+                                      .toString()
+                                      .substring(0, 25)}
+                                  </Typography>
+                                </Typography>
+                              )}
+                            </div>
+                          );
+                        }
+                      })()}
+                    </div>
+                  </Box>
+                </Stack>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>ยกเลิก</Button>
+                <Button type="submit" setLoading={setLoading}>
+                  บันทึก
                 </Button>
-                {filepdf && (
-                  <Typography
-                    align="left"
-                    sx={{
-                      display: "inline-block",
-                      m: "auto",
-                      ml: 1,
-                    }}
-                  >
-                    ชื่อไฟล์ที่เลือก:{" "}
-                    <Button onClick={handledownloadpdf}>{filepdf.name}</Button>
-                    {console.log("filepdf.name", filepdf.name)}
-                  </Typography>
-                )}
-                <br />
-                <p style={{ color: "red" }}>*ไฟล์ xlxs เพื่อเพิ่มหลักสูตร</p>
-                <Typography
-                  style={{ color: "green", fontSize: "15px", marginTop: "2px" }}
-                >
-                  ( ไฟล์ล่าสุด : {exlname} )
-                </Typography>
-                {/* <input
-                  type={"file"}
-                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                  ID="fileSelect"
-                  runat="server"
-                  onChange={handleUploadxlxs}
-                /> */}
-                <Button minWidth="100%" variant="contained" component="label">
-                  เลือกไฟล์
-                  <input
-                    hidden
-                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    multiple
-                    type="file"
-                    onChange={handleUploadxlxs}
-                  />
-                </Button>
-                {filecourse && (
-                  <Typography
-                    align="left"
-                    sx={{
-                      display: "inline-block",
-                      m: "auto",
-                      ml: 1,
-                    }}
-                  >
-                    ชื่อไฟล์ที่เลือก:{" "}
-                    <Button onClick={handledownload}>{filecourse.name}</Button>
-                  </Typography>
-                )}
-                <br />
-              </Stack>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>ยกเลิก</Button>
-              <Button onClick={handleSubmit} autoFocus>
-                บันทึก
-              </Button>
-            </DialogActions>
+              </DialogActions>
+            </form>
           </Dialog>
         </>
       )}

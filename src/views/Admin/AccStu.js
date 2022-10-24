@@ -440,6 +440,7 @@ export default function EnhancedTable() {
                       <TableCell align="center">
                         {/* {row.html_status}
                         <br />({row.html_name}) */}
+
                         <div style={{ display: "flex" }}>
                           {(() => {
                             if (row.html_status === "ยังไม่อัปโหลด") {
@@ -480,11 +481,46 @@ export default function EnhancedTable() {
                         </div>
                       </TableCell>
                       <TableCell align="center">
-                        {row.date_html}
-                        <br />
-                        {"เวลา "}
-                        {row.time}
-                        {" น."}
+                        {console.log("first", row.date_html)}
+                        <div style={{ display: "flex" }}>
+                          {(() => {
+                            if (row.date_html === null) {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>ยังไม่อัปโหลด</p>
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "green",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  {row.date_html}
+                                  <br />
+                                  {"เวลา "}
+                                  {row.time}
+                                  {" น."}
+                                </div>
+                              );
+                            }
+                          })()}
+                        </div>
                       </TableCell>
                       <TableCell
                         align="center"
@@ -494,6 +530,7 @@ export default function EnhancedTable() {
                           row={index}
                           rows={rows}
                           setRows={setRows}
+                          setLoading={setLoading}
                         />
                         <Deletebutton
                           row={index}

@@ -15,7 +15,7 @@ import "./drop-file-input.css";
 import { ImageConfig } from "../config/ImageConfig";
 import uploadImg from "../../assets/uploadfile/cloud-upload-regular-240.png";
 
-const DropFileDepart = (props) => {
+const DropFileTeacher = (props) => {
   const [open, setOpen] = React.useState(false);
   const wrapperRef = useRef(null);
 
@@ -78,7 +78,7 @@ const DropFileDepart = (props) => {
 
       const UploadStudent = await axios({
         method: "post",
-        url: "http://127.0.0.1:5000/add-file-department",
+        url: "http://127.0.0.1:5000/create-many-teacher-info",
         data: formData,
         headers: {
           Authorization: `Bearer ` + token,
@@ -110,7 +110,7 @@ const DropFileDepart = (props) => {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        อัปโหลดไฟล์สาขาวิชา
+        อัปโหลดไฟล์รายชื่ออาจารย์ที่ปรึกษา
       </Button>
       <Dialog
         // maxWidth="30"
@@ -119,7 +119,9 @@ const DropFileDepart = (props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"เพิ่มสาขาวิชา"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"เพิ่มออาจารย์ที่ปรึกษา"}
+        </DialogTitle>
         <DialogContent>
           <div
             ref={wrapperRef}
@@ -218,9 +220,9 @@ const DropFileDepart = (props) => {
   );
 };
 
-DropFileDepart.propTypes = {
+DropFileTeacher.propTypes = {
   onFileChange: PropTypes.func,
   setLoading: PropTypes.func,
 };
 
-export default DropFileDepart;
+export default DropFileTeacher;

@@ -57,7 +57,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CheckButton({ row, rows, setRows }) {
+export default function CheckButton({ row, rows, setRows, std_id }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -84,7 +84,12 @@ export default function CheckButton({ row, rows, setRows }) {
           ตรวจสอบการการรียนของนิสิตในที่ปรึกษา
         </BootstrapDialogTitle>
         <DialogContent dividers style={{ width: "100%" }}>
-          <PageCheckPass row={row} rows={rows} setRows={setRows} />
+          <PageCheckPass
+            row={row}
+            rows={rows}
+            setRows={setRows}
+            std_id={std_id}
+          />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

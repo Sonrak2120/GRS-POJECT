@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
@@ -16,6 +19,7 @@ import Sentbutton from "../../views/Student/button/Sentbutton";
 import axios from "axios";
 import { Grid, styled } from "@mui/material";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import HeadDataStudent from "../Student/HeadDataStudent";
 
 const Typo_custom = styled("Typography")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
@@ -232,79 +236,90 @@ export default function CollapsibleTable() {
   }
   if (groups.length > 0) {
     return (
-      <TableContainer component={Paper}>
-        <Progess load={loading}></Progess>
-        <Grid container justifyContent="center">
-          <Grid
-            item
-            container
-            xs={10}
-            direction="column"
-            sx={{ mb: "31px", mt: "31px" }}
-          >
-            <Grid item style={{ margin: "auto" }}>
-              <Typo_custom>
-                {name} จำนวนหน่วยกิตไม่น้อยกว่า {num} หน่วยกิต
-              </Typo_custom>
+      <>
+        <Card>
+          <HeadDataStudent />
+        </Card>
+        <Box sx={{ mt: "16px" }}>
+          <TableContainer component={Paper}>
+            <Progess load={loading}></Progess>
+            <Grid container justifyContent="center">
+              <Grid
+                item
+                container
+                xs={10}
+                direction="column"
+                sx={{ mb: "31px", mt: "31px" }}
+              >
+                <Grid item style={{ margin: "auto" }}>
+                  <Typo_custom>
+                    {name} จำนวนหน่วยกิตไม่น้อยกว่า {num} หน่วยกิต
+                  </Typo_custom>
+                </Grid>
+              </Grid>
+              {/* <Grid_custom
+                item
+                container
+                // xs={11}
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  width: "80%",
+                }}
+                // direction="column"
+              >
+                <Grid_custom
+                // justifyContent="center"
+                // alignItems="center"
+                // sx={{ position: "absolute" }}
+                >
+                  <Sentbutton setLoading={setLoading} />
+                </Grid_custom>
+              </Grid_custom> */}
             </Grid>
-          </Grid>
-          <Grid_custom
-            item
-            container
-            // xs={11}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              width: "80%",
-            }}
-            // direction="column"
-          >
-            <Grid_custom
-            // justifyContent="center"
-            // alignItems="center"
-            // sx={{ position: "absolute" }}
-            >
-              <Sentbutton setLoading={setLoading} />
-            </Grid_custom>
-          </Grid_custom>
-        </Grid>
-        {rows.map((row, index) => (
-          <Table_custom
-            aria-label="collapsible table"
-            key={index}
-            sx={{ width: "80%" }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell
-                  component="th"
-                  scope="row"
-                  sx={{ width: "80%", fontWeight: "1000", fontSize: "21px" }}
-                >
-                  {row.section[0]}
-                </TableCell>
+            {rows.map((row, index) => (
+              <Table_custom
+                aria-label="collapsible table"
+                key={index}
+                sx={{ width: "80%" }}
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        width: "80%",
+                        fontWeight: "1000",
+                        fontSize: "21px",
+                      }}
+                    >
+                      {row.section[0]}
+                    </TableCell>
 
-                <TableCell
-                  component="th"
-                  scope="row"
-                  align="center"
-                  sx={{ width: "20%", fontWeight: "700", fontSize: "16px" }}
-                >
-                  {row.section[1]} {"หน่วยกิต"}
-                </TableCell>
-              </TableRow>
-            </TableHead>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      align="center"
+                      sx={{ width: "20%", fontWeight: "700", fontSize: "16px" }}
+                    >
+                      {row.section[1]} {"หน่วยกิต"}
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
 
-            <TableBody>
-              {groups[index].sub_n_grade.map((rowSub) => {
-                return <Row key={rowSub.group} row={rowSub} />;
-              })}
-            </TableBody>
-          </Table_custom>
-        ))}
-      </TableContainer>
+                <TableBody>
+                  {groups[index].sub_n_grade.map((rowSub) => {
+                    return <Row key={rowSub.group} row={rowSub} />;
+                  })}
+                </TableBody>
+              </Table_custom>
+            ))}
+          </TableContainer>
+        </Box>
+      </>
     );
   }
   return <></>;

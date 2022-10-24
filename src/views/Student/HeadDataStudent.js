@@ -15,14 +15,16 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import CheckButton from "./button/CheckButton";
 import { styled } from "@mui/material/styles";
+import Sentbutton from "./button/Sentbutton";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
-import CheckActtiveButton from "./button/CheckActtiveButton";
-import HistoryButton from "./button/HistoryButton";
+import CheckDataButton from "./button/CheckDataButton";
+import PageActivedata from "./button/PageActivedata";
+import HistoryButton from "../Teacher/button/HistoryButton";
+import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
 const Table_custom = styled("Table")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
@@ -33,49 +35,6 @@ const Table_custom = styled("Table")(({ theme }) => ({
     marginLeft: "30px",
   },
 }));
-
-const AntTabs = styled(Tabs)({
-  borderBottom: "1px solid #e8e8e8",
-  "& .MuiTabs-indicator": {
-    backgroundColor: "#1890ff",
-  },
-});
-
-const AntTab = styled((props) => <Tab disableRipple {...props} />)(
-  ({ theme }) => ({
-    textTransform: "none",
-    minWidth: 0,
-    [theme.breakpoints.up("sm")]: {
-      minWidth: 0,
-    },
-    fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(1),
-    color: "rgba(0, 0, 0, 0.85)",
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-    "&:hover": {
-      color: "#40a9ff",
-      opacity: 1,
-    },
-    "&.Mui-selected": {
-      color: "#1890ff",
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    "&.Mui-focusVisible": {
-      backgroundColor: "#d1eaff",
-    },
-  })
-);
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -105,25 +64,20 @@ TabPanel.propTypes = {
 
 export default function CollapsibleTable() {
   const [value, setValue] = React.useState(0);
-  const [rows, setRows] = React.useState([]);
   const [tab, setTab] = React.useState([]);
-
   const [rows2, setRows2] = React.useState([]);
-  const [groups, setgrop] = React.useState([]);
-  const [nums, setNums] = React.useState([]);
-  const [donts, setDont] = React.useState([]);
-  const [datas, setDatas] = React.useState([]);
+  const [groups, setgrops] = React.useState([]);
   const [stdId, setStId] = React.useState("");
-  const [datadate, setDataDate] = React.useState("");
-  const [datatime, setDataTime] = React.useState("");
-  const [checkdate, setCheckDate] = React.useState("");
-  const [checktime, setCheckTime] = React.useState("");
-  const [sentdate, setSentDate] = React.useState("");
-  const [senttime, setSentTime] = React.useState("");
+  const [head, setHead] = React.useState();
+  const [loading, setLoading] = React.useState(false);
+  console.log("head", head);
+  console.log("groups", groups);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  console.log("groups", groups);
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -134,25 +88,19 @@ export default function CollapsibleTable() {
       };
 
       let reqOptions = {
-        url: "http://localhost:5000/get-student-data-require",
+        url: "http://localhost:5000/get-require-status-info",
         method: "GET",
         headers: headersList,
       };
 
       let response = await axios.request(reqOptions);
-      setTab(response.data.data);
-
-      setStId(response.data.data);
-      // setDataDate(rows2[row2].group.data_date);
-      // setDataTime(rows2[row2].group.data_time);
-      // setCheckDate(rows2[row2].group.check_date);
-      // setCheckTime(rows2[row2].group.check_time);
-      // setSentDate(rows2[row2].group.sent_date);
-      // setSentTime(rows2[row2].group.sent_time);
-
       const data = response.data.data;
+
+      setTab(response.data.data);
+      setStId(response.data.data);
       setRows2(response.data.data);
-      setgrop(data);
+      setgrops(data[0].group);
+      setHead(data[0].head);
     };
 
     api_();
@@ -246,6 +194,9 @@ export default function CollapsibleTable() {
             </div>
           </TableCell>
           <TableCell align="center">
+            {row2.teacher_name} {row2.teacher_surname}
+          </TableCell>
+          <TableCell align="center">
             {row2.sent_date}
             {"-"}
             {row2.sent_time}
@@ -258,51 +209,7 @@ export default function CollapsibleTable() {
                 justifyContent: "center",
               }}
             >
-              {(() => {
-                if (row2.status === "") {
-                  return (
-                    <div>
-                      <CheckActtiveButton
-                        row2={inx}
-                        rows2={rows2}
-                        setRows2={setRows2}
-                      />
-                    </div>
-                  );
-                } else if (row2.status === "CHECK") {
-                  return (
-                    <CheckActtiveButton
-                      row2={inx}
-                      rows2={rows2}
-                      setRows2={setRows2}
-                    />
-                  );
-                } else if (row2.status === "NOT PASS") {
-                  return (
-                    <Button
-                      variant="contained"
-                      disabled
-                      row2={inx}
-                      rows2={rows2}
-                      setRows2={setRows2}
-                    >
-                      ตรวจสอบแล้ว
-                    </Button>
-                  );
-                } else {
-                  return (
-                    <Button
-                      variant="contained"
-                      disabled
-                      row2={inx}
-                      rows2={rows2}
-                      setRows2={setRows2}
-                    >
-                      ตรวจสอบแล้ว
-                    </Button>
-                  );
-                }
-              })()}
+              <Sentbutton setLoading={setLoading} />
             </div>
           </TableCell>
         </TableRow>
@@ -321,6 +228,7 @@ export default function CollapsibleTable() {
                       <TableCell>นามสกุล</TableCell>
                       <TableCell align="center">สถานะ</TableCell>
                       <TableCell align="center">วัน/เวลา ที่ตรวจสอบ</TableCell>
+                      <TableCell align="center">อาจารย์ที่ปรึกษา</TableCell>
                       <TableCell align="center">Action</TableCell>
                     </TableRow>
                   </TableHead>
@@ -401,6 +309,9 @@ export default function CollapsibleTable() {
                           </div>
                         </TableCell>
                         <TableCell align="center">
+                          {row.teacher_name} {row.teacher_surname}
+                        </TableCell>
+                        <TableCell align="center">
                           {row.check_date}
                           {"-"}
                           {row.check_time}
@@ -428,78 +339,62 @@ export default function CollapsibleTable() {
     );
   }
 
-  if (groups.length > 0) {
+  if (head) {
     return (
       <div>
+        <Progess load={loading}></Progess>
         <h5>รายชื่อนิสิตในที่ปรึกษา</h5>
-        <Box sx={{ width: "100%" }}>
+        <Box>
           <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
-            <AntTabs
-              value={value}
-              onChange={handleChange}
-              aria-label="ant example"
-            >
-              {tab.map((row, inx) => (
-                <AntTab key={inx} label={row.department.depart_id} />
-              ))}
-            </AntTabs>
+            <TableContainer component={Paper} sx={{ mb: "16px" }}>
+              <Table_custom aria-label="collapsible table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
+                      รหัสนิสิต
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
+                      ชื่อ
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="left"
+                    >
+                      นามสกุล
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="center"
+                    >
+                      สถานะ
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="center"
+                    >
+                      อาจารย์ที่ปรึกษา
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="center"
+                    >
+                      วัน/เวลา
+                    </TableCell>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="center"
+                    >
+                      Action
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <Row row2={head} group={groups} />
+                </TableBody>
+              </Table_custom>
+            </TableContainer>
 
-            <TabPanel value={value} index={value}>
-              {tab[value]?.std_in_depart.map((item, inx) => {
-                return (
-                  <TableContainer
-                    key={inx.toString()}
-                    component={Paper}
-                    sx={{ mb: "16px" }}
-                  >
-                    <Table_custom aria-label="collapsible table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell />
-                          <TableCell
-                            sx={{ fontWeight: "bold", fontSize: "16px" }}
-                          >
-                            รหัสนิสิต
-                          </TableCell>
-                          <TableCell
-                            sx={{ fontWeight: "bold", fontSize: "16px" }}
-                          >
-                            ชื่อ
-                          </TableCell>
-                          <TableCell
-                            sx={{ fontWeight: "bold", fontSize: "16px" }}
-                            align="left"
-                          >
-                            นามสกุล
-                          </TableCell>
-                          <TableCell
-                            sx={{ fontWeight: "bold", fontSize: "16px" }}
-                            align="center"
-                          >
-                            สถานะ
-                          </TableCell>
-                          <TableCell
-                            sx={{ fontWeight: "bold", fontSize: "16px" }}
-                            align="center"
-                          >
-                            วัน/เวลา
-                          </TableCell>
-                          <TableCell
-                            sx={{ fontWeight: "bold", fontSize: "16px" }}
-                            align="center"
-                          >
-                            Action
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        <Row row2={item?.head} inx={inx} group={item.group} />
-                      </TableBody>
-                    </Table_custom>
-                  </TableContainer>
-                );
-              })}
-            </TabPanel>
             <Box sx={{ p: 3 }} />
           </Box>
         </Box>

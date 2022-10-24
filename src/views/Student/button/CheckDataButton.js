@@ -8,10 +8,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import PageActive from "../PageAcive";
+import PageActivedata from "./PageActivedata";
 import axios from "axios";
 import DialogContentText from "@mui/material/DialogContentText";
-import DubleCheckButton from "./DubleCheckButton";
+import DubleCheckButton from "../../Teacher/button/DubleCheckButton";
+import Sentbutton from "./Sentbutton";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
@@ -53,7 +54,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
+export default function CheckDataButton({ row2, rows2, setRows2 }) {
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
   const token = sessionStorage.getItem("token");
@@ -127,7 +128,7 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           {/* <Typography gutterBottom>รอใส่ตารางข้อมูลนิสิต</Typography> */}
-          <PageActive
+          <PageActivedata
             setOpen={setOpen}
             row2={row2}
             rows2={rows2}

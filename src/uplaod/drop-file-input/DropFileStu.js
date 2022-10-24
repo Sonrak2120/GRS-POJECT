@@ -8,6 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Box } from "@mui/material";
 
 import "./drop-file-input.css";
 
@@ -80,7 +81,7 @@ const DropFileStu = (props) => {
           Accept: "*/*",
         },
       });
-      alert("อัปโหลด สาขาวิชา สำเร็จแล้ว ");
+      alert("อัปโหลด รายชื่อนิสิต สำเร็จแล้ว ");
       window.location.reload("Refresh");
     } catch {
       alert("Error อัปโหลดไฟล์ไม่ถูกต้อง");
@@ -106,7 +107,7 @@ const DropFileStu = (props) => {
         อัปโหลดไฟล์สาขาวิชา
       </Button>
       <Dialog
-        maxWidth="30"
+        // maxWidth="30"
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -153,18 +154,24 @@ const DropFileStu = (props) => {
                   }
                 >
                   <img
+                    style={{ width: "15%" }}
                     src={
-                      ImageConfig[item.file.type.split("/")[1]] ||
-                      ImageConfig["rar"]
+                      // ImageConfig[item.file.type.split("/")[1]] ||
+                      ImageConfig["css"]
                     }
                     alt="Error Input"
                   />
+
                   <div className="drop-file-preview__item__info">
-                    <Button variant="text" onClick={handledownload}>
-                      {" "}
+                    <Button onClick={handledownload} variant="outlined">
+                      {"ตรวจสอบไฟล์ : "}
                       {item.file.name}
                     </Button>
-                    <p>{item.file.size}B</p>
+                    <p style={{ marginTop: "8px" }}>
+                      {" "}
+                      {"เวลาแก้ไขไฟล์ล่าสุด : "}
+                      {item.file.lastModifiedDate.toString().substring(0, 25)}
+                    </p>
                   </div>
                   {!item.flag && (
                     <span className="drop-file-preview__item__del">
@@ -179,13 +186,23 @@ const DropFileStu = (props) => {
                 fileList.filter((item) => !item.flag)
               )}
 
-              <button
-                disabled={fileList.filter((item) => !item.flag).length === 0}
-                onClick={onClickUpload}
-                className="btn btn-primary"
+              <Box
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
               >
-                อัปโหลดไฟล์
-              </button>
+                <Button
+                  minWidth="100%"
+                  variant="contained"
+                  component="label"
+                  disabled={fileList.filter((item) => !item.flag).length === 0}
+                  onClick={onClickUpload}
+                >
+                  อัปโหลดไฟล์
+                </Button>
+              </Box>
             </div>
           ) : null}
         </DialogContent>

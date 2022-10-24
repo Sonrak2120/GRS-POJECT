@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import Button from "@mui/material/Button";
+import { Box } from "@mui/material";
+import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 
 import "./drop-file-input.css";
 
 import { ImageConfig } from "../config/ImageConfig";
 import uploadImg from "../../assets/uploadfile/cloud-upload-regular-240.png";
 
-const DropFileInputHTML = (props, { setLoading }) => {
+const DropFileInputHTML = (props) => {
   const [open, setOpen] = React.useState(false);
   const wrapperRef = useRef(null);
 
@@ -20,6 +22,8 @@ const DropFileInputHTML = (props, { setLoading }) => {
   const onDragLeave = () => wrapperRef.current.classList.remove("dragover");
 
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
+
+  const [loading, setLoading] = React.useState(false);
 
   const onFileDrop = (e) => {
     const file = e.target.files[0];
@@ -61,7 +65,7 @@ const DropFileInputHTML = (props, { setLoading }) => {
   const token = sessionStorage.getItem("token");
 
   const onClickUpload = async () => {
-    // setLoading(true);
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("file", file.file);
@@ -80,7 +84,7 @@ const DropFileInputHTML = (props, { setLoading }) => {
         }
         return item;
       });
-      // setLoading(true);
+      setLoading(true);
       setFileList(uploadThisfile);
       console.log("uploadThisfile", uploadThisfile);
 
@@ -98,6 +102,7 @@ const DropFileInputHTML = (props, { setLoading }) => {
   console.log("fileList", !(fileList.length === 0));
   return (
     <div>
+      <Progess load={loading} />
       <div
         ref={wrapperRef}
         className="drop-file-input"
@@ -133,19 +138,27 @@ const DropFileInputHTML = (props, { setLoading }) => {
               style={item?.flag ? { backgroundColor: "rgb(0,128,0,0.7)	" } : {}}
             >
               <img
+                style={{ width: "5%" }}
                 src={
                   ImageConfig[item.file.type.split("/")[1]] ||
                   ImageConfig["rar"]
                 }
                 alt="Error Input"
               />
+              {console.log("first", item.file.type.split("/")[1])}
+
               <div className="drop-file-preview__item__info">
-                <Button variant="text" onClick={handledownload}>
-                  {" "}
+                <Button onClick={handledownload} variant="outlined">
+                  {"ตรวจสอบไฟล์ : "}
                   {item.file.name}
                 </Button>
-                <p>{item.file.size}B</p>
+                <p style={{ marginTop: "8px" }}>
+                  {" "}
+                  {"เวลาแก้ไขไฟล์ล่าสุด : "}
+                  {item.file.lastModifiedDate.toString().substring(0, 25)}
+                </p>
               </div>
+
               {!item.flag && (
                 <span className="drop-file-preview__item__del">
                   <HighlightOffIcon onClick={() => fileRemove(item)} />
@@ -158,15 +171,23 @@ const DropFileInputHTML = (props, { setLoading }) => {
             "------",
             fileList.filter((item) => !item.flag)
           )}
-
-          <button
-            disabled={fileList.filter((item) => !item.flag).length === 0}
-            onClick={onClickUpload}
-            className="btn btn-primary"
-            setLoading={setLoading}
+          <Box
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
           >
-            อัปโหลดไฟล์
-          </button>
+            <Button
+              minWidth="100%"
+              variant="contained"
+              component="label"
+              disabled={fileList.filter((item) => !item.flag).length === 0}
+              onClick={onClickUpload}
+            >
+              อัปโหลดไฟล์
+            </Button>
+          </Box>
         </div>
       ) : null}
     </div>
