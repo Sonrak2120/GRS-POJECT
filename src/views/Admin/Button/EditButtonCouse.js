@@ -81,7 +81,6 @@ export default function EditButtonCouse({ row, rows, setRows, setLoading }) {
 
       let response = await axios.request(reqOptions);
       setdept(response.data.data);
-      console.log(response.data.data);
     };
     api_();
   }, []);
@@ -95,9 +94,6 @@ export default function EditButtonCouse({ row, rows, setRows, setLoading }) {
     };
     reader.readAsDataURL(filepdf);
   };
-  console.log("couseID", couseID);
-  console.log("filecourse", filecourse);
-  console.log("filepdf", filepdf);
 
   const handleSubmits = async (event) => {
     setLoading(true);
@@ -112,7 +108,6 @@ export default function EditButtonCouse({ row, rows, setRows, setLoading }) {
     bodyContent.append("file_pdf", filepdf);
     bodyContent.append("file_course", filecourse);
     bodyContent.append("id", id);
-    console.log("bodyContent", bodyContent);
 
     let response = await fetch("http://localhost:5000/edit-upload-course-pdf", {
       method: "PUT",

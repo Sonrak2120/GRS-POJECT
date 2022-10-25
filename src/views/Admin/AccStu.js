@@ -31,6 +31,7 @@ import "../../App";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import { Button } from "@mui/material";
 import DropFileStu from "../../uplaod/drop-file-input/DropFileStu";
+import ReqDownloadHTML from "./Button/ReqDownloadHTML";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -470,10 +471,12 @@ export default function EnhancedTable() {
                                     margin: "auto",
                                   }}
                                 >
-                                  <p>
-                                    อัปโหลดสำเร็จ
-                                    <br />({row.html_name})
-                                  </p>
+                                  <ReqDownloadHTML
+                                    row={index}
+                                    rows={rows}
+                                    setRows={setRows}
+                                    setLoading={setLoading}
+                                  />
                                 </div>
                               );
                             }

@@ -44,7 +44,6 @@ export default function AddCouse({ setLoading }) {
 
       let response = await axios.request(reqOptions);
       setrows(response.data.data);
-      console.log(response.data.data);
     };
     api_();
   }, []);
@@ -58,7 +57,7 @@ export default function AddCouse({ setLoading }) {
     };
     reader.readAsDataURL(filepdf);
   };
-  console.log("filepdf", filepdf);
+
   const [filecourse, setfilecourse] = useState("");
   const handleUploadxlxs = (e) => {
     const filecourse = e.target.files[0];
@@ -103,7 +102,7 @@ export default function AddCouse({ setLoading }) {
     bodyContent.append("course_id", couseID);
     bodyContent.append("file_pdf", filepdf);
     bodyContent.append("file_course", filecourse);
-    console.log(bodyContent);
+
     let response = await fetch("http://127.0.0.1:5000/upload-course-pdf", {
       method: "POST",
       body: bodyContent,
@@ -120,11 +119,9 @@ export default function AddCouse({ setLoading }) {
           alert("ผิดพลาด");
           window.location.reload("Refresh");
         }
-        console.log("result[message]", result["message"]);
       });
 
     let data2 = await response.text();
-    console.log(data2);
   };
 
   const handleClickOpen = () => {

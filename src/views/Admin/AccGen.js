@@ -15,6 +15,7 @@ import DeleteGen from "./Button/DeleteGen";
 import EditButtonGen from "./Button/EditButtonGen";
 
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import ReqDownloadXgen from "./Button/ReqDownloadXgen";
 
 export default function AccGen() {
   const [rows, setRows] = React.useState([]);
@@ -177,10 +178,12 @@ export default function AccGen() {
                               margin: "auto",
                             }}
                           >
-                            <p>
-                              อัปโหลดสำเร็จ
-                              <br />({row.filename})
-                            </p>
+                            <ReqDownloadXgen
+                              row={inx}
+                              rows={rows}
+                              setRows={setRows}
+                              setLoading={setLoading}
+                            />
                           </div>
                         );
                       }

@@ -158,7 +158,17 @@ export default function DataStu() {
   };
   return (
     <div>
-      <h5>รายชื่อนิสิตในที่ปรึกษา</h5>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>
+          รายชื่อนิสิตในที่ปรึกษา
+        </h3>
+      </div>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
           <AntTabs
@@ -167,7 +177,12 @@ export default function DataStu() {
             aria-label="ant example"
           >
             {tab.map((row, inx) => (
-              <AntTab key={inx} label={row.department.depart_id} />
+              <AntTab
+                key={inx}
+                label={
+                  row.department.depart_id + "  " + row.department.depart_name
+                }
+              />
             ))}
           </AntTabs>
 
@@ -176,6 +191,12 @@ export default function DataStu() {
               <Table sx={{ width: "100%" }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
+                    <TableCell
+                      sx={{ fontWeight: "bold", fontSize: "16px" }}
+                      align="center"
+                    >
+                      รหัสนิสิต
+                    </TableCell>
                     <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
                       ชื่อ
                     </TableCell>
@@ -185,12 +206,7 @@ export default function DataStu() {
                     >
                       นามสกุล
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: "bold", fontSize: "16px" }}
-                      align="center"
-                    >
-                      รหัสนิสิต
-                    </TableCell>
+
                     <TableCell
                       sx={{ fontWeight: "bold", fontSize: "16px" }}
                       align="center"
@@ -211,6 +227,9 @@ export default function DataStu() {
                         },
                       }}
                     >
+                      <TableCell sx={{ width: "25%" }} align="center">
+                        {item.std_id}
+                      </TableCell>
                       <TableCell
                         component="th"
                         scope="row"
@@ -221,9 +240,7 @@ export default function DataStu() {
                       <TableCell sx={{ width: "25%" }} align="left">
                         {item.surname}
                       </TableCell>
-                      <TableCell sx={{ width: "25%" }} align="center">
-                        {item.std_id}
-                      </TableCell>
+
                       <TableCell sx={{ width: "25%" }} align="center">
                         <CheckButton
                           row={inx}

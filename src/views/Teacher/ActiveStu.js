@@ -431,7 +431,17 @@ export default function CollapsibleTable() {
   if (groups.length > 0) {
     return (
       <div>
-        <h5>รายชื่อนิสิตในที่ปรึกษา</h5>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <h3 style={{ margin: "auto 0", flexGrow: "1" }}>
+            ตรวจสอบการจบการศึกษา
+          </h3>
+        </div>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
             <AntTabs
@@ -440,7 +450,12 @@ export default function CollapsibleTable() {
               aria-label="ant example"
             >
               {tab.map((row, inx) => (
-                <AntTab key={inx} label={row.department.depart_id} />
+                <AntTab
+                  key={inx}
+                  label={
+                    row.department.depart_id + " " + row.department.depart_name
+                  }
+                />
               ))}
             </AntTabs>
 

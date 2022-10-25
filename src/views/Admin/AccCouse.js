@@ -13,11 +13,14 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import AddCouse from "./Button/AddCouse";
 import EditButtonCouse from "./Button/EditButtonCouse";
+import ReqDownload from "./Button/ReqDownload";
+import ReqDownloadXcourse from "./Button/ReqDownloadXcourse";
 
 export default function AccCouse() {
   const [loading, setLoading] = React.useState(false);
   const [rows, setRows] = React.useState([]);
   const [offid, setOffid] = useState("");
+  const [id, setid] = useState("");
   useEffect(() => {
     const api_ = async () => {
       let headersList = {
@@ -32,7 +35,6 @@ export default function AccCouse() {
 
       let response = await axios.request(reqOptions);
       setRows(response.data.data);
-      console.log(response.data.data);
     };
     api_();
   }, []);
@@ -62,25 +64,7 @@ export default function AccCouse() {
         link.parentNode.removeChild(link);
       });
   };
-  const handledownload = async () => {
-    let headersList = {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    };
 
-    let bodyContent = JSON.stringify({
-      course_id: "Q03-60",
-    });
-
-    let response = await fetch("localhost:5000/download-course-pdf", {
-      method: "GET",
-      body: bodyContent,
-      headers: headersList,
-    });
-
-    let data = await response.text();
-    console.log(data);
-  };
   return (
     <div>
       <Progess load={loading} />
@@ -205,13 +189,12 @@ export default function AccCouse() {
                               margin: "auto",
                             }}
                           >
-                            <Button variant="text" onClick={handledownload}>
-                              <p>
-                                อัปโหลดสำเร็จ
-                                <br />
-                                {row.pdf_name}
-                              </p>
-                            </Button>
+                            <ReqDownload
+                              row={inx}
+                              rows={rows}
+                              setRows={setRows}
+                              setLoading={setLoading}
+                            />
                           </div>
                         );
                       }
@@ -250,10 +233,12 @@ export default function AccCouse() {
                               margin: "auto",
                             }}
                           >
-                            <p>
-                              อัปโหลดสำเร็จ
-                              <br />({row.excel_name})
-                            </p>
+                            <ReqDownloadXcourse
+                              row={inx}
+                              rows={rows}
+                              setRows={setRows}
+                              setLoading={setLoading}
+                            />
                           </div>
                         );
                       }
