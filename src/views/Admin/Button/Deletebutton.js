@@ -52,7 +52,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function DeleteDialogs({ row, rows, setRows, setLoading }) {
+export default function Deletebutton({ row, rows, setRows, setLoading }) {
   const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
   const [id, setID] = useState("");

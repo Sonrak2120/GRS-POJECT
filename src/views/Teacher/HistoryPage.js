@@ -337,7 +337,10 @@ export default function CollapsibleTable({
           </Table_custom>
         ))}
         <Box sx={{ padding: "24px" }}>
-          <Typography>หมายเหตุ: {comment}</Typography>
+          <Typography sx={{ color: "red", fontWeight: 1000 }}>
+            หมายเหตุ !
+          </Typography>
+          <Typography> - {comment}</Typography>
         </Box>
       </TableContainer>
     );

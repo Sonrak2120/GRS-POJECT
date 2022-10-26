@@ -7,9 +7,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
 
 export default function DubleCheckButton({
   stdId,
+  stdname,
+  stdsurname,
   sentToStudent,
   comment,
   setComment,
@@ -43,18 +46,27 @@ export default function DubleCheckButton({
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            ยืนยันที่จะส่งผล "การตรวจสอบการจบการศึกษา" <br /> ให้กับ
-            หมายเลขนิสิต {stdId} หรือไม่
+            ยืนยันที่จะส่งผล "การตรวจสอบการจบการศึกษา" <br /> ให้กับ {stdId}{" "}
+            {stdname} {stdsurname} หรือไม่
             <br />
           </DialogContentText>
           <Typography variant="h6" sx={{ fontSize: "1rem" }}>
             comment
           </Typography>
-          <TextareaAutosize
+          {/* <TextareaAutosize
             aria-label="empty textarea"
-            placeholder="Empty"
+            placeholder=" หมายเหตุ..."
             style={{ width: "100%" }}
             minRows={3}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          /> */}
+          <TextField
+            id="filled-search"
+            label="หมายเหตุ..."
+            type="search"
+            variant="filled"
+            style={{ width: "100%" }}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />

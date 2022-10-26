@@ -23,13 +23,14 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
 import CheckActtiveButton from "./button/CheckActtiveButton";
 import HistoryButton from "./button/HistoryButton";
+import "../../App.css";
 
 const Table_custom = styled("Table")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
     width: "100%",
   },
   [theme.breakpoints.up("xl")]: {
-    width: "80%",
+    width: "100%",
     marginLeft: "30px",
   },
 }));
@@ -37,7 +38,7 @@ const Table_custom = styled("Table")(({ theme }) => ({
 const AntTabs = styled(Tabs)({
   borderBottom: "1px solid #e8e8e8",
   "& .MuiTabs-indicator": {
-    backgroundColor: "#1890ff",
+    backgroundColor: "#02bc77",
   },
 });
 
@@ -51,24 +52,15 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing(1),
     color: "rgba(0, 0, 0, 0.85)",
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
+    fontFamily: "'Prompt', sans-serif;",
     "&:hover": {
-      color: "#40a9ff",
+      color: "#02bc77",
       opacity: 1,
     },
     "&.Mui-selected": {
-      color: "#1890ff",
+      color: "#02bc77",
+      // backgroundColor: "#2f3337",
+      borderRadius: "15px",
       fontWeight: theme.typography.fontWeightMedium,
     },
     "&.Mui-focusVisible": {
@@ -307,33 +299,47 @@ export default function CollapsibleTable() {
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
-                <Typography variant="h6" gutterBottom component="div">
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                  sx={{ fontWeight: "bold" }}
+                >
                   ประวัติการตรวจสอบ
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="center">รหัสนิสิต</TableCell>
-                      <TableCell>ชื่อ</TableCell>
-                      <TableCell>นามสกุล</TableCell>
-                      <TableCell align="center">สถานะ</TableCell>
-                      <TableCell align="center">วัน/เวลา ที่ตรวจสอบ</TableCell>
-                      <TableCell align="center">Action</TableCell>
+                      <TableCell />
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        รหัสนิสิต
+                      </TableCell>
+                      <TableCell sx={{ fontWeight: "bold" }}>ชื่อ</TableCell>
+                      <TableCell sx={{ fontWeight: "bold" }}>นามสกุล</TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        สถานะ
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        วัน/เวลา ที่ตรวจสอบ
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        Action
+                      </TableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
                     {group.map((row, index) => (
                       <TableRow key={index}>
+                        <TableCell />
                         <TableCell>{row.std_id}</TableCell>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.surname}</TableCell>
                         <TableCell align="center">
                           {/* {row.status} */}
-                          {console.log("row", row)}
                           <div style={{ display: "flex" }}>
                             {(() => {
                               if (row.status === "") {
@@ -427,7 +433,6 @@ export default function CollapsibleTable() {
       </React.Fragment>
     );
   }
-  console.log(groups.length);
   if (groups.length > 0) {
     return (
       <div>
@@ -438,9 +443,16 @@ export default function CollapsibleTable() {
             marginBottom: "20px",
           }}
         >
-          <h3 style={{ margin: "auto 0", flexGrow: "1" }}>
+          <Typography
+            variant="h3"
+            style={{
+              margin: "auto 0",
+              flexGrow: "1",
+              fontWeight: 500,
+            }}
+          >
             ตรวจสอบการจบการศึกษา
-          </h3>
+          </Typography>
         </div>
         <Box sx={{ width: "100%" }}>
           <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
@@ -464,8 +476,13 @@ export default function CollapsibleTable() {
                 return (
                   <TableContainer
                     key={inx.toString()}
-                    component={Paper}
-                    sx={{ mb: "16px" }}
+                    sx={{
+                      mb: "16px",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      m: "aotu",
+                      display: "flex",
+                    }}
                   >
                     <Table_custom aria-label="collapsible table">
                       <TableHead>
@@ -521,5 +538,13 @@ export default function CollapsibleTable() {
       </div>
     );
   }
-  return <>5555</>;
+  return (
+    <>
+      <div className="tables">
+        <Typography color="#0000008f" fontSize={30}>
+          ยังไม่มีนิสิตที่ยื่นตรวจ
+        </Typography>
+      </div>
+    </>
+  );
 }

@@ -60,9 +60,9 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
   const [check, setCheck] = React.useState([]);
   const [subcode, setSubcode] = React.useState([]);
   const [stdId, setStId] = React.useState("");
+  const [stdsurname, setStsurname] = React.useState("");
+  const [stdname, setStname] = React.useState("");
   const [comment, setComment] = React.useState("");
-
-  console.log("stdId", stdId);
 
   const sentToStudent = async (event) => {
     const body = {
@@ -70,8 +70,8 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
       sub_code: subcode,
       result: check,
       comment: comment,
+      name: stdname,
     };
-    console.log("body", body);
 
     let headersList = {
       Accept: "*/*",
@@ -137,6 +137,8 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
             subcode={subcode}
             setSubcode={setSubcode}
             setStId={setStId}
+            setStsurname={setStsurname}
+            setStname={setStname}
           />
         </DialogContent>
         <DialogActions>
@@ -145,6 +147,8 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
           </Button> */}
           <DubleCheckButton
             stdId={stdId}
+            stdsurname={stdsurname}
+            stdname={stdname}
             sentToStudent={sentToStudent}
             comment={comment}
             setComment={setComment}

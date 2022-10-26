@@ -19,7 +19,8 @@ import { Typography } from "@mui/material";
 
 import "../../../uplaod/Upload.css";
 
-export default function AddCouse({ setLoading }) {
+export default function OfficeAddCouse({ setLoading }) {
+  const token = sessionStorage.getItem("token");
   const [open, setOpen] = React.useState(false);
 
   const [rows, setrows] = React.useState([]);
@@ -88,6 +89,7 @@ export default function AddCouse({ setLoading }) {
 
     let headersList = {
       Accept: "*/*",
+      Authorization: `Bearer ` + token,
     };
     var data = {
       course_id: couseID,
@@ -98,16 +100,18 @@ export default function AddCouse({ setLoading }) {
     };
     let bodyContent = new FormData();
     bodyContent.append("course_name", cousename);
-    bodyContent.append("depart_id", departID);
     bodyContent.append("course_id", couseID);
     bodyContent.append("file_pdf", filepdf);
     bodyContent.append("file_course", filecourse);
 
-    let response = await fetch("http://127.0.0.1:5000/upload-course-pdf", {
-      method: "POST",
-      body: bodyContent,
-      headers: headersList,
-    })
+    let response = await fetch(
+      "http://127.0.0.1:5000/upload-course-pdf-for-officer",
+      {
+        method: "POST",
+        body: bodyContent,
+        headers: headersList,
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result["message"] === "success") {
@@ -203,7 +207,7 @@ export default function AddCouse({ setLoading }) {
                   control={control}
                   defaultValue=""
                 />
-                <Controller
+                {/* <Controller
                   render={({ field: { onChange } }) => (
                     <Box sx={{ width: "450px" }}>
                       <FormControl fullWidth>
@@ -230,7 +234,7 @@ export default function AddCouse({ setLoading }) {
                   name="departID"
                   control={control}
                   defaultValue=""
-                />
+                /> */}
 
                 <Controller
                   render={({ field: { onChange } }) => (

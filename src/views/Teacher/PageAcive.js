@@ -19,6 +19,7 @@ import { Grid, styled } from "@mui/material";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import Checkbox from "@mui/material/Checkbox";
 import Sentbutton from "../Student/button/Sentbutton";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const Typo_custom = styled("Typography")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
@@ -31,6 +32,7 @@ const Typo_custom = styled("Typography")(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
     letterSpacing: "-0.06px",
+    fontFamily: "'Prompt', sans-serif;",
   },
   [theme.breakpoints.up("xl")]: {
     marginBottom: "30px",
@@ -41,6 +43,7 @@ const Typo_custom = styled("Typography")(({ theme }) => ({
     fontWeight: 500,
     fontSize: 30,
     letterSpacing: "-0.06px",
+    fontFamily: "'Prompt', sans-serif;",
   },
 }));
 
@@ -79,12 +82,15 @@ export default function CollapsibleTable({
   subcode,
   setSubcode,
   setStId,
+  setStname,
+  setStsurname,
 }) {
   const [rows, setRows] = React.useState([]);
   const [groups, setgrop] = React.useState([]);
   const [name, setName] = React.useState([]);
   const [num, setNum] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [isCheckAll, setIsCheckAll] = React.useState(false);
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
@@ -116,6 +122,8 @@ export default function CollapsibleTable({
       response.data.sub_code.map((item) => temp.push(0));
       setCheck(temp);
       setStId(rows2[0]?.std_in_depart?.[row2]?.head?.std_id);
+      setStname(rows2[0]?.std_in_depart?.[row2]?.head?.name);
+      setStsurname(rows2[0]?.std_in_depart?.[row2]?.head?.surname);
     };
     api_();
   }, []);
@@ -170,16 +178,28 @@ export default function CollapsibleTable({
                       <TableCell
                         component="th"
                         scope="row"
-                        sx={{ width: "25%" }}
+                        sx={{ width: "25%", fontWeight: "bold" }}
                       >
                         รหัสวิชา
                       </TableCell>
-                      <TableCell sx={{ width: "25%" }}>ชื่อวิชา</TableCell>
-                      <TableCell align="center">หน่วยกิต</TableCell>
-                      <TableCell align="center">เกรด</TableCell>
-                      <TableCell align="center">ภาค</TableCell>
-                      <TableCell align="center">ปี</TableCell>
-                      <TableCell align="center"></TableCell>
+                      <TableCell sx={{ width: "25%", fontWeight: "bold" }}>
+                        ชื่อวิชา
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        หน่วยกิต
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        เกรด
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        ภาค
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        ปี
+                      </TableCell>
+                      <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                        {/* <Checkbox color="secondary" /> */}
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   {row.subject.map((item, index) => {
@@ -212,6 +232,7 @@ export default function CollapsibleTable({
                             />
                           </TableCell>
                         </TableRow>
+                        {/* {console.log("Check---", check)} */}
                         {item[3].length > 1 && (
                           <>
                             {item[3].map((item1, index1) => {
@@ -223,7 +244,7 @@ export default function CollapsibleTable({
                                       component="th"
                                       scope="row"
                                     ></TableCell>
-                                    <TableCell> {item[1]} </TableCell>
+                                    <TableCell> {item[1]}</TableCell>
                                     <TableCell align="center">
                                       {item[2]}
                                     </TableCell>

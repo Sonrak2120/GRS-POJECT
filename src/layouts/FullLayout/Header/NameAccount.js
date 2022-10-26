@@ -52,7 +52,7 @@ function NameAccount() {
         if (role === "admin") {
           if (lgUp) {
             return (
-              <p
+              <Typography
                 style={{
                   color: "#EEEEEE",
                   fontSize: "20px",
@@ -67,11 +67,11 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           } else {
             return (
-              <p
+              <Typography
                 style={{
                   color: "white",
                   fontSize: "20px",
@@ -86,13 +86,13 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           }
         } else if (role === "officer") {
           if (lgUp) {
             return (
-              <p
+              <Typography
                 style={{
                   color: "#EEEEEE",
                   fontSize: "20px",
@@ -107,11 +107,11 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           } else {
             return (
-              <p
+              <Typography
                 style={{
                   color: "black",
                   fontSize: "20px",
@@ -126,13 +126,13 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           }
         } else if (role === "teacher") {
           if (lgUp) {
             return (
-              <p
+              <Typography
                 style={{
                   color: "#EEEEEE",
                   fontSize: "20px",
@@ -147,11 +147,11 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           } else {
             return (
-              <p
+              <Typography
                 style={{
                   color: "black",
                   fontSize: "20px",
@@ -166,13 +166,13 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           }
         } else {
           if (lgUp) {
             return (
-              <p
+              <Typography
                 style={{
                   color: "#EEEEEE",
                   fontSize: "20px",
@@ -187,26 +187,27 @@ function NameAccount() {
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           } else {
             return (
-              <p
+              <Typography
                 style={{
                   color: "black",
                   fontSize: "20px",
                   margin: "10px",
                   marginLeft: "5px",
                   marginRight: "30px",
-                  width: "80%",
+                  width: "100%",
                   textOverflow: "ellipsis",
                   overflow: "hidden",
                   whiteSpace: "nowrap",
                   wordWrap: "break-word",
+                  // backgroundColor: "pink",
                 }}
               >
                 {name} {surname}
-              </p>
+              </Typography>
             );
           }
         }

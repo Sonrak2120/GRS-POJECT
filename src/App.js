@@ -34,6 +34,9 @@ import UploadDepartNew from "./uplaod/UploadDepartNew";
 import AccGen from "./views/Admin/AccGen";
 import AccOff from "./views/Admin/AccOff";
 import AccDepartmentOfficer from "./views/Officer/AccDepartmentOfficer";
+import OfiicAccT from "./views/Officer/OfiicAccT";
+import OfficeAccCouse from "./views/Officer/OfficeAccCouse";
+import OfficeAccStu from "./views/Officer/OfficeAccStu";
 
 //////////////////////////////////////////Student
 import HomeStudent from "./views/Student/HomeStudent";
@@ -129,9 +132,9 @@ const App = () => {
       element: <FullLayoutOfficer />,
       children: [
         { path: "/officer", element: <AccDepartmentOfficer /> },
-        { path: "addstudent", element: <AccStu /> },
-        { path: "list", element: <AccT /> },
-        { path: "addcouse", element: <AccCouse /> },
+        { path: "addstudent", element: <OfficeAccStu /> },
+        { path: "list", element: <OfiicAccT /> },
+        { path: "addcouse", element: <OfficeAccCouse /> },
         { path: "gensubject", element: <AccGen /> },
         { path: "updatecouse", element: <UploadNew /> },
         { path: "updatehtml", element: <UploadHtmlNew /> },

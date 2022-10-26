@@ -31,7 +31,7 @@ const Table_custom = styled("Table")(({ theme }) => ({
     width: "100%",
   },
   [theme.breakpoints.up("xl")]: {
-    width: "80%",
+    width: "90%",
     marginLeft: "30px",
   },
 }));
@@ -114,13 +114,13 @@ export default function CollapsibleTable() {
       <React.Fragment>
         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
           <TableCell sx={{ width: "50px" }}>
-            <IconButton
+            {/* <IconButton
               aria-label="expand row2"
               size="small"
               onClick={() => setOpen(!open)}
             >
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
+            </IconButton> */}
           </TableCell>
           <TableCell>{row2[0].std_id}</TableCell>
           <TableCell align="left">{row2[0].name}</TableCell>
@@ -205,51 +205,63 @@ export default function CollapsibleTable() {
     return (
       <div>
         <Progess load={loading}></Progess>
-        <h5>รายชื่อนิสิตในที่ปรึกษา</h5>
-        <Box>
-          <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
-            <TableContainer component={Paper} sx={{ mb: "16px" }}>
-              <Table_custom aria-label="collapsible table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell />
-                    <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
-                      รหัสนิสิต
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
-                      ชื่อ
-                    </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: "bold", fontSize: "16px" }}
-                      align="left"
-                    >
-                      นามสกุล
-                    </TableCell>
+        {/* <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+          }}
+        >
+          รายชื่อนิสิตในที่ปรึกษา
+        </Typography> */}
 
-                    <TableCell
-                      sx={{ fontWeight: "bold", fontSize: "16px" }}
-                      align="center"
-                    >
-                      อาจารย์ที่ปรึกษา
-                    </TableCell>
+        <TableContainer
+          sx={{
+            mb: "16px",
+            alignItems: "center",
+            justifyContent: "center",
+            m: "aotu",
+            display: "flex",
+          }}
+        >
+          <Table_custom aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
+                  รหัสนิสิต
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", fontSize: "16px" }}>
+                  ชื่อ
+                </TableCell>
+                <TableCell
+                  sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  align="left"
+                >
+                  นามสกุล
+                </TableCell>
 
-                    <TableCell
-                      sx={{ fontWeight: "bold", fontSize: "16px" }}
-                      align="center"
-                    >
-                      Action
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <Row row2={head} group={groups} />
-                </TableBody>
-              </Table_custom>
-            </TableContainer>
+                <TableCell
+                  sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  align="center"
+                >
+                  อาจารย์ที่ปรึกษา
+                </TableCell>
 
-            <Box sx={{ p: 3 }} />
-          </Box>
-        </Box>
+                <TableCell
+                  sx={{ fontWeight: "bold", fontSize: "16px" }}
+                  align="center"
+                >
+                  Action
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <Row row2={head} group={groups} />
+            </TableBody>
+          </Table_custom>
+        </TableContainer>
       </div>
     );
   }

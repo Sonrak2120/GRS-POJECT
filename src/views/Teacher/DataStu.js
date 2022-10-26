@@ -15,6 +15,7 @@ import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
+import SwipeableViews from "react-swipeable-views";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +53,7 @@ function a11yProps(index) {
 const AntTabs = styled(Tabs)({
   borderBottom: "1px solid #e8e8e8",
   "& .MuiTabs-indicator": {
-    backgroundColor: "#1890ff",
+    backgroundColor: "#02bc77",
   },
 });
 
@@ -66,24 +67,15 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing(1),
     color: "rgba(0, 0, 0, 0.85)",
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
+    fontFamily: "'Prompt', sans-serif;",
     "&:hover": {
-      color: "#40a9ff",
+      color: "#02bc77",
       opacity: 1,
     },
     "&.Mui-selected": {
-      color: "#1890ff",
+      color: "#02bc77",
+      // backgroundColor: "#2f3337",
+      borderRadius: "15px",
       fontWeight: theme.typography.fontWeightMedium,
     },
     "&.Mui-focusVisible": {
@@ -165,9 +157,16 @@ export default function DataStu() {
           marginBottom: "20px",
         }}
       >
-        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>
+        <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+          }}
+        >
           รายชื่อนิสิตในที่ปรึกษา
-        </h3>
+        </Typography>
       </div>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
@@ -185,7 +184,6 @@ export default function DataStu() {
               />
             ))}
           </AntTabs>
-
           <TabPanel value={value} index={value}>
             <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
               <Table sx={{ width: "100%" }} aria-label="simple table">

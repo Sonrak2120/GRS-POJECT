@@ -31,8 +31,7 @@ const Table_custom = styled("Table")(({ theme }) => ({
     width: "100%",
   },
   [theme.breakpoints.up("xl")]: {
-    width: "80%",
-    marginLeft: "30px",
+    width: "100%",
   },
 }));
 
@@ -113,7 +112,7 @@ export default function CollapsibleTable() {
     return (
       <React.Fragment>
         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-          <TableCell sx={{ width: "50px" }}>
+          <TableCell>
             <IconButton
               aria-label="expand row2"
               size="small"
@@ -214,124 +213,131 @@ export default function CollapsibleTable() {
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Typography variant="h6" gutterBottom component="div">
-                  ประวัติการตรวจสอบ
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center">รหัสนิสิต</TableCell>
-                      <TableCell>ชื่อ</TableCell>
-                      <TableCell>นามสกุล</TableCell>
-                      <TableCell align="center">สถานะ</TableCell>
-                      <TableCell align="center">วัน/เวลา ที่ตรวจสอบ</TableCell>
-                      <TableCell align="center">อาจารย์ที่ปรึกษา</TableCell>
-                      <TableCell align="center">Action</TableCell>
-                    </TableRow>
-                  </TableHead>
+              <Typography variant="h6" gutterBottom component="div">
+                ประวัติการตรวจสอบ
+              </Typography>
+              <Table aria-label="purchases">
+                <TableHead>
+                  <TableCell />
+                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                    รหัสนิสิต
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>ชื่อ</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>นามสกุล</TableCell>
+                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                    สถานะ
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                    วัน/เวลา ที่ตรวจสอบ
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                    อาจารย์ที่ปรึกษา
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                    Action
+                  </TableCell>
+                </TableHead>
 
-                  <TableBody>
-                    {group.map((row, index) => (
-                      <TableRow key={index}>
-                        <TableCell>{row.std_id}</TableCell>
-                        <TableCell align="left">{row.name}</TableCell>
-                        <TableCell align="left">{row.surname}</TableCell>
-                        <TableCell align="center">
-                          {/* {row.status} */}
-                          {console.log("row", row)}
-                          <div style={{ display: "flex" }}>
-                            {(() => {
-                              if (row.status === "") {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "green",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>รอการตรวจสอบ</p>
-                                  </div>
-                                );
-                              } else if (row.status === "CHECK") {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "blue",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>รอการตรวจสอบ</p>
-                                  </div>
-                                );
-                              } else if (row.status === "NOT PASS") {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "red",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>ยังไม่ผ่าน</p>
-                                  </div>
-                                );
-                              } else {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "green",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>ตรวจสอบผ่านแล้ว</p>
-                                  </div>
-                                );
-                              }
-                            })()}
-                          </div>
-                        </TableCell>
-                        <TableCell align="center">
-                          {row.teacher_name} {row.teacher_surname}
-                        </TableCell>
-                        <TableCell align="center">
-                          {row.check_date}
-                          {"-"}
-                          {row.check_time}
-                        </TableCell>
-                        <TableCell align="center">
-                          <HistoryButton
-                            row2={inx}
-                            rows2={rows2}
-                            row={row}
-                            setRows2={setRows2}
-                            stdId={stdId}
-                            index={index}
-                            data={row}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Box>
+                <TableBody>
+                  {group.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell />
+                      <TableCell align="center">{row.std_id}</TableCell>
+                      <TableCell align="left">{row.name}</TableCell>
+                      <TableCell align="left">{row.surname}</TableCell>
+                      <TableCell align="center">
+                        {console.log("row", row)}
+                        <div style={{ display: "flex" }}>
+                          {(() => {
+                            if (row.status === "") {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "green",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>รอการตรวจสอบ</p>
+                                </div>
+                              );
+                            } else if (row.status === "CHECK") {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "blue",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>รอการตรวจสอบ</p>
+                                </div>
+                              );
+                            } else if (row.status === "NOT PASS") {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>ยังไม่ผ่าน</p>
+                                </div>
+                              );
+                            } else {
+                              return (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: "green",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>ตรวจสอบผ่านแล้ว</p>
+                                </div>
+                              );
+                            }
+                          })()}
+                        </div>
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.teacher_name} {row.teacher_surname}
+                      </TableCell>
+                      <TableCell align="center">
+                        {row.check_date}
+                        {"-"}
+                        {row.check_time}
+                      </TableCell>
+                      <TableCell align="center">
+                        <HistoryButton
+                          row2={inx}
+                          rows2={rows2}
+                          row={row}
+                          setRows2={setRows2}
+                          stdId={stdId}
+                          index={index}
+                          data={row}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </Collapse>
           </TableCell>
         </TableRow>
@@ -343,10 +349,27 @@ export default function CollapsibleTable() {
     return (
       <div>
         <Progess load={loading}></Progess>
-        <h5>รายชื่อนิสิตในที่ปรึกษา</h5>
+        {/* <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+          }}
+        >
+          รายชื่อนิสิตในที่ปรึกษา
+        </Typography> */}
         <Box>
           <Box sx={{ bgcolor: "#fff", borderRadius: "15px" }}>
-            <TableContainer component={Paper} sx={{ mb: "16px" }}>
+            <TableContainer
+              sx={{
+                mb: "16px",
+                alignItems: "center",
+                justifyContent: "center",
+                m: "aotu",
+                display: "flex",
+              }}
+            >
               <Table_custom aria-label="collapsible table">
                 <TableHead>
                   <TableRow>
@@ -395,7 +418,7 @@ export default function CollapsibleTable() {
               </Table_custom>
             </TableContainer>
 
-            <Box sx={{ p: 3 }} />
+            {/* <Box sx={{ p: 3 }} /> */}
           </Box>
         </Box>
       </div>
