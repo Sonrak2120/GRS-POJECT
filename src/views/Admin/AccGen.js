@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 import axios from "axios";
 import AddCouse from "./Button/AddCouse";
@@ -77,9 +77,18 @@ export default function AccGen() {
           marginBottom: "20px",
         }}
       >
-        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>รายวิชาศึกษาทั่วไป</h3>
+        <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+          }}
+        >
+          รายวิชาศึกษาทั่วไป
+        </Typography>
         <Button onClick={onDownload4} variant="contained" color="primary">
-          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มคู่มือการศึกษาทั่วไป
+          ดาวน์โหลด ตัวอย่าง excel เพื่อเพิ่มคู่มือการศึกษาทั่วไป
         </Button>
       </div>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>

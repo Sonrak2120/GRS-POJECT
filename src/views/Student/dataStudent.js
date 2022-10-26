@@ -31,7 +31,7 @@ const MenuitemStudent = [
     href: "/student/checkcouse",
   },
   {
-    title: "ตรวจสอบแผนรายวิชา",
+    title: "ตรวจสอบรายวิชา",
     icon: FormatListNumberedIcon,
     href: "/student/checkplan",
   },

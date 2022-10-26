@@ -11,6 +11,7 @@ import EditbuttonOfficer from "./Button/EditbuttonOfficer";
 import OfficerAddPage from "./Button/OfficerAddPage";
 import AddPage from "./AddPage";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
+import { Typography } from "@mui/material";
 
 import axios from "axios";
 
@@ -44,7 +45,17 @@ export default function AccOff() {
   return (
     <div>
       <Progess load={loading} />
-      <h3 style={{ marginBottom: "20px" }}>บัญชีผู้ใช้ของเจ้าหน้าที่</h3>
+      <Typography
+        variant="h3"
+        style={{
+          margin: "auto 0",
+          flexGrow: "1",
+          fontWeight: 500,
+          marginBottom: "20px",
+        }}
+      >
+        บัญชีผู้ใช้ของเจ้าหน้าที่
+      </Typography>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

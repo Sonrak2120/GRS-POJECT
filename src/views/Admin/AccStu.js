@@ -227,11 +227,11 @@ const EnhancedTableToolbar = (props) => {
       </Typography>
       <Button
         onClick={onDownload3}
-        sx={{ width: "20%", height: "20%" }}
+        sx={{ width: "25%", height: "20%" }}
         variant="contained"
         color="primary"
       >
-        ดาวน์โหลด ตัวอย่างเพื่อเพิ่มรายชื่อนิสิต
+        ดาวน์โหลด ตัวอย่าง excel เพื่อเพิ่มรายชื่อนิสิต
       </Button>
     </Toolbar>
   );

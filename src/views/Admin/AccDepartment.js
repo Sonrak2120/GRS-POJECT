@@ -12,7 +12,7 @@ import AddDepartment from "./Button/AddDepartment";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import EditButtonDepart from "./Button/EditButtonDepart";
 import AddFullDepart from "./Button/AddFullDepart";
-import { Stack, Button } from "@mui/material";
+import { Stack, Button, Typography } from "@mui/material";
 import DropFileDepart from "../../uplaod/drop-file-input/DropFileDepart";
 
 export default function AccDepartment() {
@@ -75,9 +75,18 @@ export default function AccDepartment() {
           marginBottom: "20px",
         }}
       >
-        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>สาขาวิชา</h3>
+        <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+          }}
+        >
+          สาขาวิชา
+        </Typography>
         <Button onClick={onDownload5} variant="contained" color="primary">
-          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มสาขาวิชา
+          ดาวน์โหลด ตัวอย่าง excel เพื่อเพิ่มสาขาวิชา
         </Button>
       </div>
 

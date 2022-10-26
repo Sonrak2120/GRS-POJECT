@@ -122,85 +122,15 @@ export default function CollapsibleTable() {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell>{row2.std_id}</TableCell>
-          <TableCell align="left">{row2.name}</TableCell>
-          <TableCell align="left">{row2.surname}</TableCell>
+          <TableCell>{row2[0].std_id}</TableCell>
+          <TableCell align="left">{row2[0].name}</TableCell>
+          <TableCell align="left">{row2[0].surname}</TableCell>
 
           <TableCell align="center">
-            <div style={{ display: "flex" }}>
-              {(() => {
-                if (row2.status === "") {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        color: "green",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        margin: "auto",
-                      }}
-                    >
-                      <p>รอการตรวจสอบ</p>
-                    </div>
-                  );
-                } else if (row2.status === "CHECK") {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        color: "blue",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        margin: "auto",
-                      }}
-                    >
-                      <p>รอการตรวจสอบ</p>
-                    </div>
-                  );
-                } else if (row2.status === "NOT PASS") {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        color: "red",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        margin: "auto",
-                      }}
-                    >
-                      <p>ยังไม่ผ่าน</p>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        color: "green",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        margin: "auto",
-                      }}
-                    >
-                      <p>ตรวจสอบผ่านแล้ว</p>
-                    </div>
-                  );
-                }
-              })()}
-            </div>
+            {row2[0].teacher_name} {row2[0].teacher_surname}
           </TableCell>
-          <TableCell align="center">
-            {row2.teacher_name} {row2.teacher_surname}
-          </TableCell>
-          <TableCell align="center">
-            {row2.sent_date}
-            {"-"}
-            {row2.sent_time}
-          </TableCell>
+
+          {console.log("first++++", row2)}
           <TableCell align="center">
             <div
               style={{
@@ -213,7 +143,7 @@ export default function CollapsibleTable() {
             </div>
           </TableCell>
         </TableRow>
-        <TableRow>
+        {/* <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
@@ -239,75 +169,7 @@ export default function CollapsibleTable() {
                         <TableCell>{row.std_id}</TableCell>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.surname}</TableCell>
-                        <TableCell align="center">
-                          {/* {row.status} */}
-                          {console.log("row", row)}
-                          <div style={{ display: "flex" }}>
-                            {(() => {
-                              if (row.status === "") {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "green",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>รอการตรวจสอบ</p>
-                                  </div>
-                                );
-                              } else if (row.status === "CHECK") {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "blue",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>รอการตรวจสอบ</p>
-                                  </div>
-                                );
-                              } else if (row.status === "NOT PASS") {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "red",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>ยังไม่ผ่าน</p>
-                                  </div>
-                                );
-                              } else {
-                                return (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      color: "green",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      textAlign: "center",
-                                      margin: "auto",
-                                    }}
-                                  >
-                                    <p>ตรวจสอบผ่านแล้ว</p>
-                                  </div>
-                                );
-                              }
-                            })()}
-                          </div>
-                        </TableCell>
+
                         <TableCell align="center">
                           {row.teacher_name} {row.teacher_surname}
                         </TableCell>
@@ -334,11 +196,11 @@ export default function CollapsibleTable() {
               </Box>
             </Collapse>
           </TableCell>
-        </TableRow>
+        </TableRow> */}
       </React.Fragment>
     );
   }
-  // console.log("head", head.toString());
+  console.log("head", rows2);
   if (head) {
     return (
       <div>
@@ -363,24 +225,14 @@ export default function CollapsibleTable() {
                     >
                       นามสกุล
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: "bold", fontSize: "16px" }}
-                      align="center"
-                    >
-                      สถานะ
-                    </TableCell>
+
                     <TableCell
                       sx={{ fontWeight: "bold", fontSize: "16px" }}
                       align="center"
                     >
                       อาจารย์ที่ปรึกษา
                     </TableCell>
-                    <TableCell
-                      sx={{ fontWeight: "bold", fontSize: "16px" }}
-                      align="center"
-                    >
-                      วัน/เวลา
-                    </TableCell>
+
                     <TableCell
                       sx={{ fontWeight: "bold", fontSize: "16px" }}
                       align="center"

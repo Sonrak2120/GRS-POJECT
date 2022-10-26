@@ -20,6 +20,7 @@ import axios from "axios";
 import { Grid, styled } from "@mui/material";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import HeadDataStudent from "../Student/HeadDataStudent";
+import Head from "./Head";
 
 const Typo_custom = styled("Typography")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
@@ -32,6 +33,7 @@ const Typo_custom = styled("Typography")(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
     letterSpacing: "-0.06px",
+    fontFamily: "'Prompt', sans-serif;",
   },
   [theme.breakpoints.up("xl")]: {
     marginBottom: "30px",
@@ -42,6 +44,7 @@ const Typo_custom = styled("Typography")(({ theme }) => ({
     fontWeight: 500,
     fontSize: 30,
     letterSpacing: "-0.06px",
+    fontFamily: "'Prompt', sans-serif;",
   },
 }));
 
@@ -75,6 +78,7 @@ export default function CollapsibleTable() {
   const [groups, setgrop] = React.useState([]);
   const [name, setName] = React.useState([]);
   const [num, setNum] = React.useState([]);
+  const [count, setcount] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   useEffect(() => {
     const token = sessionStorage.getItem("token");
@@ -99,6 +103,28 @@ export default function CollapsibleTable() {
     };
     api_();
   }, []);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    const api_ = async () => {
+      let headersList = {
+        Authorization: `Bearer ${token}`,
+        Accept: "*/*",
+      };
+
+      let reqOptions = {
+        url: "http://localhost:5000/get-require-number",
+        method: "GET",
+        headers: headersList,
+      };
+
+      let response = await axios.request(reqOptions);
+      setcount(response.data.num);
+    };
+    api_();
+  }, []);
+  console.log("first--------", count);
+
   function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(true);
@@ -238,7 +264,17 @@ export default function CollapsibleTable() {
     return (
       <>
         <Card>
-          <HeadDataStudent />
+          {(() => {
+            if (count === 0) {
+              console.log(count);
+              return <Head />;
+            } else {
+              console.log(count);
+              return <HeadDataStudent />;
+            }
+          })()}
+          {/* <HeadDataStudent />
+          {console.log("Head", Head)} */}
         </Card>
         <Box sx={{ mt: "16px" }}>
           <TableContainer component={Paper}>

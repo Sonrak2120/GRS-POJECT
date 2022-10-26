@@ -427,7 +427,7 @@ export default function CollapsibleTable() {
       </React.Fragment>
     );
   }
-
+  console.log(groups.length);
   if (groups.length > 0) {
     return (
       <div>
@@ -521,5 +521,5 @@ export default function CollapsibleTable() {
       </div>
     );
   }
-  return <></>;
+  return <>5555</>;
 }

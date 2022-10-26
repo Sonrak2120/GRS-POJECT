@@ -11,7 +11,7 @@ import Deletebutton from "./Button/Deletebutton";
 import AddPage from "./AddPage";
 import axios from "axios";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import DropFileTeacher from "../../uplaod/drop-file-input/DropFileTeacher";
 
 function createData(name, lastname, id) {
@@ -45,7 +45,17 @@ export default function AccT() {
   return (
     <div>
       <Progess load={loading} />
-      <h3 style={{ marginBottom: "20px" }}>บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา</h3>
+      <Typography
+        variant="h3"
+        style={{
+          margin: "auto 0",
+          flexGrow: "1",
+          fontWeight: 500,
+          marginBottom: "20px",
+        }}
+      >
+        บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา
+      </Typography>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

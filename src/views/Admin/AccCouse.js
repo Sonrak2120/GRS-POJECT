@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteCouseButton from "./Button/DeleteCouseButton";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 import axios from "axios";
 import AddCouse from "./Button/AddCouse";
@@ -76,9 +76,18 @@ export default function AccCouse() {
           marginBottom: "20px",
         }}
       >
-        <h3 style={{ margin: "auto 0", flexGrow: "1" }}>หลักสูตรการศึกษา</h3>
+        <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+          }}
+        >
+          หลักสูตรการศึกษา
+        </Typography>
         <Button onClick={onDownload2} variant="contained" color="primary">
-          ดาวน์โหลด ตัวอย่างเพื่อเพิ่มหลักสูตร
+          ดาวน์โหลด ตัวอย่าง excel เพื่อเพิ่มหลักสูตร
         </Button>
       </div>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
