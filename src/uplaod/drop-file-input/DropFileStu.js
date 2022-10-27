@@ -104,7 +104,7 @@ const DropFileStu = (props) => {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        อัปโหลดไฟล์สาขาวิชา
+        อัปโหลดไฟล์รายชื่อนิสิต
       </Button>
       <Dialog
         // maxWidth="30"

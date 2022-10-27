@@ -21,6 +21,8 @@ import Checkbox from "@mui/material/Checkbox";
 import Sentbutton from "../Student/button/Sentbutton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+import "../../App.css";
+
 const Typo_custom = styled("Typography")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
     marginBottom: "20px",
@@ -334,5 +336,11 @@ export default function CollapsibleTable({
       </TableContainer>
     );
   }
-  return <></>;
+  return (
+    <div className="tables">
+      <Typography color="#0000008f" fontSize={30}>
+        กำลังโหลดข้อมูล
+      </Typography>
+    </div>
+  );
 }

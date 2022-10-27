@@ -54,7 +54,7 @@ export default function AlertDialog({ setLoading }) {
   // };
 
   const handleSubmits = (event) => {
-    // setLoading(true);
+    setLoading(true);
     setOpen(false);
     var data = {
       teacher_id: teacherID,
@@ -74,11 +74,11 @@ export default function AlertDialog({ setLoading }) {
       .then((res) => res.json())
       .then((result) => {
         if (result["message"] === "success") {
-          // setLoading(false);
+          setLoading(false);
           alert("กรุณาแจ้งผู้ใช้ให้ยืนยันตัวตนที่หน้าเข้าสู่ระบบ");
           window.location.reload("Refresh");
         } else {
-          // setLoading(false);
+          setLoading(false);
           alert("ผิดพลาด");
         }
       });

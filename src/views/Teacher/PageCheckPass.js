@@ -17,6 +17,8 @@ import { styled } from "@mui/material";
 import Progess from "../../layouts/FullLayout/Sidebar/Progess";
 import { useState } from "react";
 
+import "../../App.css";
+
 const Typo_custom = styled("Typography")(({ theme }) => ({
   [theme.breakpoints.down("xl")]: {
     marginBottom: "20px",
@@ -283,5 +285,13 @@ export default function CollapsibleTable({
       </TableContainer>
     );
   }
-  return <></>;
+  return (
+    <>
+      <div className="tables">
+        <Typography color="#0000008f" fontSize={30}>
+          เจ้าหน้าที่ยังไม่อัปโหลดข้อมูล
+        </Typography>
+      </div>
+    </>
+  );
 }

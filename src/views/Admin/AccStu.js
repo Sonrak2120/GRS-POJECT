@@ -227,7 +227,7 @@ const EnhancedTableToolbar = (props) => {
       </Typography>
       <Button
         onClick={onDownload3}
-        sx={{ width: "25%", height: "20%" }}
+        sx={{ width: "30%", height: "20%" }}
         variant="contained"
         color="primary"
       >

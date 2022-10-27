@@ -122,7 +122,12 @@ export default function EditbuttonOfficer({ row, rows, setRows, setLoading }) {
             {"แก้ไขข้อมูลเจ้าหน้าที่"}
           </DialogTitle>
           <DialogContent>
-            <Stack spacing={2} justifyContent="center" alignItems={"center"}>
+            <Stack
+              spacing={2}
+              justifyContent="center"
+              alignItems={"center"}
+              sx={{ mt: 2 }}
+            >
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={{ xs: 1, sm: 2, md: 2 }}
