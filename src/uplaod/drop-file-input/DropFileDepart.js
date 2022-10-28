@@ -45,7 +45,7 @@ const DropFileDepart = (props) => {
       ];
       setFileList(updatedList);
       props.onFileChange(updatedList);
-      props.setLoading(updatedList);
+      // props.setLoading(updatedList);
       reader.readAsDataURL(file);
     }
   };
@@ -55,7 +55,7 @@ const DropFileDepart = (props) => {
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
     props.onFileChange(updatedList);
-    props.setLoading(updatedList);
+    // props.setLoading(updatedList);
   };
 
   const handledownload = () => {
