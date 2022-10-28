@@ -79,7 +79,7 @@ const App = () => {
       element: <SentToForget />,
     },
     {
-      path: "/forget-password/:userid",
+      path: "/forget-password/:token",
       element: <Forgetpassword />,
     },
     {

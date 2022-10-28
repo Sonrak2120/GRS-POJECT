@@ -126,7 +126,7 @@ export default function Forgetpassword() {
     setOpen2(false);
   };
 
-  const { userid } = useParams();
+  const { token } = useParams();
   const [user_name, setUser_name] = useState();
   const [user_surname, setUser_surname] = useState();
   const [err, setErr] = useState(false);
@@ -139,7 +139,7 @@ export default function Forgetpassword() {
       };
 
       let reqOptions = {
-        url: `http://localhost:5000/get-info-forget-password-user/${userid}`,
+        url: `http://localhost:5000/get-info-forget-password-user/${token}`,
         method: "GET",
         headers: headersList,
       };
@@ -151,6 +151,9 @@ export default function Forgetpassword() {
         setRole(response.data.role);
 
         console.log(response);
+        if (response.data.message === "not found") {
+          setErr(true);
+        }
       } catch {
         alert("error");
       }
@@ -171,7 +174,7 @@ export default function Forgetpassword() {
         };
 
         let bodyContent = JSON.stringify({
-          userid: `${userid}`,
+          token: `${token}`,
           name: name,
           surname: surname,
           email: email,
