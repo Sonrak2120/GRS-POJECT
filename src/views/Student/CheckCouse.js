@@ -193,11 +193,18 @@ export default function CollapsibleTable() {
                                 {item.credit}
                               </TableCell>
                               <TableCell align="center">
-                                {item.grade}
-                                {console.log(
-                                  "item.grade",
-                                  item.grade.search("N")
-                                )}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: item.grade === "N" && "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>{item.grade}</p>
+                                </div>
                               </TableCell>
                               <TableCell align="center">
                                 {item.class_grade}
@@ -249,28 +256,18 @@ export default function CollapsibleTable() {
                                 {item.credit}
                               </TableCell>
                               <TableCell align="center">
-                                {item.grade}
-
-                                {/* {(() => {
-                                  if (item.grade === "N") {
-                                    return (
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          color: "red",
-                                          alignItems: "center",
-                                          justifyContent: "center",
-                                          textAlign: "center",
-                                          margin: "auto",
-                                        }}
-                                      >
-                                        <p>{item.grade}</p>
-                                      </div>
-                                    );
-                                  } else {
-                                    return <p>{item.grade}</p>;
-                                  }
-                                })()} */}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: item.grade === "N" && "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>{item.grade}</p>
+                                </div>
                               </TableCell>
                               <TableCell align="center">
                                 {item.class_grade}
