@@ -53,7 +53,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
+export default function CheckActtiveButton({ row2, rows2, setRows2,depart_inx }) {
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
   const token = sessionStorage.getItem("token");
@@ -72,6 +72,7 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
       comment: comment,
       name: stdname,
     };
+    
 
     let headersList = {
       Accept: "*/*",
@@ -92,7 +93,7 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
     try {
       let response = await axios.request(reqOptions);
       alert("สำเร็จเเล้ว");
-      console.log(response.data);
+
       window.location.reload("Refresh");
       setOpen(false);
     } catch {
@@ -108,7 +109,7 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  // console.log("first.std_id",row2,"---",rows2)
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -139,6 +140,7 @@ export default function CheckActtiveButton({ row2, rows2, setRows2 }) {
             setStId={setStId}
             setStsurname={setStsurname}
             setStname={setStname}
+            depart_inx={depart_inx}
           />
         </DialogContent>
         <DialogActions>

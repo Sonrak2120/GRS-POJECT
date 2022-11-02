@@ -86,6 +86,7 @@ export default function CollapsibleTable({
   setStId,
   setStname,
   setStsurname,
+  depart_inx
 }) {
   const [rows, setRows] = React.useState([]);
   const [groups, setgrop] = React.useState([]);
@@ -103,7 +104,7 @@ export default function CollapsibleTable({
       };
 
       let bodyContent = {
-        std_id: rows2[0]?.std_in_depart?.[row2]?.head?.std_id,
+        std_id: rows2[depart_inx]?.std_in_depart?.[row2]?.head?.std_id ,
       };
 
       let reqOptions = {
@@ -112,6 +113,7 @@ export default function CollapsibleTable({
         headers: headersList,
         data: bodyContent,
       };
+      
 
       let response = await axios.request(reqOptions);
       const data = response.data.data;
@@ -120,6 +122,7 @@ export default function CollapsibleTable({
       setRows(response.data.data);
       setSubcode(response.data.sub_code);
       setgrop(data);
+
       const temp = [];
       response.data.sub_code.map((item) => temp.push(0));
       setCheck(temp);
@@ -130,6 +133,8 @@ export default function CollapsibleTable({
     api_();
   }, []);
   const count = check.length;
+
+  
 
   function Row(props) {
     const { row, setCheck } = props;
@@ -214,7 +219,19 @@ export default function CollapsibleTable({
                           </TableCell>
                           <TableCell> {item[1]} </TableCell>
                           <TableCell align="center">{item[2]}</TableCell>
-                          <TableCell align="center">{item[3][0][0]}</TableCell>
+                          <TableCell align="center">
+                          <div
+                              style={{
+                                display: "flex",
+                                color: item[3][0][0] === "N" && "red",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                              }}
+                            >
+                              <p>{item[3][0][0]}</p>
+                            </div></TableCell>
                           <TableCell align="center">
                             {item[3][0][1] === "1" ? "ต้น" : "ปลาย"}
                           </TableCell>
@@ -280,7 +297,7 @@ export default function CollapsibleTable({
     );
   }
 
-  if (groups.length > 0 && check.length > 0) {
+  if (groups?.length > 0 && check?.length > 0) {
     return (
       <TableContainer component={Paper}>
         <Progess load={loading}></Progess>

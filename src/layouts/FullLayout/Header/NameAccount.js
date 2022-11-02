@@ -66,7 +66,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname} <p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>ผู้ดูแลระบบ</p>
               </Typography>
             );
           } else {
@@ -85,7 +85,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname} <p style={{backgroundColor:"pink",borderRadius:"20px",color:"black",alignItems:"center",margin:"auto",textAlign:"center",justifyContent:"center"}}>ผู้ดูแลระบบ</p>
               </Typography>
             );
           }
@@ -106,7 +106,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>เจ้าหน้าที่</p>
               </Typography>
             );
           } else {
@@ -125,7 +125,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>เจ้าหน้าที่</p>
               </Typography>
             );
           }
@@ -146,7 +146,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>อาจารย์ที่ปรึกษา</p>
               </Typography>
             );
           } else {
@@ -165,7 +165,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname}{name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>อาจารย์ที่ปรึกษา</p>
               </Typography>
             );
           }
@@ -186,7 +186,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}
+                {name} {surname}{name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>นิสิต</p>
               </Typography>
             );
           } else {
@@ -206,7 +206,7 @@ function NameAccount() {
                   // backgroundColor: "pink",
                 }}
               >
-                {name} {surname}
+                {name} {surname} {name} {surname}{name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>นิสิต</p>
               </Typography>
             );
           }

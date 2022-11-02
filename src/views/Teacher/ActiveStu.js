@@ -258,6 +258,8 @@ export default function CollapsibleTable() {
                         row2={inx}
                         rows2={rows2}
                         setRows2={setRows2}
+                        depart_inx={value}
+
                       />
                     </div>
                   );
@@ -267,6 +269,8 @@ export default function CollapsibleTable() {
                       row2={inx}
                       rows2={rows2}
                       setRows2={setRows2}
+                      depart_inx={value}
+
                     />
                   );
                 } else if (row2.status === "NOT PASS") {
@@ -290,7 +294,7 @@ export default function CollapsibleTable() {
                       rows2={rows2}
                       setRows2={setRows2}
                     >
-                      ตรวจสอบแล้ว
+                      ERROR
                     </Button>
                   );
                 }
@@ -526,6 +530,7 @@ export default function CollapsibleTable() {
                       </TableHead>
                       <TableBody>
                         <Row row2={item?.head} inx={inx} group={item.group} />
+                        {console.log("item?.head",item)}
                       </TableBody>
                     </Table_custom>
                   </TableContainer>

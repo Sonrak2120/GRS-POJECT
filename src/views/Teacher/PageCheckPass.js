@@ -87,7 +87,7 @@ export default function CollapsibleTable({
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     const api_ = async () => {
-      console.log(rows[row][0]);
+      // console.log(rows[row][0]);
       let headersList = {
         Authorization: `Bearer ${token}`,
 
@@ -180,7 +180,19 @@ export default function CollapsibleTable({
                               <TableCell align="center">
                                 {item.credit}
                               </TableCell>
-                              <TableCell align="center">{item.grade}</TableCell>
+                              <TableCell align="center">
+                              <div
+                              style={{
+                                display: "flex",
+                                color: item.grade === "N" && "red",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                              }}
+                            >
+                              <p>{item.grade}</p>
+                            </div></TableCell>
                               <TableCell align="center">
                                 {item.class_grade}
                               </TableCell>
