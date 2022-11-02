@@ -38,6 +38,7 @@ const FullLayoutAdmin = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
   return (
     <MainWrapper>
+
       <Header
         sx={{
           paddingLeft: isSidebarOpen && lgUp ? "265px" : "",
@@ -52,6 +53,7 @@ const FullLayoutAdmin = () => {
         isMobileSidebarOpen={isMobileSidebarOpen}
         onSidebarClose={() => setMobileSidebarOpen(false)}
       />
+      
 
       <PageWrapper>
         <Container
@@ -67,7 +69,9 @@ const FullLayoutAdmin = () => {
           <Footer />
         </Container>
       </PageWrapper>
+      
     </MainWrapper>
+    
   );
 };
 

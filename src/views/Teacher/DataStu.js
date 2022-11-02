@@ -163,6 +163,7 @@ export default function DataStu() {
             margin: "auto 0",
             flexGrow: "1",
             fontWeight: 500,
+            marginTop :"20px"
           }}
         >
           รายชื่อนิสิตในที่ปรึกษา

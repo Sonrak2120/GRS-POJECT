@@ -83,6 +83,7 @@ export default function AccGen() {
             margin: "auto 0",
             flexGrow: "1",
             fontWeight: 500,
+            marginTop :"20px"
           }}
         >
           รายวิชาศึกษาทั่วไป
@@ -207,20 +208,24 @@ export default function AccGen() {
                   {" น."}
                 </TableCell>
                 <TableCell
-                  align="center"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+
+                > <div
+                style={{
+                  display: "flex",
+                  color: "green",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  margin: "auto",
+                }}
+              >
                   <EditButtonGen
                     row={inx}
                     rows={rows}
                     setRows={setRows}
                     setLoading={setLoading}
                   />
-                  <DeleteGen row={inx} rows={rows} setRows={setRows} />
+                  <DeleteGen row={inx} rows={rows} setRows={setRows} /></div>
                 </TableCell>
               </TableRow>
             ))}

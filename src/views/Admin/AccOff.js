@@ -52,6 +52,7 @@ export default function AccOff() {
           flexGrow: "1",
           fontWeight: 500,
           marginBottom: "20px",
+          marginTop: "20px",
         }}
       >
         บัญชีผู้ใช้ของเจ้าหน้าที่
@@ -171,8 +172,11 @@ export default function AccOff() {
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "center",
+                      color: "green",
                       alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      margin: "auto",
                     }}
                   >
                     <EditbuttonOfficer

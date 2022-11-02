@@ -82,6 +82,7 @@ export default function AccCouse() {
             margin: "auto 0",
             flexGrow: "1",
             fontWeight: 500,
+            marginTop :"20px"
           }}
         >
           หลักสูตรการศึกษา
@@ -262,21 +263,23 @@ export default function AccCouse() {
                   {" น."}
                 </TableCell>
                 <TableCell
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  align="center"
-                  sx={{ width: "200px" }}
-                >
+                ><div
+                style={{
+                  display: "flex",
+                  color: "green",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  margin: "auto",
+                }}
+              >
                   <EditButtonCouse
                     row={inx}
                     rows={rows}
                     setRows={setRows}
                     setLoading={setLoading}
                   />
-                  <DeleteCouseButton row={inx} rows={rows} setRows={setRows} />
+                  <DeleteCouseButton row={inx} rows={rows} setRows={setRows} /></div>
                 </TableCell>
               </TableRow>
             ))}

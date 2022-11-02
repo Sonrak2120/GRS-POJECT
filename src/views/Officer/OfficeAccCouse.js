@@ -84,6 +84,7 @@ export default function OfficeAccCouse() {
             margin: "auto 0",
             flexGrow: "1",
             fontWeight: 500,
+            marginTop: "20px"
           }}
         >
           หลักสูตรการศึกษา
@@ -264,21 +265,25 @@ export default function OfficeAccCouse() {
                   {" น."}
                 </TableCell>
                 <TableCell
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  align="center"
-                  sx={{ width: "200px" }}
                 >
-                  <OfficeEditButtonCouse
-                    row={inx}
-                    rows={rows}
-                    setRows={setRows}
-                    setLoading={setLoading}
-                  />
-                  <DeleteCouseButton row={inx} rows={rows} setRows={setRows} />
+                  <div
+                    style={{
+                      display: "flex",
+                      color: "red",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      margin: "auto",
+                    }}
+                  >
+
+                    <OfficeEditButtonCouse
+                      row={inx}
+                      rows={rows}
+                      setRows={setRows}
+                      setLoading={setLoading}
+                    />
+                    <DeleteCouseButton row={inx} rows={rows} setRows={setRows} /></div>
                 </TableCell>
               </TableRow>
             ))}

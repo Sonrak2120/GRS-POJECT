@@ -329,7 +329,7 @@ export default function OfficeAccStu() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%",marginTop:"20px" }}>
       <Progess load={loading} />
       {console.log("loading", loading)}
       <Paper sx={{ width: "100%", mb: 2 }}>

@@ -329,7 +329,7 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%",marginTop:"20px" }}>
       <Progess load={loading} />
       {console.log("loading", loading)}
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -526,9 +526,16 @@ export default function EnhancedTable() {
                         </div>
                       </TableCell>
                       <TableCell
-                        align="center"
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
+                      ><div
+                      style={{
+                        display: "flex",
+                        color: "green",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        margin: "auto",
+                      }}
+                    >
                         <EditButtonStudent
                           row={index}
                           rows={rows}
@@ -539,7 +546,7 @@ export default function EnhancedTable() {
                           row={index}
                           rows={rows}
                           setRows={setRows}
-                        />
+                        /></div>
                       </TableCell>
                     </TableRow>
                   );

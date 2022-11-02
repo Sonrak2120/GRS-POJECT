@@ -52,12 +52,13 @@ function NameAccount() {
         if (role === "admin") {
           if (lgUp) {
             return (
+              <div>
               <Typography
                 style={{
                   color: "#EEEEEE",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -66,8 +67,10 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname} <p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>ผู้ดูแลระบบ</p>
+                {name} {surname} 
               </Typography>
+              {/* <Typography style={{backgroundColor:"pink",borderRadius:"20px",color:"black",alignItems:"center",textAlign:"center",justifyContent:"center"}}>ผู้ดูแลระบบ</Typography> */}
+              </div>
             );
           } else {
             return (
@@ -76,7 +79,7 @@ function NameAccount() {
                   color: "white",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -85,7 +88,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname} <p style={{backgroundColor:"pink",borderRadius:"20px",color:"black",alignItems:"center",margin:"auto",textAlign:"center",justifyContent:"center"}}>ผู้ดูแลระบบ</p>
+                {name} {surname} 
               </Typography>
             );
           }
@@ -97,7 +100,7 @@ function NameAccount() {
                   color: "#EEEEEE",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -106,7 +109,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>เจ้าหน้าที่</p>
+                {name} {surname}
               </Typography>
             );
           } else {
@@ -116,7 +119,7 @@ function NameAccount() {
                   color: "black",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -125,7 +128,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>เจ้าหน้าที่</p>
+                {name} {surname}
               </Typography>
             );
           }
@@ -137,7 +140,7 @@ function NameAccount() {
                   color: "#EEEEEE",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -146,7 +149,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>อาจารย์ที่ปรึกษา</p>
+                {name} {surname}
               </Typography>
             );
           } else {
@@ -156,7 +159,7 @@ function NameAccount() {
                   color: "black",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -165,7 +168,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}{name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>อาจารย์ที่ปรึกษา</p>
+                {name} {surname}
               </Typography>
             );
           }
@@ -177,7 +180,7 @@ function NameAccount() {
                   color: "#EEEEEE",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "80%",
                   textOverflow: "ellipsis",
@@ -186,7 +189,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname}{name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>นิสิต</p>
+                {name} {surname}
               </Typography>
             );
           } else {
@@ -196,7 +199,7 @@ function NameAccount() {
                   color: "black",
                   fontSize: "20px",
                   margin: "10px",
-                  marginLeft: "5px",
+                  marginLeft: "15px",
                   marginRight: "30px",
                   width: "100%",
                   textOverflow: "ellipsis",
@@ -206,7 +209,7 @@ function NameAccount() {
                   // backgroundColor: "pink",
                 }}
               >
-                {name} {surname} {name} {surname}{name} {surname}<p style={{backgroundColor:"pink",borderRadius:"20px",color:"black"}}>นิสิต</p>
+                {name} {surname} 
               </Typography>
             );
           }

@@ -76,7 +76,7 @@ export default function AccDepartmentOfficer() {
           marginBottom: "20px",
         }}
       >
-        <h2 style={{ margin: "auto" }}>สาขาวิชา</h2>
+        <h2 style={{ margin: "auto",marginTop:"20px" }}>สาขาวิชา</h2>
       </div>
 
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>

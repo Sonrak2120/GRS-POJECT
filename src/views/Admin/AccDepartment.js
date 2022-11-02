@@ -81,6 +81,7 @@ export default function AccDepartment() {
             margin: "auto 0",
             flexGrow: "1",
             fontWeight: 500,
+            marginTop :"20px"
           }}
         >
           สาขาวิชา
