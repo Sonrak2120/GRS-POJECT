@@ -77,7 +77,7 @@ export default function Active() {
             component="img"
             src={logo}
             sx={{ maxWidth: "200px" }}
-            mt="5rem!important"
+            mt="2rem!important"
             mb="2rem!important"
           />
           <Typography variant="h4" color={"white"}>

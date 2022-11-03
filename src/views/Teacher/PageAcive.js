@@ -86,7 +86,7 @@ export default function CollapsibleTable({
   setStId,
   setStname,
   setStsurname,
-  depart_inx
+  depart_inx,
 }) {
   const [rows, setRows] = React.useState([]);
   const [groups, setgrop] = React.useState([]);
@@ -104,7 +104,7 @@ export default function CollapsibleTable({
       };
 
       let bodyContent = {
-        std_id: rows2[depart_inx]?.std_in_depart?.[row2]?.head?.std_id ,
+        std_id: rows2[depart_inx]?.std_in_depart?.[row2]?.head?.std_id,
       };
 
       let reqOptions = {
@@ -113,7 +113,6 @@ export default function CollapsibleTable({
         headers: headersList,
         data: bodyContent,
       };
-      
 
       let response = await axios.request(reqOptions);
       const data = response.data.data;
@@ -133,8 +132,6 @@ export default function CollapsibleTable({
     api_();
   }, []);
   const count = check.length;
-
-  
 
   function Row(props) {
     const { row, setCheck } = props;
@@ -169,6 +166,27 @@ export default function CollapsibleTable({
           <TableCell>{row.group[0]}</TableCell>
           <TableCell align="center">
             {row.group[1]} {"หน่วยกิต"}
+            {(() => {
+              if (row.group[2] === "") {
+                return <></>;
+              } else {
+                return (
+                  <Typography
+                    style={{
+                      // backgroundColor: "#02BC77",
+                      // borderRadius: "20px",
+                      color: "red",
+                      alignItems: "center",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      fontSize: "0.75rem",
+                    }}
+                  >
+                    {"( N = " + row.group[2] + " หน่วยกิต )"}
+                  </Typography>
+                );
+              }
+            })()}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -220,7 +238,7 @@ export default function CollapsibleTable({
                           <TableCell> {item[1]} </TableCell>
                           <TableCell align="center">{item[2]}</TableCell>
                           <TableCell align="center">
-                          <div
+                            <div
                               style={{
                                 display: "flex",
                                 color: item[3][0][0] === "N" && "red",
@@ -231,7 +249,8 @@ export default function CollapsibleTable({
                               }}
                             >
                               <p>{item[3][0][0]}</p>
-                            </div></TableCell>
+                            </div>
+                          </TableCell>
                           <TableCell align="center">
                             {item[3][0][1] === "1" ? "ต้น" : "ปลาย"}
                           </TableCell>

@@ -82,7 +82,7 @@ export default function LoginPage({ SetRole }) {
             component="img"
             src={logo}
             sx={{ maxWidth: "200px" }}
-            mt="7rem!important"
+            mt="5rem!important"
             mb="2rem!important"
           />
           <Typography variant="h4" color={"white"}>

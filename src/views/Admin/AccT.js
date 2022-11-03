@@ -42,21 +42,58 @@ export default function AccT() {
     api_();
   }, []);
 
+  const onDownload5 = () => {
+    fetch("http://localhost:5000/download-add-teacher-example-form", {
+      method: "GET",
+      headers: {
+        "Content-Type": "./example/teacher.xlsx",
+      },
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create blob link to download
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `teacher.xlsx`);
+
+        // Append to html link element page
+        document.body.appendChild(link);
+
+        // Start download
+        link.click();
+
+        // Clean up and remove the link
+        link.parentNode.removeChild(link);
+      });
+  };
+
   return (
     <div>
       <Progess load={loading} />
-      <Typography
-        variant="h3"
+      <div
         style={{
-          margin: "auto 0",
-          flexGrow: "1",
-          fontWeight: 500,
+          display: "flex",
+          alignItems: "center",
           marginBottom: "20px",
-          marginTop :"20px"
         }}
       >
-        บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา
-      </Typography>
+        <Typography
+          variant="h3"
+          style={{
+            margin: "auto 0",
+            flexGrow: "1",
+            fontWeight: 500,
+            marginBottom: "20px",
+            marginTop: "20px",
+          }}
+        >
+          บัญชีผู้ใช้ของอาจารย์ที่ปรึกษา
+        </Typography>
+        <Button onClick={onDownload5} variant="contained" color="primary">
+          ดาวน์โหลด ตัวอย่าง excel เพื่อเพิ่มอาจารย์ที่ปรึกษา
+        </Button>
+      </div>
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table sx={{ width: "100%" }} aria-label="simple table">
           <TableHead>

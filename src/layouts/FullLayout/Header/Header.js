@@ -141,7 +141,6 @@ const Header = (props) => {
           ml: 1,
         }}
       ></Box>
-      
 
       {(() => {
         if (lgUp) {
@@ -152,56 +151,101 @@ const Header = (props) => {
               aria-controls="profile-menu"
               aria-haspopup="true"
               onClick={handleClick4}
-            ><Stack>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Avatar
-                  // src={userimg}
-                  // alt={userimg}
+            >
+              <Stack>
+                <Box
                   sx={{
-                    width: "40px",
-                    height: "40px",
-                    marginRight: "5px",
+                    display: "flex",
+                    alignItems: "center",
                   }}
-                /><Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              ><Stack><NameAccount />
-               {(() => {
-        if (role === "admin") {
-          return (
-            <Typography style={{backgroundColor:"#02BC77",borderRadius:"20px",color:"black",alignItems:"center",textAlign:"center",justifyContent:"center"}}>ผู้ดูแลระบบ</Typography>
-          );
-        } else if (role === "officer") {
-          return (
-            <Typography style={{backgroundColor:"#2f3337",borderRadius:"20px",color:"white",alignItems:"center",textAlign:"center",justifyContent:"center"}}>เจ้าหน้าที่</Typography>
-          );
-        }else if (role === "teacher") {
-          return (
-            <Typography style={{backgroundColor:"#2f3337",borderRadius:"20px",color:"white",alignItems:"center",textAlign:"center",justifyContent:"center"}}>อาจารย์ที่ปรึกษา</Typography>
-          );
-        }else if (role === "student") {
-          return (
-            <Typography style={{backgroundColor:"#2f3337",borderRadius:"20px",color:"white",alignItems:"center",textAlign:"center",justifyContent:"center"}}>นิสิต</Typography>
-          );
-        }else  {
-          return (
-            <></>
-          );
-        }
-      })()}</Stack></Box>
-                
-              </Box>
-              
+                >
+                  <Avatar
+                    // src={userimg}
+                    // alt={userimg}
+                    sx={{
+                      width: "40px",
+                      height: "40px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Stack>
+                      <NameAccount />
+                      {(() => {
+                        if (role === "admin") {
+                          return (
+                            <Typography
+                              style={{
+                                backgroundColor: "#02BC77",
+                                borderRadius: "20px",
+                                color: "black",
+                                alignItems: "center",
+                                textAlign: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              ผู้ดูแลระบบ
+                            </Typography>
+                          );
+                        } else if (role === "officer") {
+                          return (
+                            <Typography
+                              style={{
+                                backgroundColor: "#2f3337",
+                                borderRadius: "20px",
+                                color: "white",
+                                alignItems: "center",
+                                textAlign: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              เจ้าหน้าที่
+                            </Typography>
+                          );
+                        } else if (role === "teacher") {
+                          return (
+                            <Typography
+                              style={{
+                                backgroundColor: "#2f3337",
+                                borderRadius: "20px",
+                                color: "white",
+                                alignItems: "center",
+                                textAlign: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              อาจารย์ที่ปรึกษา
+                            </Typography>
+                          );
+                        } else if (role === "student") {
+                          return (
+                            <Typography
+                              style={{
+                                backgroundColor: "#2f3337",
+                                borderRadius: "20px",
+                                color: "white",
+                                alignItems: "center",
+                                textAlign: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              นิสิต
+                            </Typography>
+                          );
+                        } else {
+                          return <></>;
+                        }
+                      })()}
+                    </Stack>
+                  </Box>
+                </Box>
               </Stack>
             </Button>
-            
           );
         } else {
           return (
@@ -272,10 +316,9 @@ const Header = (props) => {
             }}
           >
             <NameAccount />
-            
           </Box>
         </MenuItem>
-        
+
         <Divider />
         {/* <MenuItem onClick={handleClose4}>
           <ListItemIcon>
@@ -299,16 +342,13 @@ const Header = (props) => {
         </MenuItem>
       </Menu>
     </Toolbar>
-
-    
   );
   if (lgUp) {
     return (
       <div>
-      <AppBar sx={props.sx} elevation={0}>
-        {headerContent}
-      </AppBar>
-      
+        <AppBar sx={props.sx} elevation={0}>
+          {headerContent}
+        </AppBar>
       </div>
     );
   }
@@ -326,7 +366,6 @@ const Header = (props) => {
         }}
       >
         <NameAccount />
-       
       </Paper>
     </AppBar>
   );

@@ -329,7 +329,7 @@ export default function OfficeAccStu() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%",marginTop:"20px" }}>
+    <Box sx={{ width: "100%", marginTop: "20px" }}>
       <Progess load={loading} />
       {console.log("loading", loading)}
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -525,21 +525,29 @@ export default function OfficeAccStu() {
                           })()}
                         </div>
                       </TableCell>
-                      <TableCell
-                        align="center"
-                        style={{ display: "flex", justifyContent: "center" }}
-                      >
-                        <OfficeEditButtonStudent
-                          row={index}
-                          rows={rows}
-                          setRows={setRows}
-                          setLoading={setLoading}
-                        />
-                        <Deletebutton
-                          row={index}
-                          rows={rows}
-                          setRows={setRows}
-                        />
+                      <TableCell>
+                        <div
+                          style={{
+                            display: "flex",
+                            color: "green",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            textAlign: "center",
+                            margin: "auto",
+                          }}
+                        >
+                          <OfficeEditButtonStudent
+                            row={index}
+                            rows={rows}
+                            setRows={setRows}
+                            setLoading={setLoading}
+                          />
+                          <Deletebutton
+                            row={index}
+                            rows={rows}
+                            setRows={setRows}
+                          />
+                        </div>
                       </TableCell>
                     </TableRow>
                   );

@@ -100,7 +100,20 @@ export default function CollapsibleTable() {
                           </TableCell>
                           <TableCell>{item[1]}</TableCell>
                           <TableCell align="right">{item[2]}</TableCell>
-                          <TableCell align="right">{item[3]}</TableCell>
+                          <TableCell align="right">
+                            <div
+                              style={{
+                                display: "flex",
+                                color: item[3] === "N" && "red",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                textAlign: "center",
+                                margin: "auto",
+                              }}
+                            >
+                              <p>{item[3]}</p>
+                            </div>
+                          </TableCell>
                         </TableRow>
                       );
                     })}

@@ -140,6 +140,27 @@ export default function CollapsibleTable({
           <TableCell>{row.group[0]}</TableCell>
           <TableCell align="center">
             {row.group[1]} {"หน่วยกิต"}
+            {(() => {
+              if (row.group[2] === "") {
+                return <></>;
+              } else {
+                return (
+                  <Typography
+                    style={{
+                      // backgroundColor: "#02BC77",
+                      // borderRadius: "20px",
+                      color: "red",
+                      alignItems: "center",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      fontSize: "0.75rem",
+                    }}
+                  >
+                    {"( N = " + row.group[2] + " หน่วยกิต )"}
+                  </Typography>
+                );
+              }
+            })()}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -181,18 +202,19 @@ export default function CollapsibleTable({
                                 {item.credit}
                               </TableCell>
                               <TableCell align="center">
-                              <div
-                              style={{
-                                display: "flex",
-                                color: item.grade === "N" && "red",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                textAlign: "center",
-                                margin: "auto",
-                              }}
-                            >
-                              <p>{item.grade}</p>
-                            </div></TableCell>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    color: item.grade === "N" && "red",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    textAlign: "center",
+                                    margin: "auto",
+                                  }}
+                                >
+                                  <p>{item.grade}</p>
+                                </div>
+                              </TableCell>
                               <TableCell align="center">
                                 {item.class_grade}
                               </TableCell>
