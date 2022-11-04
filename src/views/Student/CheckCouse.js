@@ -319,26 +319,6 @@ export default function CollapsibleTable() {
                   </Typo_custom>
                 </Grid>
               </Grid>
-              {/* <Grid_custom
-                item
-                container
-                // xs={11}
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  width: "80%",
-                }}
-                // direction="column"
-              >
-                <Grid_custom
-                // justifyContent="center"
-                // alignItems="center"
-                // sx={{ position: "absolute" }}
-                >
-                  <Sentbutton setLoading={setLoading} />
-                </Grid_custom>
-              </Grid_custom> */}
             </Grid>
             {rows.map((row, index) => (
               <Table_custom

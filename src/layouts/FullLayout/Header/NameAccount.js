@@ -21,6 +21,7 @@ function NameAccount() {
   const [surname, setSurname] = React.useState([]);
   const [role, setrole] = React.useState([]);
   const [id, setid] = React.useState([]);
+  const [depart, setdepart] = React.useState([]);
 
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
@@ -42,6 +43,7 @@ function NameAccount() {
       setSurname(response.data.surname);
       setrole(response.data.role);
       setid(response.data.user_id);
+      setdepart(response.data.depart_id);
       // console.log(response.data);
     };
     api_();
@@ -53,23 +55,23 @@ function NameAccount() {
           if (lgUp) {
             return (
               <div>
-              <Typography
-                style={{
-                  color: "#EEEEEE",
-                  fontSize: "20px",
-                  margin: "10px",
-                  marginLeft: "15px",
-                  marginRight: "30px",
-                  width: "80%",
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  wordWrap: "break-word",
-                }}
-              >
-                {name} {surname} 
-              </Typography>
-              {/* <Typography style={{backgroundColor:"pink",borderRadius:"20px",color:"black",alignItems:"center",textAlign:"center",justifyContent:"center"}}>ผู้ดูแลระบบ</Typography> */}
+                <Typography
+                  style={{
+                    color: "#EEEEEE",
+                    fontSize: "20px",
+                    margin: "10px",
+                    marginLeft: "15px",
+                    marginRight: "30px",
+                    width: "80%",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    wordWrap: "break-word",
+                  }}
+                >
+                  {name} {surname}
+                </Typography>
+                {/* <Typography style={{backgroundColor:"pink",borderRadius:"20px",color:"black",alignItems:"center",textAlign:"center",justifyContent:"center"}}>ผู้ดูแลระบบ</Typography> */}
               </div>
             );
           } else {
@@ -88,7 +90,7 @@ function NameAccount() {
                   wordWrap: "break-word",
                 }}
               >
-                {name} {surname} 
+                {name} {surname}
               </Typography>
             );
           }
@@ -209,7 +211,7 @@ function NameAccount() {
                   // backgroundColor: "pink",
                 }}
               >
-                {name} {surname} 
+                {name} {surname}
               </Typography>
             );
           }

@@ -20,7 +20,7 @@ import DomainVerificationIcon from "@mui/icons-material/DomainVerification";
 
 const MenuitemTeacher = [
   {
-    title: "ตรวจสอบการเรียน",
+    title: "ตรวจสอบการเรียนนิสิต",
     icon: GradingIcon,
     href: "/teacher",
   },

@@ -182,7 +182,15 @@ export default function FreeSolo() {
                   alignItems: "center",
                 }}
               >
-                <Icon_Box color="success" /> เรียนผ่านแล้ว
+                <Icon_Box color="success" />{" "}
+                <Typography
+                  variant="h4"
+                  style={{
+                    fontWeight: 500,
+                  }}
+                >
+                  เรียนผ่านแล้ว
+                </Typography>
               </Box>
               <Box
                 style={{
@@ -190,7 +198,16 @@ export default function FreeSolo() {
                   alignItems: "center",
                 }}
               >
-                <Icon_Box sx={{ color: "blue" }} /> กำลังเรียน
+                <Icon_Box sx={{ color: "blue" }} />
+                <Typography
+                  variant="h4"
+                  style={{
+                    fontWeight: 500,
+                  }}
+                >
+                  {" "}
+                  กำลังเรียน
+                </Typography>
               </Box>
               <Box
                 style={{
@@ -198,7 +215,15 @@ export default function FreeSolo() {
                   alignItems: "center",
                 }}
               >
-                <Icon_Box sx={{ color: pink[500] }} /> ยังไม่ได้เรียน
+                <Icon_Box sx={{ color: pink[500] }} />
+                <Typography
+                  variant="h4"
+                  style={{
+                    fontWeight: 500,
+                  }}
+                >
+                  ยังไม่ได้เรียน
+                </Typography>
               </Box>
             </Box_custom>
           </Grid>
@@ -211,7 +236,7 @@ export default function FreeSolo() {
           display="flex"
           style={{ marginBottom: "20px" }}
         >
-          ตรวจสอบแผนรายวิชา
+          ตรวจสอบรายวิชา
         </Typography>
         <Autocomplete
           value={value}
@@ -318,7 +343,14 @@ export default function FreeSolo() {
                             />
                           )}
                         </p>
-                        <p style={{ color: "#000", marginTop: 20 }}>
+                        <Typography
+                          variant="h4"
+                          style={{
+                            fontWeight: 200,
+                            color: "#000",
+                            marginTop: 20,
+                          }}
+                        >
                           {label.sub_code[0]} {label.sub_code[1]}
                           <Typography
                             style={{
@@ -336,7 +368,7 @@ export default function FreeSolo() {
                             {"  "}
                             {label.pre[0][1][1]}
                           </Typography>
-                        </p>
+                        </Typography>
                       </div>
                     );
                   })}

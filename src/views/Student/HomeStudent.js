@@ -14,6 +14,38 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
+import { Grid, styled } from "@mui/material";
+
+const Typo_custom = styled("Typography")(({ theme }) => ({
+  [theme.breakpoints.down("xl")]: {
+    marginBottom: "20px",
+
+    fontWeight: 250,
+    fontSize: 20,
+
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    letterSpacing: "-0.06px",
+    fontFamily: "'Prompt', sans-serif;",
+    borderRadius: "7px",
+    width: "110%",
+    // backgroundColor: "#ccc",
+  },
+  [theme.breakpoints.up("xl")]: {
+    marginBottom: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: 500,
+    fontSize: 30,
+    letterSpacing: "-0.06px",
+    fontFamily: "'Prompt', sans-serif;",
+    borderRadius: "7px",
+    width: "110%",
+    // backgroundColor: "#ccc",
+  },
+}));
 
 export default function CollapsibleTable() {
   const [rows, setRows] = React.useState([]);
@@ -130,6 +162,19 @@ export default function CollapsibleTable() {
   if (groups.length > 0) {
     return (
       <TableContainer component={Paper}>
+        <Grid container justifyContent="center">
+          <Grid
+            item
+            container
+            xs={10}
+            direction="column"
+            sx={{ mb: "31px", mt: "31px" }}
+          >
+            <Grid item style={{ margin: "auto" }}>
+              <Typo_custom>ตรวจสอบการเรียน</Typo_custom>
+            </Grid>
+          </Grid>
+        </Grid>
         {rows.map((row, index) => (
           <Table aria-label="collapsible table" key={index}>
             <TableHead>

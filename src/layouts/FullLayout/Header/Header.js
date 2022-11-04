@@ -65,6 +65,7 @@ const Header = (props) => {
   const [surname, setSurname] = React.useState([]);
   const [role, setrole] = React.useState([]);
   const [id, setid] = React.useState([]);
+  const [depart, setdepart] = React.useState([]);
 
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
@@ -86,6 +87,7 @@ const Header = (props) => {
       setSurname(response.data.surname);
       setrole(response.data.role);
       setid(response.data.user_id);
+      setdepart(response.data.depart_id);
       // console.log(response.data);
     };
     api_();
@@ -189,7 +191,7 @@ const Header = (props) => {
                                 justifyContent: "center",
                               }}
                             >
-                              ผู้ดูแลระบบ
+                              ผู้ดูแลระบบ {depart}
                             </Typography>
                           );
                         } else if (role === "officer") {
@@ -204,7 +206,7 @@ const Header = (props) => {
                                 justifyContent: "center",
                               }}
                             >
-                              เจ้าหน้าที่
+                              เจ้าหน้าที่ {depart}
                             </Typography>
                           );
                         } else if (role === "teacher") {
@@ -219,7 +221,7 @@ const Header = (props) => {
                                 justifyContent: "center",
                               }}
                             >
-                              อาจารย์ที่ปรึกษา
+                              อาจารย์ที่ปรึกษา {depart}
                             </Typography>
                           );
                         } else if (role === "student") {
