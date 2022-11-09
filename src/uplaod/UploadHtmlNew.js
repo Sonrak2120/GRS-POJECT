@@ -23,7 +23,7 @@ function UploadHtmlNew() {
           fontWeight: 500,
         }}
       >
-        อัปเดตผลการเรียนนิสิต
+        อัปโหลดผลการเรียนนิสิต
       </Typography>
       <div>
         <DropFileInputHTML
